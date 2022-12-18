@@ -4,11 +4,17 @@ import { ErrorPage } from '@/resources/ErrorPage/ErrorPage';
 import { NewApiDelegationsPage } from '@/components/NewApiDelegationPage';
 import { ApiDelegationOverviewPage } from '@/components/ApiDelegationOverviewPage';
 import { NewOrgDelegationPage } from '@/components/NewOrgDelegationPage';
+import { EvSearchPage } from '@/components/EvSearchPage';
 
 export const Router = createBrowserRouter(
   [
     {
       path: '/',
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: 'evsearch',
+      element: <EvSearchPage />,
       errorElement: <ErrorPage />,
     },
     {
