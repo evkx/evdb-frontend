@@ -1,4 +1,8 @@
 {
+  "common": {
+    "error": "Feil",
+    "restart": "Start på nytt"
+  },
   "profile": {
     "received": "Mottatte",
     "sent": "Sendte",
@@ -34,7 +38,24 @@
     "next": "Neste",
     "add_new_business": "Legg til ny virksomhet",
     "card_title": "Programmeringsgrensesnitt - API",
+    "confirm_delegation": "Bekreft delegering",
+    "confirmation_page_content_top_text": "Du ønsker å gi rettigheter til følgende API:",
+    "confirmation_page_content_second_text": "API-tilgangene blir gitt til:",
+    "confirmation_page_content_bottom_text": "Tilgangen vil bli gitt og er gyldig til den aktivt slettes eller trekkes tilbake. Mottaker får beskjed.",
     "filter_label": "Filtrer på tilbyder",
-    "filter_remove_all": "Fjern alle filtre"
+    "filter_remove_all": "Fjern alle filtre",
+    "chosen_orgs": "Valgte bedrifter",
+    "new_api_content_text2": "Velg hvilke API du vil gi tilgang til ved å klikke på pluss-tegnet. Du kan også søke etter API eller filtrere på tilbyder.",
+    "delegable_apis": "Delegerbare API",
+    "chosen_apis": "Valgte API:",
+    "no_chosen_orgs": "Du har ingen valgte organisasjoner å gi API-tilgang til. Vennligst klikk på forrigeknappen nederst til høyre.",
+    "scopes": "Scopes",
+    "description": "Beskrivelse",
+    "additional_description": "Ytterligere beskrivelse",
+    "data_retrieval_failed": "Datauthenting feilet, prøv å refresh siden.",
+    "loading": "Laster",
+    "error_message": "Feilmelding",
+    "orgs_not_chosen_subtitle": "Kunne ikke hente ut valgte organisasjoner. Gå tilbake til forrige side for å velge organisasjoner ved å klikke på forrige-knappen nederst til høyre.",
+    "delegations_not_registered": "Valgene dine ble ikke registrert. Vennligst start delegeringsprosessen på nytt."
   }
 }

@@ -3,14 +3,14 @@ import * as ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import { initReactI18next } from 'react-i18next';
-import { use } from 'i18next';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { use } from 'i18next';
 
 import { Router } from '@/routes/Router';
 
+import { getConfig } from '../config';
+
 import LoadLocalizations from './resources/LoadLocalizations';
-import { getConfig } from './config/config';
-import BaseLocalizations from './resources/BaseLocalizations/BaseLocalizations.json';
 import store from './rtk/app/store';
 
 /**
@@ -36,11 +36,12 @@ const initLanguage = (lang) => {
 // Initialise i18next; start application when ready
 use(initReactI18next).init(
   {
+    // TODO: replace no_nb below with result from backend call that checks which language is set
     lng: initLanguage('no_nb'),
     fallbackLng: getConfig('defaultLocale'),
-    ns: ['common', 'basic'],
+    ns: ['common'],
     defaultNS: 'common',
-    resources: BaseLocalizations,
+    returnNull: false,
   },
 
   () => {

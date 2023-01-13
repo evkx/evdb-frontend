@@ -31,12 +31,6 @@
   margin-left: var(--component-page-margin-horizontal);
 }
 
-.page{
-  width: var(--pageContainer-width);
-  margin: auto;
-  margin-top: 8rem;
-}
-
 .pageContentAccordionsContainer{
     grid-template-columns: 1fr 1fr;
     display:grid;
@@ -51,7 +45,6 @@
 }
 
 .filter {
-  width: 75%;
   padding-top: 1rem;
 }
 
@@ -62,19 +55,12 @@
 }
 
 .navButton{
-  margin-right: 0.5rem;
+  margin-right: 3rem;
   width: 10rem;
+  margin-bottom: 70px;
 }
 
 .accordionScrollContainer {
-  max-height: 300px;
+  height: 300px;
   overflow-y: auto;
-}
-
-.page{
-  --page-vertical-margins: 8rem;
-  width: 1055px;
-  margin: auto;
-  margin-top: var(--page-vertical-margins);
-  margin-bottom: var(--page-vertical-margins);
 }
