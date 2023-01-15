@@ -9,6 +9,10 @@ export interface EvSearchResult {
   infoUri: string;
 }
 
+export interface EvSearch {
+  name: string;
+}
+
 export interface SliceState {
   loading: boolean;
   evList: EvSearchResult[];
@@ -21,9 +25,13 @@ const initialState: SliceState = {
   error: '',
 };
 
-export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async () => {
+export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
   return await axios
-    .post('https://evdbapi.azurewebsites.net/api/Ev')
+    .post('https://evdbapi.azurewebsites.net/api/Ev', evsearchparam, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);

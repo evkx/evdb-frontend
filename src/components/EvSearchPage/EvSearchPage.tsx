@@ -17,7 +17,7 @@ import * as React from 'react';
 
 import { ReactComponent as ApiIcon } from '@/assets/Settings.svg';
 import { ReactComponent as Cancel } from '@/assets/Cancel.svg';
-import type { EvSearchResult } from '@/rtk/features/evSearch/evsearchSlice';
+import type { EvSearchResult, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { fetchEvs } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 
@@ -30,12 +30,15 @@ export const EvSearchPage = () => {
   const loading = useAppSelector((state) => state.evsearchResult.loading);
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList);
   const dispatch = useAppDispatch();
-  const fetchData = async () => await dispatch(fetchEvs());
+  const fetchData = async (evSearch: EvSearch) => await dispatch(fetchEvs(evSearch));
   const error = useAppSelector((state) => state.evsearchResult.error);
+  const initSearch: EvSearch = {
+    name: 'Audi',
+  };
 
   useEffect(() => {
     if (loading) {
-      void fetchData();
+      void fetchData(initSearch);
     }
   }, []);
 
@@ -55,13 +58,13 @@ export const EvSearchPage = () => {
     } else if (loading) {
       return t('api_delegation.loading') + '...';
     }
-    return evsearchresult.map((api: EvSearchResult, index: Key | null | undefined) => {
+    return evsearchresult.map((ev: EvSearchResult, index: Key | null | undefined) => {
       return (
         <EvSearchAccordion
-          title={api.name}
-          subtitle={api.sortParameter}
+          title={ev.name}
+          subtitle={ev.sortParameter}
           key={index}
-          topContentText={api.infoUri}
+          topContentText={ev.infoUri}
         ></EvSearchAccordion>
       );
     });
