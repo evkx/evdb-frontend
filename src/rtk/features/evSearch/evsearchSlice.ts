@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 
 export interface EvSearchResult {
+  evs: Ev[];
+}
+
+export interface Ev {
   name: string;
   sortParameter: string;
   sortValue: string;
@@ -11,11 +14,12 @@ export interface EvSearchResult {
 
 export interface EvSearch {
   name: string;
+  sortOrder: number;
 }
 
 export interface SliceState {
   loading: boolean;
-  evList: EvSearchResult[];
+  evList: EvSearchResult;
   error: string | undefined;
 }
 
@@ -45,7 +49,7 @@ const evsearchSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchEvs.fulfilled, (state, action) => {
-        const responseList: EvSearchResult[] = action.payload;
+        const responseList: EvSearchResult = action.payload;
         state.evList = responseList;
         state.loading = false;
       })
