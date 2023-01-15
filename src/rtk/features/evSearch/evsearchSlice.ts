@@ -21,9 +21,9 @@ const initialState: SliceState = {
   error: '',
 };
 
-export const fetchEvs = createAsyncThunk('delegableApi/fetchDelegableApis', async () => {
+export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async () => {
   return await axios
-    .get('/accessmanagement/api/v1/1337/resources/maskinportenschema')
+    .post('https://evdbapi.azurewebsites.net/api/Ev')
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);
@@ -46,3 +46,5 @@ const evsearchSlice = createSlice({
       });
   },
 });
+
+export default evsearchSlice.reducer;

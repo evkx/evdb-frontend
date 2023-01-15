@@ -9,14 +9,27 @@ import {
   CheckboxGroupVariant,
 } from '@altinn/altinn-design-system';
 import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 
 import { ReactComponent as ApiIcon } from '@/assets/Settings.svg';
 import { ReactComponent as Cancel } from '@/assets/Cancel.svg';
+import type { EvSearchResult } from '@/rtk/features/evSearch/evsearchSlice';
+import { fetchEvs } from '@/rtk/features/evSearch/evsearchSlice';
+import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 
 import classes from './EvSearchPage.module.css';
 
 export const EvSearchPage = () => {
   const { t } = useTranslation('common');
+  const loading = useAppSelector((state) => state.delegableApi.loading);
+  const dispatch = useAppDispatch();
+  const fetchData = async () => await dispatch(fetchEvs());
+
+  useEffect(() => {
+    if (loading) {
+      void fetchData();
+    }
+  }, []);
 
   return (
     <div className={classes.page}>
