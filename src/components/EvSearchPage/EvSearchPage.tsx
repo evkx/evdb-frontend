@@ -90,11 +90,15 @@ export const EvSearchPage = () => {
                 { checked: false, label: 'Hatchback', name: 'hatchback' },
               ]}
             ></CheckboxGroup>
+            <br></br>
             <Select
+              label='Sortering'
               options={[
-                { label: 'Test', value: '0' },
-                { label: 'Forbruk', value: '1' },
-                { label: 'Forbruk2', value: '2' },
+                { label: 'Merke,model', value: '1' },
+                { label: 'Rekkevidde WLTP minimum spesifikasjon', value: '2' },
+                { label: 'Netto batterystørrelse minst-størst', value: '3' },
+                { label: 'Netto batteristørrels størst-minst', value: '4' },
+                { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
               ]}
             ></Select>
             <br></br>
