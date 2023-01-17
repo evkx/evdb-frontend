@@ -57,5 +57,9 @@
     "error_message": "Feilmelding",
     "orgs_not_chosen_subtitle": "Kunne ikke hente ut valgte organisasjoner. Gå tilbake til forrige side for å velge organisasjoner ved å klikke på forrige-knappen nederst til høyre.",
     "delegations_not_registered": "Valgene dine ble ikke registrert. Vennligst start delegeringsprosessen på nytt."
+  },
+  "evsearch":{
+    "title" : "Elbilsøk",
+    "searchresult": "Matchende elbiler"
   }
 }

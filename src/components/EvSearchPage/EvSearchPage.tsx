@@ -9,6 +9,7 @@ import {
   ButtonColor,
   CheckboxGroup,
   CheckboxGroupVariant,
+  Select,
 } from '@altinn/altinn-design-system';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -74,7 +75,7 @@ export const EvSearchPage = () => {
   return (
     <div className={classes.page}>
       <Page>
-        <PageHeader icon={<ApiIcon />}>{t('api_delegation.api_delegations')}</PageHeader>
+        <PageHeader icon={<ApiIcon />}>{t('evsearch.title')}</PageHeader>
         <PageContent>
           <div className={classes.pageContent}>
             <CheckboxGroup
@@ -89,7 +90,13 @@ export const EvSearchPage = () => {
                 { checked: false, label: 'Hatchback', name: 'hatchback' },
               ]}
             ></CheckboxGroup>
-
+            <Select
+              options={[
+                { label: 'Test', value: '0' },
+                { label: 'Forbruk', value: '1' },
+                { label: 'Forbruk2', value: '2' },
+              ]}
+            ></Select>
             <br></br>
             <Button
               variant={ButtonVariant.Filled}
@@ -101,7 +108,7 @@ export const EvSearchPage = () => {
           </div>
           <div className={classes.pageContentAccordionsContainer}>
             <div className={classes.apiAccordions}>
-              <h4>{t('api_delegation.delegable_apis')}:</h4>
+              <h4>{t('evsearch.searchresult')}:</h4>
               <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
             </div>
           </div>
