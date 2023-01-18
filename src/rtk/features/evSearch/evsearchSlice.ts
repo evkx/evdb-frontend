@@ -53,7 +53,12 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
 const evsearchSlice = createSlice({
   name: 'evsearch',
   initialState,
-  reducers: {},
+  reducers: {
+    updateSortOrder: (state: SliceState, action) => {
+      const sortOrder = action.payload.trim().toLowerCase();
+      state.search.sortOrder = parseInt(sortOrder);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEvs.fulfilled, (state, action) => {
@@ -68,3 +73,4 @@ const evsearchSlice = createSlice({
 });
 
 export default evsearchSlice.reducer;
+export const { updateSortOrder } = evsearchSlice.actions;

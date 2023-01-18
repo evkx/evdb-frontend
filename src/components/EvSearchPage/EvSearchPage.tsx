@@ -18,9 +18,10 @@ import * as React from 'react';
 
 import { ReactComponent as ApiIcon } from '@/assets/Settings.svg';
 import { ReactComponent as Cancel } from '@/assets/Cancel.svg';
-import type { EvSearchResult, Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
-import { fetchEvs } from '@/rtk/features/evSearch/evsearchSlice';
+import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
+import { fetchEvs, updateSortOrder } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
+import { search } from '@/rtk/features/delegableApi/delegableApiSlice';
 
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
 
@@ -42,6 +43,11 @@ export const EvSearchPage = () => {
     }
   }, []);
 
+  const handleSortOrderChange = (filterList: string) => {
+    dispatch(updateSortOrder(filterList));
+    void fetchData(initSearch);
+  };
+
   const delegableApiAccordions = () => {
     if (error) {
       return (
@@ -62,7 +68,7 @@ export const EvSearchPage = () => {
       return (
         <EvSearchAccordion
           title={ev.name}
-          subtitle={ev.sortParameter}
+          subtitle={ev.sortValue + ' ' + ev.sortParameter}
           key={index}
           topContentText={ev.infoUri}
         ></EvSearchAccordion>
@@ -76,6 +82,19 @@ export const EvSearchPage = () => {
         <PageHeader icon={<ApiIcon />}>{t('evsearch.title')}</PageHeader>
         <PageContent>
           <div className={classes.pageContent}>
+            <Select
+              label='Sortering'
+              multiple={false}
+              onChange={handleSortOrderChange}
+              options={[
+                { label: 'Merke,model', value: '1' },
+                { label: 'Rekkevidde WLTP minimum spesifikasjon', value: '2' },
+                { label: 'Netto batterystørrelse minst-størst', value: '3' },
+                { label: 'Netto batteristørrels størst-minst', value: '4' },
+                { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
+              ]}
+            ></Select>
+            <br></br>
             <CheckboxGroup
               data-testid='evsearch-evtype'
               variant={CheckboxGroupVariant.Vertical}
@@ -89,24 +108,8 @@ export const EvSearchPage = () => {
               ]}
             ></CheckboxGroup>
             <br></br>
-            <Select
-              label='Sortering'
-              options={[
-                { label: 'Merke,model', value: '1' },
-                { label: 'Rekkevidde WLTP minimum spesifikasjon', value: '2' },
-                { label: 'Netto batterystørrelse minst-størst', value: '3' },
-                { label: 'Netto batteristørrels størst-minst', value: '4' },
-                { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
-              ]}
-            ></Select>
+
             <br></br>
-            <Button
-              variant={ButtonVariant.Filled}
-              color={ButtonColor.Secondary}
-              icon={<Cancel />}
-            >
-              {t('api_delegation.undo')}
-            </Button>
           </div>
           <div className={classes.pageContentAccordionsContainer}>
             <div className={classes.apiAccordions}>
