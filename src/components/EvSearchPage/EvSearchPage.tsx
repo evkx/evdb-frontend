@@ -31,12 +31,10 @@ export const EvSearchPage = () => {
   const loading = useAppSelector((state) => state.evsearchResult.loading);
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
   const dispatch = useAppDispatch();
+
   const fetchData = async (evSearch: EvSearch) => await dispatch(fetchEvs(evSearch));
   const error = useAppSelector((state) => state.evsearchResult.error);
-  const initSearch: EvSearch = {
-    name: 'Audi',
-    sortOrder: 5,
-  };
+  const initSearch = useAppSelector((state) => state.evsearchResult.search);
 
   useEffect(() => {
     if (loading) {

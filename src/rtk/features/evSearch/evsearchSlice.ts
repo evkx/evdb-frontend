@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Search } from 'react-router-dom';
 
 export interface EvSearchResult {
   evs: Ev[];
@@ -20,12 +21,19 @@ export interface EvSearch {
 export interface SliceState {
   loading: boolean;
   evList: EvSearchResult;
+  search: EvSearch;
   error: string | undefined;
 }
 
 const initialState: SliceState = {
   loading: true,
-  evList: [],
+  evList: {
+    evs: [],
+  },
+  search: {
+    name: '',
+    sortOrder: 3,
+  },
   error: '',
 };
 
