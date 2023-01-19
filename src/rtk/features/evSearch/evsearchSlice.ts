@@ -16,6 +16,7 @@ export interface Ev {
 export interface EvSearch {
   name: string;
   sortOrder: number;
+  evType: string[];
 }
 
 export interface SliceState {
@@ -33,13 +34,14 @@ const initialState: SliceState = {
   search: {
     name: '',
     sortOrder: 3,
+    evType: [],
   },
   error: '',
 };
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
   return await axios
-    .post('https://evdbapi.azurewebsites.net/api/Ev', evsearchparam, {
+    .post('https://localhost:7033/api/Ev', evsearchparam, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -58,6 +60,10 @@ const evsearchSlice = createSlice({
       const sortOrder = action.payload.trim().toLowerCase();
       state.search.sortOrder = parseInt(sortOrder);
     },
+    updateEvType: (state: SliceState, action) => {
+      const evTypes = action.payload;
+      state.search.evType = evTypes;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,4 +79,4 @@ const evsearchSlice = createSlice({
 });
 
 export default evsearchSlice.reducer;
-export const { updateSortOrder } = evsearchSlice.actions;
+export const { updateSortOrder, updateEvType } = evsearchSlice.actions;

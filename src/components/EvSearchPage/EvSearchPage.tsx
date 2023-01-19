@@ -19,13 +19,29 @@ import * as React from 'react';
 import { ReactComponent as ApiIcon } from '@/assets/Settings.svg';
 import { ReactComponent as Cancel } from '@/assets/Cancel.svg';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
-import { fetchEvs, updateSortOrder } from '@/rtk/features/evSearch/evsearchSlice';
+import { fetchEvs, updateSortOrder, updateEvType } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 import { search } from '@/rtk/features/delegableApi/delegableApiSlice';
 
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
 
 import classes from './EvSearchPage.module.css';
+
+export enum EvBodyTypes {
+  Sedan = 'Sedan',
+  Coupe = 'Coupe',
+  Hatchback = 'Hatchback',
+  Sport = 'Sport',
+  StationWagon = 'StationWagon',
+  SUV = 'SUV',
+  CoupeSUV = 'CoupeSUV',
+  Convertible = 'Convertible',
+  Minivan = 'Minivan',
+  PickupTruck = 'PickupTruck',
+  Crossover = 'Crossover',
+  Roadster = 'Roadster',
+  MPV = 'MPV',
+}
 
 export const EvSearchPage = () => {
   const { t } = useTranslation('common');
@@ -47,6 +63,19 @@ export const EvSearchPage = () => {
     dispatch(updateSortOrder(filterList));
     void fetchData(initSearch);
   };
+
+  const handleTypeChange = (names: string[]) => {
+    dispatch(updateEvType(names));
+
+    const newSearch: EvSearch = {
+      evType: names,
+      sortOrder: initSearch.sortOrder,
+      name: initSearch.name,
+    };
+    void fetchData(newSearch);
+  };
+
+  const evBodyTypeKeys = Object.keys(EvBodyTypes);
 
   const delegableApiAccordions = () => {
     if (error) {
@@ -97,15 +126,13 @@ export const EvSearchPage = () => {
             <br></br>
             <CheckboxGroup
               data-testid='evsearch-evtype'
-              variant={CheckboxGroupVariant.Vertical}
-              items={[
-                { checked: false, label: 'SUV', name: 'suv' },
-                { checked: false, label: 'Sedan', name: 'sedan' },
-                { checked: false, label: 'CrossOver', name: 'crossover' },
-                { checked: false, label: 'MPV', name: 'mpw' },
-                { checked: false, label: 'Wagon', name: 'wagon' },
-                { checked: false, label: 'Hatchback', name: 'hatchback' },
-              ]}
+              variant={CheckboxGroupVariant.Horizontal}
+              onChange={(values) => handleTypeChange(values)}
+              items={evBodyTypeKeys.map((key) => ({
+                label: key,
+                name: key,
+                checked: initSearch.evType === undefined || initSearch.evType.includes(key),
+              }))}
             ></CheckboxGroup>
             <br></br>
 
