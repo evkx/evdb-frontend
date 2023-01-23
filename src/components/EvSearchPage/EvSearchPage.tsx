@@ -48,7 +48,6 @@ export enum EvBodyTypes {
 export const EvSearchPage = () => {
   const { t } = useTranslation('common');
   const loading = useAppSelector((state) => state.evsearchResult.loading);
-  const brandloading = useAppSelector((state) => state.evsearchResult.brandloading);
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
   const brandsResult = useAppSelector((state) => state.evsearchResult.brands);
   const dispatch = useAppDispatch();

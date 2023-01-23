@@ -1,9 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
+import * as React from 'react';
 
 import { ErrorPage } from '@/resources/ErrorPage/ErrorPage';
-import { NewApiDelegationsPage } from '@/components/NewApiDelegationPage';
-import { ApiDelegationOverviewPage } from '@/components/ApiDelegationOverviewPage';
-import { NewOrgDelegationPage } from '@/components/NewOrgDelegationPage';
 import { EvSearchPage } from '@/components/EvSearchPage';
 
 export const Router = createBrowserRouter(
@@ -17,21 +15,6 @@ export const Router = createBrowserRouter(
       element: <EvSearchPage />,
       errorElement: <ErrorPage />,
     },
-    {
-      path: 'api-delegations',
-      element: <ApiDelegationOverviewPage />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: 'api-delegations/new-api',
-      element: <NewApiDelegationsPage />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: 'api-delegations/new-org',
-      element: <NewOrgDelegationPage />,
-      errorElement: <ErrorPage />,
-    },
   ],
-  { basename: '/accessmanagement/ui' },
+  { basename: '/' },
 );
