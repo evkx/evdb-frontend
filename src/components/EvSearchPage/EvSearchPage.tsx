@@ -67,7 +67,13 @@ export const EvSearchPage = () => {
 
   const handleSortOrderChange = (filterList: string) => {
     dispatch(updateSortOrder(filterList));
-    void fetchData(initSearch);
+    const newSearch: EvSearch = {
+      evType: initSearch.evType,
+      sortOrder: parseInt(filterList),
+      name: initSearch.name,
+      brands: initSearch.brands,
+    };
+    void fetchData(newSearch);
   };
 
   const handleBrandChange = (filterList: string[]) => {
