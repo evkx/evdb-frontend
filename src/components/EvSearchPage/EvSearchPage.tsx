@@ -4,24 +4,26 @@ import {
   PanelVariant,
   PageHeader,
   PageContent,
-  Button,
-  ButtonVariant,
-  ButtonColor,
   CheckboxGroup,
   CheckboxGroupVariant,
   Select,
 } from '@altinn/altinn-design-system';
+import type { MultiSelectOption, SingleSelectOption } from '@altinn/altinn-design-system';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import * as React from 'react';
 
-import { ReactComponent as ApiIcon } from '@/assets/Settings.svg';
-import { ReactComponent as Cancel } from '@/assets/Cancel.svg';
+import { ReactComponent as CarIcon } from '@/assets/Car.svg';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
-import { fetchEvs, updateSortOrder, updateEvType } from '@/rtk/features/evSearch/evsearchSlice';
+import {
+  fetchEvs,
+  fetchBrands,
+  updateSortOrder,
+  updateEvType,
+  updateBrands,
+} from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
-import { search } from '@/rtk/features/delegableApi/delegableApiSlice';
 
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
 
@@ -46,16 +48,21 @@ export enum EvBodyTypes {
 export const EvSearchPage = () => {
   const { t } = useTranslation('common');
   const loading = useAppSelector((state) => state.evsearchResult.loading);
+  const brandloading = useAppSelector((state) => state.evsearchResult.brandloading);
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
+  const brandsResult = useAppSelector((state) => state.evsearchResult.brands);
   const dispatch = useAppDispatch();
 
-  const fetchData = async (evSearch: EvSearch) => await dispatch(fetchEvs(evSearch));
-  const error = useAppSelector((state) => state.evsearchResult.error);
   const initSearch = useAppSelector((state) => state.evsearchResult.search);
+  const fetchData = async (evSearch: EvSearch) => await dispatch(fetchEvs(evSearch));
+  const fetchBrandData = async () => await dispatch(fetchBrands());
+
+  const error = useAppSelector((state) => state.evsearchResult.error);
 
   useEffect(() => {
     if (loading) {
       void fetchData(initSearch);
+      void fetchBrandData();
     }
   }, []);
 
@@ -64,6 +71,22 @@ export const EvSearchPage = () => {
     void fetchData(initSearch);
   };
 
+  const handleBrandChange = (filterList: string[]) => {
+    dispatch(updateBrands(filterList));
+    const newSearch: EvSearch = {
+      evType: initSearch.evType,
+      sortOrder: initSearch.sortOrder,
+      name: initSearch.name,
+      brands: filterList,
+    };
+    void fetchData(newSearch);
+  };
+
+  const filterOptions: SingleSelectOption[] = brandsResult.map((provider: string) => ({
+    label: provider,
+    value: provider,
+  }));
+
   const handleTypeChange = (names: string[]) => {
     dispatch(updateEvType(names));
 
@@ -71,6 +94,7 @@ export const EvSearchPage = () => {
       evType: names,
       sortOrder: initSearch.sortOrder,
       name: initSearch.name,
+      brands: initSearch.brands,
     };
     void fetchData(newSearch);
   };
@@ -108,7 +132,7 @@ export const EvSearchPage = () => {
   return (
     <div className={classes.page}>
       <Page>
-        <PageHeader icon={<ApiIcon />}>{t('evsearch.title')}</PageHeader>
+        <PageHeader icon={<CarIcon />}>{t('evsearch.title')}</PageHeader>
         <PageContent>
           <div className={classes.pageContent}>
             <Select
@@ -122,6 +146,12 @@ export const EvSearchPage = () => {
                 { label: 'Netto batteristørrels størst-minst', value: '4' },
                 { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
               ]}
+            ></Select>
+            <Select
+              label='Brands'
+              multiple={true}
+              onChange={handleBrandChange}
+              options={filterOptions}
             ></Select>
             <br></br>
             <CheckboxGroup

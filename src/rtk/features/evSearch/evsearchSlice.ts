@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Search } from 'react-router-dom';
 
 export interface EvSearchResult {
   evs: Ev[];
@@ -17,17 +16,21 @@ export interface EvSearch {
   name: string;
   sortOrder: number;
   evType: string[];
+  brands: string[];
 }
 
 export interface SliceState {
   loading: boolean;
+  brandloading: boolean;
   evList: EvSearchResult;
   search: EvSearch;
+  brands: string[];
   error: string | undefined;
 }
 
 const initialState: SliceState = {
   loading: true,
+  brandloading: true,
   evList: {
     evs: [],
   },
@@ -35,7 +38,9 @@ const initialState: SliceState = {
     name: '',
     sortOrder: 3,
     evType: [],
+    brands: [],
   },
+  brands: ['Audi', 'BMW'],
   error: '',
 };
 
@@ -46,6 +51,15 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
         'Content-Type': 'application/json',
       },
     })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('error', error);
+    });
+});
+
+export const fetchBrands = createAsyncThunk('evsearch/fetchBrands', async () => {
+  return await axios
+    .get('https://localhost:7033/api/brands')
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);
@@ -64,6 +78,10 @@ const evsearchSlice = createSlice({
       const evTypes = action.payload;
       state.search.evType = evTypes;
     },
+    updateBrands: (state: SliceState, action) => {
+      const brands = action.payload;
+      state.search.brands = brands;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -74,9 +92,17 @@ const evsearchSlice = createSlice({
       })
       .addCase(fetchEvs.rejected, (state, action) => {
         state.error = action.error.message;
+      })
+      .addCase(fetchBrands.fulfilled, (state, action) => {
+        const responseList: string[] = action.payload;
+        state.brands = responseList;
+        state.brandloading = false;
+      })
+      .addCase(fetchBrands.rejected, (state, action) => {
+        state.error = action.error.message;
       });
   },
 });
 
 export default evsearchSlice.reducer;
-export const { updateSortOrder, updateEvType } = evsearchSlice.actions;
+export const { updateSortOrder, updateEvType, updateBrands } = evsearchSlice.actions;
