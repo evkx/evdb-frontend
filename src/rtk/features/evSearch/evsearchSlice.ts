@@ -19,12 +19,17 @@ export interface EvSearch {
   brands: string[];
 }
 
+export interface EvSearchOptions {
+  brands: string[];
+  seatConfig: string[];
+}
+
 export interface SliceState {
   loading: boolean;
   brandloading: boolean;
   evList: EvSearchResult;
   search: EvSearch;
-  brands: string[];
+  searchOptions: EvSearchOptions;
   error: string | undefined;
 }
 
@@ -40,7 +45,10 @@ const initialState: SliceState = {
     evType: [],
     brands: [],
   },
-  brands: ['Audi', 'BMW'],
+  searchOptions: {
+    brands: ['Audi'],
+    seatConfig: [],
+  },
   error: '',
 };
 
@@ -57,9 +65,9 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
     });
 });
 
-export const fetchBrands = createAsyncThunk('evsearch/fetchBrands', async () => {
+export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions', async () => {
   return await axios
-    .get('https://localhost:7033/api/brands')
+    .get('https://localhost:7033/api/searchoptions')
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);
@@ -93,12 +101,12 @@ const evsearchSlice = createSlice({
       .addCase(fetchEvs.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(fetchBrands.fulfilled, (state, action) => {
-        const responseList: string[] = action.payload;
-        state.brands = responseList;
+      .addCase(fetchSearchOptions.fulfilled, (state, action) => {
+        const responseList: EvSearchOptions = action.payload;
+        state.searchOptions = responseList;
         state.brandloading = false;
       })
-      .addCase(fetchBrands.rejected, (state, action) => {
+      .addCase(fetchSearchOptions.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },

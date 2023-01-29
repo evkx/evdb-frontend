@@ -18,7 +18,7 @@ import { ReactComponent as CarIcon } from '@/assets/Car.svg';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import {
   fetchEvs,
-  fetchBrands,
+  fetchSearchOptions,
   updateSortOrder,
   updateEvType,
   updateBrands,
@@ -49,19 +49,19 @@ export const EvSearchPage = () => {
   const { t } = useTranslation('common');
   const loading = useAppSelector((state) => state.evsearchResult.loading);
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
-  const brandsResult = useAppSelector((state) => state.evsearchResult.brands);
+  const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
   const dispatch = useAppDispatch();
 
   const initSearch = useAppSelector((state) => state.evsearchResult.search);
   const fetchData = async (evSearch: EvSearch) => await dispatch(fetchEvs(evSearch));
-  const fetchBrandData = async () => await dispatch(fetchBrands());
+  const fetchSearchOptionData = async () => await dispatch(fetchSearchOptions());
 
   const error = useAppSelector((state) => state.evsearchResult.error);
 
   useEffect(() => {
     if (loading) {
       void fetchData(initSearch);
-      void fetchBrandData();
+      void fetchSearchOptionData();
     }
   }, []);
 
