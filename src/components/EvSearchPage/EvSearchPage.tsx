@@ -29,27 +29,12 @@ import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
 
 import classes from './EvSearchPage.module.css';
 
-export enum EvBodyTypes {
-  Sedan = 'Sedan',
-  Coupe = 'Coupe',
-  Hatchback = 'Hatchback',
-  Sport = 'Sport',
-  StationWagon = 'StationWagon',
-  SUV = 'SUV',
-  CoupeSUV = 'CoupeSUV',
-  Convertible = 'Convertible',
-  Minivan = 'Minivan',
-  PickupTruck = 'PickupTruck',
-  Crossover = 'Crossover',
-  Roadster = 'Roadster',
-  MPV = 'MPV',
-}
-
 export const EvSearchPage = () => {
   const { t } = useTranslation('common');
   const loading = useAppSelector((state) => state.evsearchResult.loading);
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
   const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
+  const bodyTypesResult = useAppSelector((state) => state.evsearchResult.searchOptions.bodyTypes);
   const dispatch = useAppDispatch();
 
   const initSearch = useAppSelector((state) => state.evsearchResult.search);
@@ -103,8 +88,6 @@ export const EvSearchPage = () => {
     };
     void fetchData(newSearch);
   };
-
-  const evBodyTypeKeys = Object.keys(EvBodyTypes);
 
   const delegableApiAccordions = () => {
     if (error) {
@@ -163,7 +146,7 @@ export const EvSearchPage = () => {
               data-testid='evsearch-evtype'
               variant={CheckboxGroupVariant.Horizontal}
               onChange={(values) => handleTypeChange(values)}
-              items={evBodyTypeKeys.map((key) => ({
+              items={bodyTypesResult.map((key) => ({
                 label: key,
                 name: key,
                 checked: initSearch.evType === undefined || initSearch.evType.includes(key),

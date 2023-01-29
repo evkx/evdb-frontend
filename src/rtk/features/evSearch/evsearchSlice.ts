@@ -22,6 +22,7 @@ export interface EvSearch {
 export interface EvSearchOptions {
   brands: string[];
   seatConfig: string[];
+  bodyTypes: string[];
 }
 
 export interface SliceState {
@@ -48,13 +49,14 @@ const initialState: SliceState = {
   searchOptions: {
     brands: ['Audi'],
     seatConfig: [],
+    bodyTypes: ['Sedan'],
   },
   error: '',
 };
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
   return await axios
-    .post('https://localhost:7033/api/Ev', evsearchparam, {
+    .post('https://evdbapi.azurewebsites.net/api/Ev', evsearchparam, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -67,7 +69,7 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
 
 export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions', async () => {
   return await axios
-    .get('https://localhost:7033/api/searchoptions')
+    .get('https://evdbapi.azurewebsites.net/api/searchoptions')
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);
