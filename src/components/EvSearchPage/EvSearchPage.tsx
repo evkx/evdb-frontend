@@ -1,14 +1,6 @@
-import {
-  Page,
-  Panel,
-  PanelVariant,
-  PageHeader,
-  PageContent,
-  CheckboxGroup,
-  CheckboxGroupVariant,
-  Select,
-} from '@altinn/altinn-design-system';
-import type { MultiSelectOption, SingleSelectOption } from '@altinn/altinn-design-system';
+import { Page, Panel, PanelVariant, PageHeader, PageContent } from '@altinn/altinn-design-system';
+import type { SingleSelectOption } from '@digdir/design-system-react';
+import { CheckboxGroup, CheckboxGroupVariant, Select } from '@digdir/design-system-react';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
