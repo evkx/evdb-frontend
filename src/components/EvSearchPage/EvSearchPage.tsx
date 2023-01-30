@@ -138,6 +138,8 @@ export const EvSearchPage = () => {
               data-testid='evsearch-evtype'
               variant={CheckboxGroupVariant.Horizontal}
               onChange={(values) => handleTypeChange(values)}
+              compact={true}
+              legend='Select body type'
               items={bodyTypesResult.map((key) => ({
                 label: key,
                 name: key,
