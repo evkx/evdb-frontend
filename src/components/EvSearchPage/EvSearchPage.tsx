@@ -14,6 +14,7 @@ import {
   updateSortOrder,
   updateEvType,
   updateBrands,
+  updateSeatConfig,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 
@@ -24,14 +25,20 @@ import classes from './EvSearchPage.module.css';
 export const EvSearchPage = () => {
   const { t } = useTranslation('common');
   const loading = useAppSelector((state) => state.evsearchResult.loading);
+
+  const dispatch = useAppDispatch();
+
+  const fetchSearchOptionData = async () => await dispatch(fetchSearchOptions());
+
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
   const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
   const bodyTypesResult = useAppSelector((state) => state.evsearchResult.searchOptions.bodyTypes);
-  const dispatch = useAppDispatch();
+  const seatConfigResult = useAppSelector(
+    (state) => state.evsearchResult.searchOptions.seatConfiguration,
+  );
 
   const initSearch = useAppSelector((state) => state.evsearchResult.search);
   const fetchData = async (evSearch: EvSearch) => await dispatch(fetchEvs(evSearch));
-  const fetchSearchOptionData = async () => await dispatch(fetchSearchOptions());
 
   const error = useAppSelector((state) => state.evsearchResult.error);
 
@@ -49,6 +56,11 @@ export const EvSearchPage = () => {
       sortOrder: parseInt(filterList),
       name: initSearch.name,
       brands: initSearch.brands,
+      seatConfiguration: initSearch.seatConfiguration,
+      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
+      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
+      seatMassageFirstRow: initSearch.seatMassageFirstRow,
+      seatMassageSecondRow: initSearch.seatMassageSecondRow,
     };
     void fetchData(newSearch);
   };
@@ -60,6 +72,11 @@ export const EvSearchPage = () => {
       sortOrder: initSearch.sortOrder,
       name: initSearch.name,
       brands: filterList,
+      seatConfiguration: initSearch.seatConfiguration,
+      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
+      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
+      seatMassageFirstRow: initSearch.seatMassageFirstRow,
+      seatMassageSecondRow: initSearch.seatMassageSecondRow,
     };
     void fetchData(newSearch);
   };
@@ -77,6 +94,27 @@ export const EvSearchPage = () => {
       sortOrder: initSearch.sortOrder,
       name: initSearch.name,
       brands: initSearch.brands,
+      seatConfiguration: initSearch.seatConfiguration,
+      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
+      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
+      seatMassageFirstRow: initSearch.seatMassageFirstRow,
+      seatMassageSecondRow: initSearch.seatMassageSecondRow,
+    };
+    void fetchData(newSearch);
+  };
+
+  const handleSeatConfigChange = (names: string[]) => {
+    dispatch(updateSeatConfig(names));
+    const newSearch: EvSearch = {
+      evType: initSearch.evType,
+      sortOrder: initSearch.sortOrder,
+      name: initSearch.name,
+      brands: initSearch.brands,
+      seatConfiguration: names,
+      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
+      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
+      seatMassageFirstRow: initSearch.seatMassageFirstRow,
+      seatMassageSecondRow: initSearch.seatMassageSecondRow,
     };
     void fetchData(newSearch);
   };
@@ -144,6 +182,21 @@ export const EvSearchPage = () => {
                 label: key,
                 name: key,
                 checked: initSearch.evType === undefined || initSearch.evType.includes(key),
+              }))}
+            ></CheckboxGroup>
+            <br></br>
+            <CheckboxGroup
+              data-testid='evsearch-seatconfig'
+              variant={CheckboxGroupVariant.Horizontal}
+              onChange={(values) => handleSeatConfigChange(values)}
+              compact={true}
+              legend='Number of seats'
+              items={seatConfigResult.map((key) => ({
+                label: key,
+                name: key,
+                checked:
+                  initSearch.seatConfiguration === undefined ||
+                  initSearch.seatConfiguration.includes(key),
               }))}
             ></CheckboxGroup>
             <br></br>

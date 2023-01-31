@@ -17,12 +17,18 @@ export interface EvSearch {
   sortOrder: number;
   evType: string[];
   brands: string[];
+  seatConfiguration: string[];
+  seatMassageFirstRow: boolean;
+  seatVentilationFirstRow: boolean;
+  seatMassageSecondRow: boolean;
+  seatVentilationSecondRow: boolean;
 }
 
 export interface EvSearchOptions {
   brands: string[];
   seatConfig: string[];
   bodyTypes: string[];
+  seatConfiguration: string[];
 }
 
 export interface SliceState {
@@ -45,11 +51,17 @@ const initialState: SliceState = {
     sortOrder: 3,
     evType: [],
     brands: [],
+    seatConfiguration: [],
+    seatMassageFirstRow: false,
+    seatMassageSecondRow: false,
+    seatVentilationFirstRow: false,
+    seatVentilationSecondRow: false,
   },
   searchOptions: {
     brands: ['Audi'],
     seatConfig: [],
     bodyTypes: ['Sedan'],
+    seatConfiguration: ['5 seat'],
   },
   error: '',
 };
@@ -92,6 +104,10 @@ const evsearchSlice = createSlice({
       const brands = action.payload;
       state.search.brands = brands;
     },
+    updateSeatConfig: (state: SliceState, action) => {
+      const seatConfig = action.payload;
+      state.search.seatConfiguration = seatConfig;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -115,4 +131,5 @@ const evsearchSlice = createSlice({
 });
 
 export default evsearchSlice.reducer;
-export const { updateSortOrder, updateEvType, updateBrands } = evsearchSlice.actions;
+export const { updateSortOrder, updateEvType, updateBrands, updateSeatConfig } =
+  evsearchSlice.actions;
