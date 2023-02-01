@@ -1,6 +1,6 @@
 import { Page, Panel, PanelVariant, PageHeader, PageContent } from '@altinn/altinn-design-system';
 import type { SingleSelectOption } from '@digdir/design-system-react';
-import { CheckboxGroup, CheckboxGroupVariant, Select } from '@digdir/design-system-react';
+import { CheckboxGroup, CheckboxGroupVariant, Select, Tabs } from '@digdir/design-system-react';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
@@ -185,21 +185,44 @@ export const EvSearchPage = () => {
               }))}
             ></CheckboxGroup>
             <br></br>
-            <CheckboxGroup
-              data-testid='evsearch-seatconfig'
-              variant={CheckboxGroupVariant.Horizontal}
-              onChange={(values) => handleSeatConfigChange(values)}
-              compact={true}
-              legend='Number of seats'
-              items={seatConfigResult.map((key) => ({
-                label: key,
-                name: key,
-                checked:
-                  initSearch.seatConfiguration === undefined ||
-                  initSearch.seatConfiguration.includes(key),
-              }))}
-            ></CheckboxGroup>
+
             <br></br>
+
+            <Tabs
+              items={[
+                {
+                  content: (
+                    <CheckboxGroup
+                      data-testid='evsearch-seatconfig'
+                      variant={CheckboxGroupVariant.Horizontal}
+                      onChange={(values) => handleSeatConfigChange(values)}
+                      compact={true}
+                      legend='Number of seats'
+                      items={seatConfigResult.map((key) => ({
+                        label: key,
+                        name: key,
+                        checked:
+                          initSearch.seatConfiguration === undefined ||
+                          initSearch.seatConfiguration.includes(key),
+                      }))}
+                    ></CheckboxGroup>
+                  ),
+                  name: 'Seats',
+                },
+                {
+                  content: <h1>hoppsann</h1>,
+                  name: 'Drivetrain',
+                },
+                {
+                  content: <h1>heisann</h1>,
+                  name: 'Driver Assistance',
+                },
+                {
+                  content: <h1>heisann</h1>,
+                  name: 'Exterior',
+                },
+              ]}
+            />
 
             <br></br>
           </div>
