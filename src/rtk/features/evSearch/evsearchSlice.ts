@@ -22,6 +22,7 @@ export interface EvSearch {
   seatVentilationFirstRow: boolean;
   seatMassageSecondRow: boolean;
   seatVentilationSecondRow: boolean;
+  allWheelDrive: boolean;
 }
 
 export interface EvSearchOptions {
@@ -56,6 +57,7 @@ const initialState: SliceState = {
     seatMassageSecondRow: false,
     seatVentilationFirstRow: false,
     seatVentilationSecondRow: false,
+    allWheelDrive: false,
   },
   searchOptions: {
     brands: ['Audi'],
@@ -68,7 +70,7 @@ const initialState: SliceState = {
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
   return await axios
-    .post('https://evdbapi.azurewebsites.net/api/Ev', evsearchparam, {
+    .post('https://api.evkx.net/api/Ev', evsearchparam, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -81,7 +83,7 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
 
 export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions', async () => {
   return await axios
-    .get('https://evdbapi.azurewebsites.net/api/searchoptions')
+    .get('https://api.evkx.net/api/searchoptions')
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);
@@ -108,6 +110,10 @@ const evsearchSlice = createSlice({
       const seatConfig = action.payload;
       state.search.seatConfiguration = seatConfig;
     },
+    updateAllWheelDrive: (state: SliceState, action) => {
+      const allWheelDrive = action.payload;
+      state.search.allWheelDrive = allWheelDrive;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -131,5 +137,10 @@ const evsearchSlice = createSlice({
 });
 
 export default evsearchSlice.reducer;
-export const { updateSortOrder, updateEvType, updateBrands, updateSeatConfig } =
-  evsearchSlice.actions;
+export const {
+  updateSortOrder,
+  updateEvType,
+  updateBrands,
+  updateSeatConfig,
+  updateAllWheelDrive,
+} = evsearchSlice.actions;

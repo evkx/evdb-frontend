@@ -1,6 +1,12 @@
 import { Page, Panel, PanelVariant, PageHeader, PageContent } from '@altinn/altinn-design-system';
 import type { SingleSelectOption } from '@digdir/design-system-react';
-import { CheckboxGroup, CheckboxGroupVariant, Select, Tabs } from '@digdir/design-system-react';
+import {
+  CheckboxGroup,
+  CheckboxGroupVariant,
+  Select,
+  Tabs,
+  Checkbox,
+} from '@digdir/design-system-react';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
@@ -15,6 +21,7 @@ import {
   updateEvType,
   updateBrands,
   updateSeatConfig,
+  updateAllWheelDrive,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 
@@ -61,6 +68,7 @@ export const EvSearchPage = () => {
       seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
       seatMassageFirstRow: initSearch.seatMassageFirstRow,
       seatMassageSecondRow: initSearch.seatMassageSecondRow,
+      allWheelDrive: initSearch.allWheelDrive,
     };
     void fetchData(newSearch);
   };
@@ -77,6 +85,7 @@ export const EvSearchPage = () => {
       seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
       seatMassageFirstRow: initSearch.seatMassageFirstRow,
       seatMassageSecondRow: initSearch.seatMassageSecondRow,
+      allWheelDrive: initSearch.allWheelDrive,
     };
     void fetchData(newSearch);
   };
@@ -99,6 +108,7 @@ export const EvSearchPage = () => {
       seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
       seatMassageFirstRow: initSearch.seatMassageFirstRow,
       seatMassageSecondRow: initSearch.seatMassageSecondRow,
+      allWheelDrive: initSearch.allWheelDrive,
     };
     void fetchData(newSearch);
   };
@@ -115,6 +125,25 @@ export const EvSearchPage = () => {
       seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
       seatMassageFirstRow: initSearch.seatMassageFirstRow,
       seatMassageSecondRow: initSearch.seatMassageSecondRow,
+      allWheelDrive: initSearch.allWheelDrive,
+    };
+    void fetchData(newSearch);
+  };
+
+  const handleAllWheelDriveChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const isChecked = event.target.checked;
+    dispatch(updateAllWheelDrive(isChecked));
+    const newSearch: EvSearch = {
+      evType: initSearch.evType,
+      sortOrder: initSearch.sortOrder,
+      name: initSearch.name,
+      brands: initSearch.brands,
+      seatConfiguration: initSearch.seatConfiguration,
+      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
+      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
+      seatMassageFirstRow: initSearch.seatMassageFirstRow,
+      seatMassageSecondRow: initSearch.seatMassageSecondRow,
+      allWheelDrive: isChecked,
     };
     void fetchData(newSearch);
   };
@@ -186,8 +215,6 @@ export const EvSearchPage = () => {
             ></CheckboxGroup>
             <br></br>
 
-            <br></br>
-
             <Tabs
               items={[
                 {
@@ -210,7 +237,14 @@ export const EvSearchPage = () => {
                   name: 'Seats',
                 },
                 {
-                  content: <h1>hoppsann</h1>,
+                  content: (
+                    <Checkbox
+                      checked={initSearch.allWheelDrive}
+                      label='All wheel drive'
+                      onChange={handleAllWheelDriveChange}
+                      compact={true}
+                    ></Checkbox>
+                  ),
                   name: 'Drivetrain',
                 },
                 {
