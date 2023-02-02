@@ -346,13 +346,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digdir/design-system-react@npm:^0.4.2":
-  version: 0.4.2
-  resolution: "@digdir/design-system-react@npm:0.4.2"
+"@digdir/design-system-react@npm:^0.4.3":
+  version: 0.4.3
+  resolution: "@digdir/design-system-react@npm:0.4.3"
   peerDependencies:
     react: ^18.1.0
     react-dom: ^18.0.0
-  checksum: c93e25327b8ab4721040f84d05f5ac9a94e14e0ff4edeb4243c40956235e7718a7862ef3e53e0e52f279e57870060a1a9a7422830862db1f3d26e62ce0a00cf3
+  checksum: e06738722b5e2063d7163438522b34769941f4f1356ec1b15a72c6c63971cca93ef4c615e0fda590344ae8c8bc658d5d07a77b596547ac75c5b140067f47ab3b
   languageName: node
   linkType: hard
 
@@ -5356,7 +5356,7 @@ __metadata:
   resolution: "react-app@workspace:."
   dependencies:
     "@altinn/altinn-design-system": ^0.25.10
-    "@digdir/design-system-react": ^0.4.2
+    "@digdir/design-system-react": ^0.4.3
     "@reduxjs/toolkit": ^1.9.1
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.10

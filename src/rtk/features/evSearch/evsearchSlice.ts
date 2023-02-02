@@ -23,6 +23,9 @@ export interface EvSearch {
   seatMassageSecondRow: boolean;
   seatVentilationSecondRow: boolean;
   allWheelDrive: boolean;
+  nightVision: boolean;
+  adaptiveSuspension: boolean;
+  airSuspension: boolean;
 }
 
 export interface EvSearchOptions {
@@ -49,7 +52,7 @@ const initialState: SliceState = {
   },
   search: {
     name: '',
-    sortOrder: 3,
+    sortOrder: 1,
     evType: [],
     brands: [],
     seatConfiguration: [],
@@ -58,6 +61,9 @@ const initialState: SliceState = {
     seatVentilationFirstRow: false,
     seatVentilationSecondRow: false,
     allWheelDrive: false,
+    nightVision: false,
+    adaptiveSuspension: false,
+    airSuspension: false,
   },
   searchOptions: {
     brands: ['Audi'],
@@ -114,6 +120,18 @@ const evsearchSlice = createSlice({
       const allWheelDrive = action.payload;
       state.search.allWheelDrive = allWheelDrive;
     },
+    updateNightVision: (state: SliceState, action) => {
+      const checked = action.payload;
+      state.search.nightVision = checked;
+    },
+    updateAdaptiveDamping: (state: SliceState, action) => {
+      const checked = action.payload;
+      state.search.adaptiveSuspension = checked;
+    },
+    updateAdaptiveAirSuspension: (state: SliceState, action) => {
+      const checked = action.payload;
+      state.search.airSuspension = checked;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -143,4 +161,7 @@ export const {
   updateBrands,
   updateSeatConfig,
   updateAllWheelDrive,
+  updateNightVision,
+  updateAdaptiveDamping,
+  updateAdaptiveAirSuspension,
 } = evsearchSlice.actions;
