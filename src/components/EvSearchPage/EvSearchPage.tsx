@@ -58,44 +58,16 @@ export const EvSearchPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    void fetchData(initSearch);
+  }, [initSearch]);
+
   const handleSortOrderChange = (filterList: string) => {
     dispatch(updateSortOrder(filterList));
-    const newSearch: EvSearch = {
-      evType: initSearch.evType,
-      sortOrder: parseInt(filterList),
-      name: initSearch.name,
-      brands: initSearch.brands,
-      seatConfiguration: initSearch.seatConfiguration,
-      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
-      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
-      seatMassageFirstRow: initSearch.seatMassageFirstRow,
-      seatMassageSecondRow: initSearch.seatMassageSecondRow,
-      allWheelDrive: initSearch.allWheelDrive,
-      nightVision: initSearch.nightVision,
-      adaptiveSuspension: initSearch.adaptiveSuspension,
-      airSuspension: initSearch.airSuspension,
-    };
-    void fetchData(newSearch);
   };
 
   const handleBrandChange = (filterList: string[]) => {
     dispatch(updateBrands(filterList));
-    const newSearch: EvSearch = {
-      evType: initSearch.evType,
-      sortOrder: initSearch.sortOrder,
-      name: initSearch.name,
-      brands: filterList,
-      seatConfiguration: initSearch.seatConfiguration,
-      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
-      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
-      seatMassageFirstRow: initSearch.seatMassageFirstRow,
-      seatMassageSecondRow: initSearch.seatMassageSecondRow,
-      allWheelDrive: initSearch.allWheelDrive,
-      nightVision: initSearch.nightVision,
-      adaptiveSuspension: initSearch.adaptiveSuspension,
-      airSuspension: initSearch.airSuspension,
-    };
-    void fetchData(newSearch);
   };
 
   const filterOptions: SingleSelectOption[] = brandsResult.map((provider: string) => ({
@@ -105,106 +77,25 @@ export const EvSearchPage = () => {
 
   const handleTypeChange = (names: string[]) => {
     dispatch(updateEvType(names));
-
-    const newSearch: EvSearch = {
-      evType: names,
-      sortOrder: initSearch.sortOrder,
-      name: initSearch.name,
-      brands: initSearch.brands,
-      seatConfiguration: initSearch.seatConfiguration,
-      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
-      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
-      seatMassageFirstRow: initSearch.seatMassageFirstRow,
-      seatMassageSecondRow: initSearch.seatMassageSecondRow,
-      allWheelDrive: initSearch.allWheelDrive,
-      nightVision: initSearch.nightVision,
-      adaptiveSuspension: initSearch.adaptiveSuspension,
-      airSuspension: initSearch.airSuspension,
-    };
-    void fetchData(newSearch);
   };
 
   const handleSeatConfigChange = (names: string[]) => {
     dispatch(updateSeatConfig(names));
-    const newSearch: EvSearch = {
-      evType: initSearch.evType,
-      sortOrder: initSearch.sortOrder,
-      name: initSearch.name,
-      brands: initSearch.brands,
-      seatConfiguration: names,
-      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
-      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
-      seatMassageFirstRow: initSearch.seatMassageFirstRow,
-      seatMassageSecondRow: initSearch.seatMassageSecondRow,
-      allWheelDrive: initSearch.allWheelDrive,
-      nightVision: initSearch.nightVision,
-      adaptiveSuspension: initSearch.adaptiveSuspension,
-      airSuspension: initSearch.airSuspension,
-    };
-    void fetchData(newSearch);
   };
 
   const handleAllWheelDriveChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const isChecked = event.target.checked;
     dispatch(updateAllWheelDrive(isChecked));
-    const newSearch: EvSearch = {
-      evType: initSearch.evType,
-      sortOrder: initSearch.sortOrder,
-      name: initSearch.name,
-      brands: initSearch.brands,
-      seatConfiguration: initSearch.seatConfiguration,
-      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
-      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
-      seatMassageFirstRow: initSearch.seatMassageFirstRow,
-      seatMassageSecondRow: initSearch.seatMassageSecondRow,
-      nightVision: initSearch.nightVision,
-      adaptiveSuspension: initSearch.adaptiveSuspension,
-      airSuspension: initSearch.airSuspension,
-      allWheelDrive: isChecked,
-    };
-    void fetchData(newSearch);
   };
 
   const handleNightVisionChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const isChecked = event.target.checked;
     dispatch(updateNightVision(isChecked));
-    const newSearch: EvSearch = {
-      evType: initSearch.evType,
-      sortOrder: initSearch.sortOrder,
-      name: initSearch.name,
-      brands: initSearch.brands,
-      seatConfiguration: initSearch.seatConfiguration,
-      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
-      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
-      seatMassageFirstRow: initSearch.seatMassageFirstRow,
-      seatMassageSecondRow: initSearch.seatMassageSecondRow,
-      nightVision: isChecked,
-      adaptiveSuspension: initSearch.adaptiveSuspension,
-      airSuspension: initSearch.airSuspension,
-      allWheelDrive: initSearch.allWheelDrive,
-    };
-    void fetchData(newSearch);
   };
 
   const handleAdaptiveSuspensionChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const isChecked = event.target.checked;
     dispatch(updateAdaptiveDamping(isChecked));
-    const newSearch: EvSearch = {
-      evType: initSearch.evType,
-      sortOrder: initSearch.sortOrder,
-      name: initSearch.name,
-      brands: initSearch.brands,
-      seatConfiguration: initSearch.seatConfiguration,
-      seatVentilationFirstRow: initSearch.seatVentilationFirstRow,
-      seatVentilationSecondRow: initSearch.seatVentilationSecondRow,
-      seatMassageFirstRow: initSearch.seatMassageFirstRow,
-      seatMassageSecondRow: initSearch.seatMassageSecondRow,
-      nightVision: initSearch.nightVision,
-      adaptiveSuspension: isChecked,
-      airSuspension: initSearch.airSuspension,
-      allWheelDrive: initSearch.allWheelDrive,
-    };
-    void fetchData(newSearch);
   };
 
   const delegableApiAccordions = () => {
@@ -230,6 +121,8 @@ export const EvSearchPage = () => {
           subtitle={ev.sortValue + ' ' + ev.sortParameter}
           key={index}
           topContentText={ev.infoUri}
+          maxPower={ev.maxPowerKw}
+          topSpeedKph={ev.topSpeedKph}
         ></EvSearchAccordion>
       );
     });

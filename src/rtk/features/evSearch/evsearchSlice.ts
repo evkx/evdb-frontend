@@ -10,6 +10,8 @@ export interface Ev {
   sortParameter: string;
   sortValue: string;
   infoUri: string;
+  maxPowerKw: number;
+  topSpeedKph: number;
 }
 
 export interface EvSearch {
