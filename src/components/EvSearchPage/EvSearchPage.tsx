@@ -144,6 +144,9 @@ export const EvSearchPage = () => {
                 { label: 'Netto batterystørrelse minst-størst', value: '3' },
                 { label: 'Netto batteristørrels størst-minst', value: '4' },
                 { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
+                { label: 'Power more > less', value: '6' },
+                { label: 'Top speed more >less', value: '7' },
+                { label: 'Max DC Charging', value: '8' },
               ]}
             ></Select>
             <Select
