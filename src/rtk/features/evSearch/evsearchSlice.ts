@@ -90,8 +90,8 @@ const initialState: SliceState = {
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
   return await axios
-    // .post('https://api.evkx.net/api/Ev', evsearchparam, {
-    .post('https://localhost:7033/api/Ev', evsearchparam, {
+    // .post('https://localhost:7033/api/Ev', evsearchparam, {
+    .post('https://api.evkx.net/api/Ev', evsearchparam, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -104,8 +104,8 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
 
 export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions', async () => {
   return await axios
-    // .get('https://api.evkx.net/api/searchoptions')
-    .get('https://localhost:7033/api/searchoptions')
+    // .get('https://localhost:7033/api/searchoptions')
+    .get('https://api.evkx.net/api/searchoptions')
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);
