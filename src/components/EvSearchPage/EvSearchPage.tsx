@@ -13,7 +13,6 @@ import { useEffect } from 'react';
 import * as React from 'react';
 
 import { ReactComponent as CarIcon } from '@/assets/Car.svg';
-import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import {
   fetchEvs,
   fetchSearchOptions,
@@ -24,7 +23,13 @@ import {
   updateAllWheelDrive,
   updateNightVision,
   updateAdaptiveDamping,
+  updateInstrumentCluster,
+  updateHeadUpDisplay,
+  updateAndroidAuto,
+  updateAppleCarPlay,
+  updateColors,
 } from '@/rtk/features/evSearch/evsearchSlice';
+import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
@@ -42,6 +47,7 @@ export const EvSearchPage = () => {
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
   const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
   const bodyTypesResult = useAppSelector((state) => state.evsearchResult.searchOptions.bodyTypes);
+  const colorResult = useAppSelector((state) => state.evsearchResult.searchOptions.colors);
   const seatConfigResult = useAppSelector(
     (state) => state.evsearchResult.searchOptions.seatConfiguration,
   );
@@ -96,6 +102,25 @@ export const EvSearchPage = () => {
   const handleAdaptiveSuspensionChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const isChecked = event.target.checked;
     dispatch(updateAdaptiveDamping(isChecked));
+  };
+  const handleInstrumentClusterChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const isChecked = event.target.checked;
+    dispatch(updateInstrumentCluster(isChecked));
+  };
+  const handleHeadUpDisplayChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const isChecked = event.target.checked;
+    dispatch(updateHeadUpDisplay(isChecked));
+  };
+  const handleAppleCarPlayChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const isChecked = event.target.checked;
+    dispatch(updateAppleCarPlay(isChecked));
+  };
+  const handleAndroidAutoChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const isChecked = event.target.checked;
+    dispatch(updateAndroidAuto(isChecked));
+  };
+  const handleColorChange = (names: string[]) => {
+    dispatch(updateColors(names));
   };
 
   const delegableApiAccordions = () => {
@@ -223,8 +248,55 @@ export const EvSearchPage = () => {
                   name: 'Driver Assistance',
                 },
                 {
-                  content: <h1>heisann</h1>,
+                  content: (
+                    <CheckboxGroup
+                      data-testid='evsearch-evtype'
+                      variant={CheckboxGroupVariant.Horizontal}
+                      onChange={(values) => handleColorChange(values)}
+                      compact={true}
+                      legend='Select body type'
+                      items={colorResult.map((key) => ({
+                        label: key,
+                        name: key,
+                        checked: initSearch.colors === undefined || initSearch.colors.includes(key),
+                      }))}
+                    ></CheckboxGroup>
+                  ),
                   name: 'Exterior',
+                },
+                {
+                  content: (
+                    <div>
+                      <Checkbox
+                        checked={initSearch.headUpDisplay}
+                        label='Head Up Display'
+                        onChange={handleHeadUpDisplayChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.instrumentCluster}
+                        label='Dedicated Instrument Cluster'
+                        onChange={handleInstrumentClusterChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.androidAuto}
+                        label='Android Auto Support'
+                        onChange={handleAndroidAutoChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.appleCarPlay}
+                        label='Apple Car Play Support'
+                        onChange={handleAppleCarPlayChange}
+                        compact={true}
+                      ></Checkbox>
+                    </div>
+                  ),
+                  name: 'UI & Interface',
                 },
               ]}
             />

@@ -28,6 +28,11 @@ export interface EvSearch {
   nightVision: boolean;
   adaptiveSuspension: boolean;
   airSuspension: boolean;
+  instrumentCluster: boolean;
+  headUpDisplay: boolean;
+  androidAuto: boolean;
+  appleCarPlay: boolean;
+  colors: string[];
 }
 
 export interface EvSearchOptions {
@@ -35,6 +40,7 @@ export interface EvSearchOptions {
   seatConfig: string[];
   bodyTypes: string[];
   seatConfiguration: string[];
+  colors: string[];
 }
 
 export interface SliceState {
@@ -66,19 +72,26 @@ const initialState: SliceState = {
     nightVision: false,
     adaptiveSuspension: false,
     airSuspension: false,
+    instrumentCluster: false,
+    headUpDisplay: false,
+    androidAuto: false,
+    appleCarPlay: false,
+    colors: [],
   },
   searchOptions: {
     brands: ['Audi'],
     seatConfig: [],
     bodyTypes: ['Sedan'],
     seatConfiguration: ['5 seat'],
+    colors: ['Red'],
   },
   error: '',
 };
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
   return await axios
-    .post('https://api.evkx.net/api/Ev', evsearchparam, {
+    // .post('https://api.evkx.net/api/Ev', evsearchparam, {
+    .post('https://localhost:7033/api/Ev', evsearchparam, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -91,7 +104,8 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
 
 export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions', async () => {
   return await axios
-    .get('https://api.evkx.net/api/searchoptions')
+    // .get('https://api.evkx.net/api/searchoptions')
+    .get('https://localhost:7033/api/searchoptions')
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);
@@ -134,6 +148,26 @@ const evsearchSlice = createSlice({
       const checked = action.payload;
       state.search.airSuspension = checked;
     },
+    updateInstrumentCluster: (state: SliceState, action) => {
+      const checked = action.payload;
+      state.search.instrumentCluster = checked;
+    },
+    updateHeadUpDisplay: (state: SliceState, action) => {
+      const checked = action.payload;
+      state.search.headUpDisplay = checked;
+    },
+    updateAndroidAuto: (state: SliceState, action) => {
+      const checked = action.payload;
+      state.search.androidAuto = checked;
+    },
+    updateAppleCarPlay: (state: SliceState, action) => {
+      const checked = action.payload;
+      state.search.appleCarPlay = checked;
+    },
+    updateColors: (state: SliceState, action) => {
+      const selections = action.payload;
+      state.search.colors = selections;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -166,4 +200,9 @@ export const {
   updateNightVision,
   updateAdaptiveDamping,
   updateAdaptiveAirSuspension,
+  updateInstrumentCluster,
+  updateHeadUpDisplay,
+  updateAndroidAuto,
+  updateAppleCarPlay,
+  updateColors,
 } = evsearchSlice.actions;

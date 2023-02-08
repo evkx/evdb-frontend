@@ -1,4 +1,4 @@
-import { Accordion, AccordionHeader, AccordionContent } from '@altinn/altinn-design-system';
+import { Accordion, AccordionHeader, AccordionContent } from '@digdir/design-system-react';
 import { useState } from 'react';
 import { t } from 'i18next';
 import * as React from 'react';

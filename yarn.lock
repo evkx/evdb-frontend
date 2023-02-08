@@ -5,9 +5,9 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@altinn/altinn-design-system@npm:^0.27.4":
-  version: 0.27.4
-  resolution: "@altinn/altinn-design-system@npm:0.27.4"
+"@altinn/altinn-design-system@npm:^0.27.5":
+  version: 0.27.5
+  resolution: "@altinn/altinn-design-system@npm:0.27.5"
   dependencies:
     "@altinn/figma-design-tokens": ^6.0.1
     "@navikt/ds-icons": ^2.0.0
@@ -18,7 +18,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 399299b4cabaa516d9c09a8943b0b2e3f1cf923026c220eb01afde192c8b6c32220beb7cbfb5c15aae8d15c742185355a5ca578c203db881d4894f1d6730e8ee
+  checksum: 19abedbdb39df5a9fe633dadb78d7407b465422ac398df75661a373a9ba53e731c2b7f799c79de30905c44e1755e6f0f1fc04d192bd6fa7c7b7aaf4d360b215c
   languageName: node
   linkType: hard
 
@@ -346,13 +346,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digdir/design-system-react@npm:^0.4.3":
-  version: 0.4.3
-  resolution: "@digdir/design-system-react@npm:0.4.3"
+"@digdir/design-system-react@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@digdir/design-system-react@npm:0.5.0"
   peerDependencies:
     react: ^18.1.0
     react-dom: ^18.0.0
-  checksum: e06738722b5e2063d7163438522b34769941f4f1356ec1b15a72c6c63971cca93ef4c615e0fda590344ae8c8bc658d5d07a77b596547ac75c5b140067f47ab3b
+  checksum: 3374bfc9a95fcc611fd4667d47ecd6f48124187087b8f5b6fffcfbb69b2f88bc3136d3c2fa2f1b458f0fae641d11e23711406a1c5fc564189bc130e6852bc7f3
   languageName: node
   linkType: hard
 
@@ -1024,10 +1024,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.3.1":
-  version: 1.3.1
-  resolution: "@remix-run/router@npm:1.3.1"
-  checksum: c91cba100b13fbb83cdaf43ca66b0d9fc1ab9dfe0bc58ac80ff2a4889488bf518a111267c790350eac8c7f764cc7809402430de15bdf70282d0bd60acf06d9de
+"@remix-run/router@npm:1.3.2":
+  version: 1.3.2
+  resolution: "@remix-run/router@npm:1.3.2"
+  checksum: ee2108b87d4a1241cdea137dd7e1741ee679228bd33fd81e22a6bb2940f81186cefe9a85e26d60cc49bbcc1bdbc57d1954b7d4d62f8a51ef69feddfc899f55fa
   languageName: node
   linkType: hard
 
@@ -3814,7 +3814,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^22.4.5":
+"i18next@npm:^22.4.9":
   version: 22.4.9
   resolution: "i18next@npm:22.4.9"
   dependencies:
@@ -4444,9 +4444,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^13.0.3":
-  version: 13.1.0
-  resolution: "lint-staged@npm:13.1.0"
+"lint-staged@npm:^13.1.1":
+  version: 13.1.1
+  resolution: "lint-staged@npm:13.1.1"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.19
@@ -4463,7 +4463,7 @@ __metadata:
     yaml: ^2.1.3
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: adf20c4ca9285c4a93b06598b970d71b04cfe58a1a4c9006f753b83e02c1c622d1866c32a4f1e7e29a98091c501eac3345f7678af247b4f97d5be88b3d8727c1
+  checksum: 8e5093c7e982a2f6d6449927a40156a812644479df1d2760aee8bf05df3a314e022d8f7e275e57fd61769ee57e3cf7b062ed3c6e4934a63848300b877e269daa
   languageName: node
   linkType: hard
 
@@ -5355,8 +5355,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-app@workspace:."
   dependencies:
-    "@altinn/altinn-design-system": ^0.27.4
-    "@digdir/design-system-react": ^0.4.3
+    "@altinn/altinn-design-system": ^0.27.5
+    "@digdir/design-system-react": ^0.5.0
     "@reduxjs/toolkit": ^1.9.2
     "@types/react": ^18.0.27
     "@types/react-dom": ^18.0.10
@@ -5377,19 +5377,19 @@ __metadata:
     eslint-plugin-promise: ^6.1.1
     eslint-plugin-react: ^7.31.10
     husky: ^8.0.1
-    i18next: ^22.4.5
-    lint-staged: ^13.0.3
+    i18next: ^22.4.9
+    lint-staged: ^13.1.1
     prettier: ^2.7.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-i18next: ^12.0.0
-    react-query: ^3.39.2
-    react-redux: ^8.0.4
-    react-router-dom: ^6.4.2
+    react-query: ^3.39.3
+    react-redux: ^8.0.5
+    react-router-dom: ^6.8.1
     redux-logger: ^3.0.6
     typescript: 4.9.4
     vite: ^4.0.4
-    vite-plugin-svgr: ^2.2.2
+    vite-plugin-svgr: ^2.4.0
   languageName: unknown
   linkType: soft
 
@@ -5462,7 +5462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-query@npm:^3.39.2":
+"react-query@npm:^3.39.3":
   version: 3.39.3
   resolution: "react-query@npm:3.39.3"
   dependencies:
@@ -5480,7 +5480,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^8.0.4":
+"react-redux@npm:^8.0.5":
   version: 8.0.5
   resolution: "react-redux@npm:8.0.5"
   dependencies:
@@ -5554,27 +5554,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.4.2":
-  version: 6.8.0
-  resolution: "react-router-dom@npm:6.8.0"
+"react-router-dom@npm:^6.8.1":
+  version: 6.8.1
+  resolution: "react-router-dom@npm:6.8.1"
   dependencies:
-    "@remix-run/router": 1.3.1
-    react-router: 6.8.0
+    "@remix-run/router": 1.3.2
+    react-router: 6.8.1
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: a10419023267014bdad20f50b5be04dffda49ebeb06c52ce9567795769dc0dc9b4e2fa61b52b5d70b61df4d17f85bae8f9c7e94c73d25d16974e46fd47765ced
+  checksum: fb1a9f5c7e4c83536ee7e6493f3c13f6abda66da69f9191fb8b087ab188ecc18a3a32575813a280cbeca67bcb8b0dcb6dbcef7ed599e03f38a44d694f4abcf14
   languageName: node
   linkType: hard
 
-"react-router@npm:6.8.0":
-  version: 6.8.0
-  resolution: "react-router@npm:6.8.0"
+"react-router@npm:6.8.1":
+  version: 6.8.1
+  resolution: "react-router@npm:6.8.1"
   dependencies:
-    "@remix-run/router": 1.3.1
+    "@remix-run/router": 1.3.2
   peerDependencies:
     react: ">=16.8"
-  checksum: 6e258c47f6cbbd0b0c7c9fd7bbaf7cd5cd60472935512fbe97c91e4bbd9b1717f0dee231f5d7206bedfbccdbc21ab77eaf336ba971ea5d8c6b1277045a7b958a
+  checksum: 8e7cc7a516adeb6060911861af99d9b512893c15ec732cbf8574872919be4f3fe439ffa8c0876d1bcbced880d081bfeda3c01cb505b5a243565d10500ee0ac36
   languageName: node
   linkType: hard
 
@@ -6561,7 +6561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-svgr@npm:^2.2.2":
+"vite-plugin-svgr@npm:^2.4.0":
   version: 2.4.0
   resolution: "vite-plugin-svgr@npm:2.4.0"
   dependencies:
