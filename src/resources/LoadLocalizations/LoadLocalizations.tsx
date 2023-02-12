@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import i18next from 'i18next';
+import * as React from 'react';
 
 interface Props {
   children: React.ReactNode;

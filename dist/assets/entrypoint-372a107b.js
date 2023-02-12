@@ -34217,8 +34217,8 @@ const VR = {
   } = Mx.actions,
   Rr = W2,
   az = () => cP(),
-  sz = '_pageContainer_1lmjv_3',
-  lz = '_exitButton_1lmjv_63',
+  sz = '_pageContainer_19l1k_3',
+  lz = '_exitButton_19l1k_65',
   uz = { pageContainer: sz, exitButton: lz },
   cz = ({ children: e }) => (
     cC(),
