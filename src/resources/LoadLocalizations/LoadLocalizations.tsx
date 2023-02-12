@@ -9,8 +9,14 @@ interface Props {
 
 const LoadLocalizations = ({ children }: Props) => {
   const { i18n } = useTranslation('common');
+  const currentUri = window.location.href;
+  let lang = 'en';
+  if (currentUri.includes('nb/')) {
+    lang = 'no_nb';
+  }
+
   const baseUrl = import.meta.env.BASE_URL;
-  const localizationsFilePath = `${baseUrl}public/localizations/${i18n.language}.json`;
+  const localizationsFilePath = `${baseUrl}public/localizations/${lang}.json`;
   const localizationsFileUrl = new URL(localizationsFilePath, import.meta.url).href;
 
   useQuery(

@@ -15,6 +15,11 @@ export const Router = createBrowserRouter(
       element: <EvSearchPage />,
       errorElement: <ErrorPage />,
     },
+    {
+      path: 'nb/evsearch',
+      element: <EvSearchPage />,
+      errorElement: <ErrorPage />,
+    },
   ],
   { basename: '/' },
 );
