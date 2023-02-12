@@ -12,6 +12,10 @@ export interface Ev {
   infoUri: string;
   maxPowerKw: number;
   topSpeedKph: number;
+  zeroTo100: number;
+  netBattery: number;
+  wltpConsumption: number;
+  wltpRange: number;
 }
 
 export interface EvSearch {
@@ -89,9 +93,13 @@ const initialState: SliceState = {
 };
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
+  const currentUri = window.location.href;
+  let uri = 'https://api.evkx.net/api/Ev';
+  if (currentUri.startsWith('http://localhost')) {
+    uri = 'https://localhost:7033/api/Ev';
+  }
   return await axios
-    // .post('https://localhost:7033/api/Ev', evsearchparam, {
-    .post('https://api.evkx.net/api/Ev', evsearchparam, {
+    .post(uri, evsearchparam, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -103,9 +111,13 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
 });
 
 export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions', async () => {
+  const currentUri = window.location.href;
+  let uri = 'https://api.evkx.net/api/searchoptions';
+  if (currentUri.startsWith('http://localhost')) {
+    uri = 'https://localhost:7033/api/searchoptions';
+  }
   return await axios
-    // .get('https://localhost:7033/api/searchoptions')
-    .get('https://api.evkx.net/api/searchoptions')
+    .get(uri)
     .then((response) => response.data)
     .catch((error) => {
       console.error('error', error);

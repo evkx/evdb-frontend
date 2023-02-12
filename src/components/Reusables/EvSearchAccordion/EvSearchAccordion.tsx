@@ -19,6 +19,10 @@ export interface EvSearchAccordionProps {
   textList?: string[];
   maxPower?: number;
   topSpeedKph?: number;
+  infoUri?: string;
+  netBattery?: number;
+  wltpConsumption?: number;
+  wltpRange?: number;
 }
 
 export const EvSearchAccordion = ({
@@ -28,6 +32,10 @@ export const EvSearchAccordion = ({
   textList = [''],
   maxPower = 0,
   topSpeedKph = 0,
+  infoUri = '',
+  netBattery = 0,
+  wltpConsumption = 0,
+  wltpRange = 0,
 }: EvSearchAccordionProps) => {
   const [open, setOpen] = useState(false);
 
@@ -47,11 +55,31 @@ export const EvSearchAccordion = ({
                   <Line />
                 </div>
                 <div className={classes.contentTexts}>
-                  {t('evsearch.topspeed')}
-                  {topSpeedKph}
+                  <table>
+                    <tr>
+                      <td>{t('evsearch.topspeed')}</td>
+                      <td> {topSpeedKph} km/h</td>
+                    </tr>
+                    <tr>
+                      <td>{t('evsearch.maxpower')}</td>
+                      <td>{maxPower} kW</td>
+                    </tr>
+                    <tr>
+                      <td>WLTP range</td>
+                      <td>{wltpRange} km</td>
+                    </tr>
+                    <tr>
+                      <td>WLTP consumption</td>
+                      <td>{wltpConsumption} kWh/100km</td>
+                    </tr>
+                    <tr>
+                      <td>Usable battery</td>
+                      <td>{netBattery} kWh</td>
+                    </tr>
+                  </table>
+
                   <br></br>
-                  {t('evsearch.maxpower')}
-                  {maxPower}
+                  <a href={infoUri}>Read our full article</a>
                 </div>
               </div>
             )}

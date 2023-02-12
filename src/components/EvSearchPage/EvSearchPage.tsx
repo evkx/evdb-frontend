@@ -32,6 +32,7 @@ import {
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 
+import { PageContainer } from '../Reusables/PageContainer';
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
 
 import classes from './EvSearchPage.module.css';
@@ -148,13 +149,17 @@ export const EvSearchPage = () => {
           topContentText={ev.infoUri}
           maxPower={ev.maxPowerKw}
           topSpeedKph={ev.topSpeedKph}
+          infoUri={ev.infoUri}
+          wltpConsumption={ev.wltpConsumption}
+          wltpRange={ev.wltpRange}
+          netBattery={ev.netBattery}
         ></EvSearchAccordion>
       );
     });
   };
 
   return (
-    <div className={classes.page}>
+    <PageContainer>
       <Page>
         <PageHeader icon={<CarIcon />}>{t('evsearch.title')}</PageHeader>
         <PageContent>
@@ -172,6 +177,8 @@ export const EvSearchPage = () => {
                 { label: 'Power more > less', value: '6' },
                 { label: 'Top speed more >less', value: '7' },
                 { label: 'Max DC Charging', value: '8' },
+                { label: 'Nominal voltage', value: '9' },
+                { label: '0-100kph', value: '10' },
               ]}
             ></Select>
             <Select
@@ -254,7 +261,7 @@ export const EvSearchPage = () => {
                       variant={CheckboxGroupVariant.Horizontal}
                       onChange={(values) => handleColorChange(values)}
                       compact={true}
-                      legend='Select body type'
+                      legend='Select paint color'
                       items={colorResult.map((key) => ({
                         label: key,
                         name: key,
@@ -311,6 +318,6 @@ export const EvSearchPage = () => {
           </div>
         </PageContent>
       </Page>
-    </div>
+    </PageContainer>
   );
 };
