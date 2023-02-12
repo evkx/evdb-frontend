@@ -1,4 +1,9 @@
-import { Accordion, AccordionHeader, AccordionContent } from '@digdir/design-system-react';
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionContent,
+  HelpText,
+} from '@digdir/design-system-react';
 import { useState } from 'react';
 import { t } from 'i18next';
 import * as React from 'react';
@@ -61,7 +66,17 @@ export const EvSearchAccordion = ({
                       <td> {topSpeedKph} km/h</td>
                     </tr>
                     <tr>
-                      <td>{t('evsearch.maxpower')}</td>
+                      <td>
+                        <div>
+                          {t('evsearch.maxpower')}
+                          <HelpText
+                            title='Help'
+                            placement='right'
+                          >
+                            Hallo
+                          </HelpText>
+                        </div>
+                      </td>
                       <td>{maxPower} kW</td>
                     </tr>
                     <tr>

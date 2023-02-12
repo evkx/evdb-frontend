@@ -1,4 +1,4 @@
-import { Page, Panel, PanelVariant, PageHeader, PageContent } from '@altinn/altinn-design-system';
+import { Page, Panel, PanelVariant, PageContent } from '@altinn/altinn-design-system';
 import type { SingleSelectOption } from '@digdir/design-system-react';
 import {
   CheckboxGroup,
@@ -32,7 +32,6 @@ import {
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 
-import { PageContainer } from '../Reusables/PageContainer';
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
 
 import classes from './EvSearchPage.module.css';
@@ -159,165 +158,162 @@ export const EvSearchPage = () => {
   };
 
   return (
-    <PageContainer>
-      <Page>
-        <PageHeader icon={<CarIcon />}>{t('evsearch.title')}</PageHeader>
-        <PageContent>
-          <div className={classes.pageContent}>
-            <Select
-              label='Sortering'
-              multiple={false}
-              onChange={handleSortOrderChange}
-              options={[
-                { label: 'Merke,model', value: '1' },
-                { label: 'Rekkevidde WLTP minimum spesifikasjon', value: '2' },
-                { label: 'Netto batterystørrelse minst-størst', value: '3' },
-                { label: 'Netto batteristørrels størst-minst', value: '4' },
-                { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
-                { label: 'Power more > less', value: '6' },
-                { label: 'Top speed more >less', value: '7' },
-                { label: 'Max DC Charging', value: '8' },
-                { label: 'Nominal voltage', value: '9' },
-                { label: '0-100kph', value: '10' },
-              ]}
-            ></Select>
-            <Select
-              label='Brands'
-              multiple={true}
-              onChange={handleBrandChange}
-              options={filterOptions}
-            ></Select>
-            <br></br>
-            <CheckboxGroup
-              data-testid='evsearch-evtype'
-              variant={CheckboxGroupVariant.Horizontal}
-              onChange={(values) => handleTypeChange(values)}
-              compact={true}
-              legend='Select body type'
-              items={bodyTypesResult.map((key) => ({
-                label: key,
-                name: key,
-                checked: initSearch.evType === undefined || initSearch.evType.includes(key),
-              }))}
-            ></CheckboxGroup>
-            <br></br>
+    <Page>
+      <PageContent>
+        <div className={classes.pageContent}>
+          <Select
+            label='Sort order'
+            multiple={false}
+            onChange={handleSortOrderChange}
+            options={[
+              { label: 'Merke,model', value: '1' },
+              { label: 'Rekkevidde WLTP minimum spesifikasjon', value: '2' },
+              { label: 'Netto batterystørrelse minst-størst', value: '3' },
+              { label: 'Netto batteristørrels størst-minst', value: '4' },
+              { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
+              { label: 'Power more > less', value: '6' },
+              { label: 'Top speed more >less', value: '7' },
+              { label: 'Max DC Charging', value: '8' },
+              { label: 'Nominal voltage', value: '9' },
+              { label: '0-100kph', value: '10' },
+            ]}
+          ></Select>
+          <Select
+            label='Brands'
+            multiple={true}
+            onChange={handleBrandChange}
+            options={filterOptions}
+          ></Select>
+          <br></br>
+          <CheckboxGroup
+            data-testid='evsearch-evtype'
+            variant={CheckboxGroupVariant.Horizontal}
+            onChange={(values) => handleTypeChange(values)}
+            compact={true}
+            legend='Select body type'
+            items={bodyTypesResult.map((key) => ({
+              label: key,
+              name: key,
+              checked: initSearch.evType === undefined || initSearch.evType.includes(key),
+            }))}
+          ></CheckboxGroup>
+          <br></br>
 
-            <Tabs
-              items={[
-                {
-                  content: (
-                    <CheckboxGroup
-                      data-testid='evsearch-seatconfig'
-                      variant={CheckboxGroupVariant.Horizontal}
-                      onChange={(values) => handleSeatConfigChange(values)}
-                      compact={true}
-                      legend='Number of seats'
-                      items={seatConfigResult.map((key) => ({
-                        label: key,
-                        name: key,
-                        checked:
-                          initSearch.seatConfiguration === undefined ||
-                          initSearch.seatConfiguration.includes(key),
-                      }))}
-                    ></CheckboxGroup>
-                  ),
-                  name: 'Seats',
-                },
-                {
-                  content: (
-                    <PageContent>
-                      <Checkbox
-                        checked={initSearch.allWheelDrive}
-                        label='All wheel drive'
-                        onChange={handleAllWheelDriveChange}
-                        compact={true}
-                      ></Checkbox>
-                      <br></br>
-                      <Checkbox
-                        checked={initSearch.adaptiveSuspension}
-                        label='Adaptive Suspension'
-                        onChange={handleAdaptiveSuspensionChange}
-                        compact={true}
-                      ></Checkbox>
-                    </PageContent>
-                  ),
-                  name: 'Drivetrain',
-                },
-                {
-                  content: (
+          <Tabs
+            items={[
+              {
+                content: (
+                  <CheckboxGroup
+                    data-testid='evsearch-seatconfig'
+                    variant={CheckboxGroupVariant.Horizontal}
+                    onChange={(values) => handleSeatConfigChange(values)}
+                    compact={true}
+                    legend='Number of seats'
+                    items={seatConfigResult.map((key) => ({
+                      label: key,
+                      name: key,
+                      checked:
+                        initSearch.seatConfiguration === undefined ||
+                        initSearch.seatConfiguration.includes(key),
+                    }))}
+                  ></CheckboxGroup>
+                ),
+                name: 'Seats',
+              },
+              {
+                content: (
+                  <PageContent>
                     <Checkbox
-                      checked={initSearch.nightVision}
-                      label='Nightvision'
-                      onChange={handleNightVisionChange}
+                      checked={initSearch.allWheelDrive}
+                      label='All wheel drive'
+                      onChange={handleAllWheelDriveChange}
                       compact={true}
                     ></Checkbox>
-                  ),
-                  name: 'Driver Assistance',
-                },
-                {
-                  content: (
-                    <CheckboxGroup
-                      data-testid='evsearch-evtype'
-                      variant={CheckboxGroupVariant.Horizontal}
-                      onChange={(values) => handleColorChange(values)}
+                    <br></br>
+                    <Checkbox
+                      checked={initSearch.adaptiveSuspension}
+                      label='Adaptive Suspension'
+                      onChange={handleAdaptiveSuspensionChange}
                       compact={true}
-                      legend='Select paint color'
-                      items={colorResult.map((key) => ({
-                        label: key,
-                        name: key,
-                        checked: initSearch.colors === undefined || initSearch.colors.includes(key),
-                      }))}
-                    ></CheckboxGroup>
-                  ),
-                  name: 'Exterior',
-                },
-                {
-                  content: (
-                    <div>
-                      <Checkbox
-                        checked={initSearch.headUpDisplay}
-                        label='Head Up Display'
-                        onChange={handleHeadUpDisplayChange}
-                        compact={true}
-                      ></Checkbox>
-                      <br></br>
-                      <Checkbox
-                        checked={initSearch.instrumentCluster}
-                        label='Dedicated Instrument Cluster'
-                        onChange={handleInstrumentClusterChange}
-                        compact={true}
-                      ></Checkbox>
-                      <br></br>
-                      <Checkbox
-                        checked={initSearch.androidAuto}
-                        label='Android Auto Support'
-                        onChange={handleAndroidAutoChange}
-                        compact={true}
-                      ></Checkbox>
-                      <br></br>
-                      <Checkbox
-                        checked={initSearch.appleCarPlay}
-                        label='Apple Car Play Support'
-                        onChange={handleAppleCarPlayChange}
-                        compact={true}
-                      ></Checkbox>
-                    </div>
-                  ),
-                  name: 'UI & Interface',
-                },
-              ]}
-            />
+                    ></Checkbox>
+                  </PageContent>
+                ),
+                name: 'Drivetrain',
+              },
+              {
+                content: (
+                  <Checkbox
+                    checked={initSearch.nightVision}
+                    label='Nightvision'
+                    onChange={handleNightVisionChange}
+                    compact={true}
+                  ></Checkbox>
+                ),
+                name: 'Driver Assistance',
+              },
+              {
+                content: (
+                  <CheckboxGroup
+                    data-testid='evsearch-evtype'
+                    variant={CheckboxGroupVariant.Horizontal}
+                    onChange={(values) => handleColorChange(values)}
+                    compact={true}
+                    legend='Select paint color'
+                    items={colorResult.map((key) => ({
+                      label: key,
+                      name: key,
+                      checked: initSearch.colors === undefined || initSearch.colors.includes(key),
+                    }))}
+                  ></CheckboxGroup>
+                ),
+                name: 'Exterior',
+              },
+              {
+                content: (
+                  <div>
+                    <Checkbox
+                      checked={initSearch.headUpDisplay}
+                      label='Head Up Display'
+                      onChange={handleHeadUpDisplayChange}
+                      compact={true}
+                    ></Checkbox>
+                    <br></br>
+                    <Checkbox
+                      checked={initSearch.instrumentCluster}
+                      label='Dedicated Instrument Cluster'
+                      onChange={handleInstrumentClusterChange}
+                      compact={true}
+                    ></Checkbox>
+                    <br></br>
+                    <Checkbox
+                      checked={initSearch.androidAuto}
+                      label='Android Auto Support'
+                      onChange={handleAndroidAutoChange}
+                      compact={true}
+                    ></Checkbox>
+                    <br></br>
+                    <Checkbox
+                      checked={initSearch.appleCarPlay}
+                      label='Apple Car Play Support'
+                      onChange={handleAppleCarPlayChange}
+                      compact={true}
+                    ></Checkbox>
+                  </div>
+                ),
+                name: 'UI & Interface',
+              },
+            ]}
+          />
 
-            <br></br>
+          <br></br>
+        </div>
+        <div className={classes.pageContentAccordionsContainer}>
+          <div className={classes.apiAccordions}>
+            <h4>{t('evsearch.searchresult')}:</h4>
+            <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
           </div>
-          <div className={classes.pageContentAccordionsContainer}>
-            <div className={classes.apiAccordions}>
-              <h4>{t('evsearch.searchresult')}:</h4>
-              <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
-            </div>
-          </div>
-        </PageContent>
-      </Page>
-    </PageContainer>
+        </div>
+      </PageContent>
+    </Page>
   );
 };
