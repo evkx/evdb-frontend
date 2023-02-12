@@ -1,9 +1,0 @@
-{ 
-  "common": {
-    "error": "Error",
-    "restart": "Restart"
-  },
-  "evsearch":{
-    "title" : "EV Search"
-  }
-}
