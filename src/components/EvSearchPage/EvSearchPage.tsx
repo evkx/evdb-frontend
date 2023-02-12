@@ -1,4 +1,4 @@
-import { Page, Panel, PanelVariant, PageHeader, PageContent } from '@altinn/altinn-design-system';
+import { Page, Panel, PanelVariant, PageContent } from '@altinn/altinn-design-system';
 import type { SingleSelectOption } from '@digdir/design-system-react';
 import {
   CheckboxGroup,
