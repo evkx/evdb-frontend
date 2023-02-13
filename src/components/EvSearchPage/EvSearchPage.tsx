@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import * as React from 'react';
 
-import { ReactComponent as CarIcon } from '@/assets/Car.svg';
 import {
   fetchEvs,
   fetchSearchOptions,

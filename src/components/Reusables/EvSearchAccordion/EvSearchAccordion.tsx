@@ -52,10 +52,10 @@ export const EvSearchAccordion = ({
       >
         <AccordionHeader subtitle={subtitle}>{title}</AccordionHeader>
         <AccordionContent>
-          <div className={classes.newApiAccordionContent}>
+          <div className={classes.evsearchAccordionContent}>
             {maxPower && (
               <div>
-                <p className={classes.scopeText}>{t('evsearch.specifications')}</p>
+                <p className={classes.evText}>{t('evsearch.specifications')}</p>
                 <div className={classes.line}>
                   <Line />
                 </div>
