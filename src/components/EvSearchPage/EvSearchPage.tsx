@@ -45,6 +45,7 @@ export const EvSearchPage = () => {
   const fetchSearchOptionData = async () => await dispatch(fetchSearchOptions());
 
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
+  const evsearchCount = useAppSelector((state) => state.evsearchResult.evList.count);
   const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
   const bodyTypesResult = useAppSelector((state) => state.evsearchResult.searchOptions.bodyTypes);
   const colorResult = useAppSelector((state) => state.evsearchResult.searchOptions.colors);
@@ -137,7 +138,7 @@ export const EvSearchPage = () => {
         </Panel>
       );
     } else if (loading) {
-      return t('api_delegation.loading') + '...';
+      return t('evsearch.loading') + '...';
     }
     return evsearchresult.map((ev: Ev, index: Key | null | undefined) => {
       return (
@@ -152,6 +153,8 @@ export const EvSearchPage = () => {
           wltpConsumption={ev.wltpConsumption}
           wltpRange={ev.wltpRange}
           netBattery={ev.netBattery}
+          zeroTo100={ev.zeroTo100}
+          thumbUri={ev.thumbUri}
         ></EvSearchAccordion>
       );
     });
@@ -163,14 +166,14 @@ export const EvSearchPage = () => {
         <PageContent>
           <div className={classes.pageContent}>
             <Select
-              label='Sortering'
+              label={String(t('evsearch.sortorder'))}
               multiple={false}
               onChange={handleSortOrderChange}
               options={[
-                { label: 'Merke,model', value: '1' },
-                { label: 'Rekkevidde WLTP minimum spesifikasjon', value: '2' },
-                { label: 'Netto batterystørrelse minst-størst', value: '3' },
-                { label: 'Netto batteristørrels størst-minst', value: '4' },
+                { label: String(t('evsearch.sortorderbrand')), value: '1' },
+                { label: String(t('evsearch.sortorderrange')), value: '2' },
+                { label: String(t('evsearch.sortordernetsize')), value: '3' },
+                { label: String(t('evsearch.sortordernetsizedesc')), value: '4' },
                 { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
                 { label: 'Power more > less', value: '6' },
                 { label: 'Top speed more >less', value: '7' },
@@ -180,7 +183,7 @@ export const EvSearchPage = () => {
               ]}
             ></Select>
             <Select
-              label='Brands'
+              label={String(t('evsearch.brandfilter'))}
               multiple={true}
               onChange={handleBrandChange}
               options={filterOptions}
@@ -189,7 +192,9 @@ export const EvSearchPage = () => {
             <CheckboxGroup
               data-testid='evsearch-evtype'
               variant={CheckboxGroupVariant.Horizontal}
-              onChange={(values) => handleTypeChange(values)}
+              onChange={(values) => {
+                handleTypeChange(values);
+              }}
               compact={true}
               legend='Select body type'
               items={bodyTypesResult.map((key) => ({
@@ -207,7 +212,9 @@ export const EvSearchPage = () => {
                     <CheckboxGroup
                       data-testid='evsearch-seatconfig'
                       variant={CheckboxGroupVariant.Horizontal}
-                      onChange={(values) => handleSeatConfigChange(values)}
+                      onChange={(values) => {
+                        handleSeatConfigChange(values);
+                      }}
                       compact={true}
                       legend='Number of seats'
                       items={seatConfigResult.map((key) => ({
@@ -257,7 +264,9 @@ export const EvSearchPage = () => {
                     <CheckboxGroup
                       data-testid='evsearch-evtype'
                       variant={CheckboxGroupVariant.Horizontal}
-                      onChange={(values) => handleColorChange(values)}
+                      onChange={(values) => {
+                        handleColorChange(values);
+                      }}
                       compact={true}
                       legend='Select paint color'
                       items={colorResult.map((key) => ({
@@ -310,7 +319,9 @@ export const EvSearchPage = () => {
           </div>
           <div className={classes.pageContentAccordionsContainer}>
             <div className={classes.apiAccordions}>
-              <h4>{t('evsearch.searchresult')}:</h4>
+              <h4 className={classes.resultInfo}>
+                {evsearchCount} {t('evsearch.searchresult')}:
+              </h4>
               <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
             </div>
           </div>

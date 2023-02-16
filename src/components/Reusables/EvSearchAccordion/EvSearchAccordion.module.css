@@ -1,5 +1,6 @@
 .evsearchAccordionContent{
   margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .evText{
@@ -22,4 +23,10 @@
 
 .bottomContentTexts{
   margin-bottom: 20px;
+}
+
+.thumb
+{
+  width: 90%;
+  max-width: 400px;
 }

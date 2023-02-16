@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface EvSearchResult {
   evs: Ev[];
+  count: number;
 }
 
 export interface Ev {
@@ -16,6 +17,7 @@ export interface Ev {
   netBattery: number;
   wltpConsumption: number;
   wltpRange: number;
+  thumbUri: string;
 }
 
 export interface EvSearch {
@@ -61,6 +63,7 @@ const initialState: SliceState = {
   brandloading: true,
   evList: {
     evs: [],
+    count: 0,
   },
   search: {
     name: '',
