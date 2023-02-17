@@ -61,43 +61,44 @@ export const EvSearchAccordion = ({
         <AccordionHeader subtitle={subtitle}>{title}</AccordionHeader>
         <AccordionContent>
           <div className={classes.evsearchAccordionContent}>
-            <div>
-              <div>
-                <div>
+            <div className={classes.cards}>
+              <div className={classes.card}>
+                <div className={classes.thumbcontainer}>
                   <img
                     src={thumbUri}
                     alt={title}
                     className={classes.thumb}
                   ></img>
                 </div>
-                <div>
-                  Read our <a href={infoUri}>full article</a>, see all{' '}
-                  <a href={infoUri + 'specifications/'}>specifications</a>, or see
-                  <a href={infoUri + 'gallery/'}>image gallery</a>.
-                </div>
               </div>
-              <FieldSet legend={t('evsearch.specificationshiglihts')}>
-                <List borderStyle='dashed'>
-                  <ListItem>
-                    <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.specwltpconsumption')}</b> - {wltpConsumption} kWh/100km
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.specnetbattery')}</b> - {netBattery} kWh
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.zeroto100')}</b> - {zeroTo100} seconds
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.topspeed')}</b>- {topSpeedKph} km/h
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.maxpower')}</b> - {maxPower} kW
-                  </ListItem>
-                </List>
-              </FieldSet>
+              <div className={classes.card}>
+                Read our <a href={infoUri}>full article</a>, see all{' '}
+                <a href={infoUri + 'specifications/'}>specifications</a>, or see our{' '}
+                <a href={infoUri + 'gallery/'}>image gallery</a>.<br></br>
+                <br></br>
+                <FieldSet legend={t('evsearch.specificationshiglihts')}>
+                  <List borderStyle='dashed'>
+                    <ListItem>
+                      <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.specwltpconsumption')}</b> - {wltpConsumption} kWh/100km
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.specnetbattery')}</b> - {netBattery} kWh
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.zeroto100')}</b> - {zeroTo100} seconds
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.topspeed')}</b>- {topSpeedKph} km/h
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.maxpower')}</b> - {maxPower} kW
+                    </ListItem>
+                  </List>
+                </FieldSet>
+              </div>
             </div>
           </div>
         </AccordionContent>
