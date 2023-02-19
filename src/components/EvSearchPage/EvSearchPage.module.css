@@ -19,3 +19,7 @@
   margin-left: 20px;
 
 }
+
+.searchinput{
+ display: flex;
+}

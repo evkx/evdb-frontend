@@ -18,6 +18,8 @@ export interface Ev {
   wltpConsumption: number;
   wltpRange: number;
   thumbUri: string;
+  maxDcChargingSpeed: number;
+  averageDcChargingSpeed: number;
 }
 
 export interface EvSearch {
@@ -86,7 +88,7 @@ const initialState: SliceState = {
     colors: [],
   },
   searchOptions: {
-    brands: ['Audi'],
+    brands: ['Audi', 'Tesla'],
     seatConfig: [],
     bodyTypes: ['Sedan'],
     seatConfiguration: ['5 seat'],

@@ -2,11 +2,8 @@ import {
   Accordion,
   AccordionHeader,
   AccordionContent,
-  HelpText,
-  HelpTextSize,
   List,
   ListItem,
-  FieldSet,
 } from '@digdir/design-system-react';
 import { useState } from 'react';
 import { t } from 'i18next';
@@ -22,8 +19,6 @@ export enum EvSearchAccordionButtonType {
 export interface EvSearchAccordionProps {
   title?: string;
   subtitle?: string;
-  topContentText?: string;
-  textList?: string[];
   maxPower?: number;
   topSpeedKph?: number;
   infoUri?: string;
@@ -32,13 +27,13 @@ export interface EvSearchAccordionProps {
   wltpRange?: number;
   zeroTo100?: number;
   thumbUri?: string;
+  maxDcChargingSpeed?: number;
+  averageDcChargingSpeed?: number;
 }
 
 export const EvSearchAccordion = ({
   title = 'No info',
   subtitle = 'No info',
-  topContentText,
-  textList = [''],
   maxPower = 0,
   topSpeedKph = 0,
   infoUri = '',
@@ -47,6 +42,8 @@ export const EvSearchAccordion = ({
   wltpRange = 0,
   zeroTo100 = 0,
   thumbUri = '',
+  maxDcChargingSpeed = 0,
+  averageDcChargingSpeed = 0,
 }: EvSearchAccordionProps) => {
   const [open, setOpen] = useState(false);
 
@@ -76,28 +73,30 @@ export const EvSearchAccordion = ({
                 <a href={infoUri + 'specifications/'}>specifications</a>, or see our{' '}
                 <a href={infoUri + 'gallery/'}>image gallery</a>.<br></br>
                 <br></br>
-                <FieldSet legend={t('evsearch.specificationshiglihts')}>
-                  <List borderStyle='dashed'>
-                    <ListItem>
-                      <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
-                    </ListItem>
-                    <ListItem>
-                      <b>{t('evsearch.specwltpconsumption')}</b> - {wltpConsumption} kWh/100km
-                    </ListItem>
-                    <ListItem>
-                      <b>{t('evsearch.specnetbattery')}</b> - {netBattery} kWh
-                    </ListItem>
-                    <ListItem>
-                      <b>{t('evsearch.zeroto100')}</b> - {zeroTo100} seconds
-                    </ListItem>
-                    <ListItem>
-                      <b>{t('evsearch.topspeed')}</b>- {topSpeedKph} km/h
-                    </ListItem>
-                    <ListItem>
-                      <b>{t('evsearch.maxpower')}</b> - {maxPower} kW
-                    </ListItem>
-                  </List>
-                </FieldSet>
+                <List borderStyle='dashed'>
+                  <ListItem>
+                    <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
+                  </ListItem>
+                  <ListItem>
+                    <b>{t('evsearch.specwltpconsumption')}</b> - {wltpConsumption} kWh/100km
+                  </ListItem>
+                  <ListItem>
+                    <b>{t('evsearch.specnetbattery')}</b> - {netBattery} kWh
+                  </ListItem>
+                  <ListItem>
+                    <b>{t('evsearch.zeroto100')}</b> - {zeroTo100} seconds
+                  </ListItem>
+                  <ListItem>
+                    <b>{t('evsearch.topspeed')}</b>- {topSpeedKph} km/h
+                  </ListItem>
+                  <ListItem>
+                    <b>{t('evsearch.maxpower')}</b> - {maxPower} kW
+                  </ListItem>
+                  <ListItem>
+                    <b>{t('evsearch.chargingspeed')}</b> - {maxDcChargingSpeed}/
+                    {averageDcChargingSpeed} kW
+                  </ListItem>
+                </List>
               </div>
             </div>
           </div>

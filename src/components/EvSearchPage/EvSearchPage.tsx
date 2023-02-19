@@ -1,15 +1,25 @@
-import { Page, Panel, PanelVariant, PageContent } from '@altinn/altinn-design-system';
-import type { SingleSelectOption } from '@digdir/design-system-react';
+import {
+  Page,
+  Panel,
+  PanelVariant,
+  PageContent,
+  Accordion,
+  AccordionHeader,
+  AccordionContent,
+} from '@altinn/altinn-design-system';
+import type { MultiSelectOption } from '@digdir/design-system-react';
 import {
   CheckboxGroup,
   CheckboxGroupVariant,
   Select,
   Tabs,
   Checkbox,
+  HelpText,
+  HelpTextSize,
 } from '@digdir/design-system-react';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 
 import {
@@ -46,12 +56,13 @@ export const EvSearchPage = () => {
 
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
   const evsearchCount = useAppSelector((state) => state.evsearchResult.evList.count);
-  const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
   const bodyTypesResult = useAppSelector((state) => state.evsearchResult.searchOptions.bodyTypes);
   const colorResult = useAppSelector((state) => state.evsearchResult.searchOptions.colors);
   const seatConfigResult = useAppSelector(
     (state) => state.evsearchResult.searchOptions.seatConfiguration,
   );
+
+  const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
 
   const initSearch = useAppSelector((state) => state.evsearchResult.search);
   const fetchData = async (evSearch: EvSearch) => await dispatch(fetchEvs(evSearch));
@@ -77,7 +88,7 @@ export const EvSearchPage = () => {
     dispatch(updateBrands(filterList));
   };
 
-  const filterOptions: SingleSelectOption[] = brandsResult.map((provider: string) => ({
+  const filterOptions: MultiSelectOption[] = brandsResult.map((provider: string) => ({
     label: provider,
     value: provider,
   }));
@@ -124,6 +135,8 @@ export const EvSearchPage = () => {
     dispatch(updateColors(names));
   };
 
+  const [open, setOpen] = useState(false);
+
   const delegableApiAccordions = () => {
     if (error) {
       return (
@@ -146,7 +159,6 @@ export const EvSearchPage = () => {
           title={ev.name}
           subtitle={ev.sortValue + ' ' + ev.sortParameter}
           key={index}
-          topContentText={ev.infoUri}
           maxPower={ev.maxPowerKw}
           topSpeedKph={ev.topSpeedKph}
           infoUri={ev.infoUri}
@@ -155,6 +167,8 @@ export const EvSearchPage = () => {
           netBattery={ev.netBattery}
           zeroTo100={ev.zeroTo100}
           thumbUri={ev.thumbUri}
+          averageDcChargingSpeed={ev.averageDcChargingSpeed}
+          maxDcChargingSpeed={ev.maxDcChargingSpeed}
         ></EvSearchAccordion>
       );
     });
@@ -165,6 +179,23 @@ export const EvSearchPage = () => {
       <Page>
         <PageContent>
           <div className={classes.pageContent}>
+            <Accordion
+              open={open}
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              <AccordionHeader>Read about search</AccordionHeader>
+              <AccordionContent>
+                <div>
+                  EVKX provides the most comprehensive EV search.
+                  <ul>
+                    <li>Search on WLTP range</li>
+                    <li>Search on WLTP consumption</li>
+                  </ul>
+                </div>
+              </AccordionContent>
+            </Accordion>
             <Select
               label={String(t('evsearch.sortorder'))}
               multiple={false}
@@ -174,14 +205,22 @@ export const EvSearchPage = () => {
                 { label: String(t('evsearch.sortorderrange')), value: '2' },
                 { label: String(t('evsearch.sortordernetsize')), value: '3' },
                 { label: String(t('evsearch.sortordernetsizedesc')), value: '4' },
-                { label: 'WLTP forbruk minium spesifikasjon', value: '5' },
-                { label: 'Power more > less', value: '6' },
-                { label: 'Top speed more >less', value: '7' },
-                { label: 'Max DC Charging', value: '8' },
-                { label: 'Nominal voltage', value: '9' },
-                { label: '0-100kph', value: '10' },
+                { label: String(t('evsearch.specwltprange')), value: '5' },
+                { label: String(t('evsearch.maxpowersort')), value: '6' },
+                { label: String(t('evsearch.topspeedsort')), value: '7' },
+                { label: String(t('evsearch.maxdcchargingsort')), value: '8' },
+                { label: String(t('evsearch.nominalvoltagesort')), value: '9' },
+                { label: String(t('evsearch.sort0100kmh')), value: '10' },
+                { label: String(t('evsearch.sort1000kmdrivingtime')), value: '11' },
+                { label: String(t('evsearch.sort1000kmaveragespeed')), value: '12' },
+                { label: String(t('evsearch.travelspeedwltpcyclus')), value: '13' },
+                { label: String(t('evsearch.travelspeed120kmh')), value: '14' },
+                { label: String(t('evsearch.averagechargingspeed0100')), value: '15' },
+                { label: String(t('evsearch.averagechargingspeed10100')), value: '16' },
+                { label: String(t('evsearch.averagechargingspeed1080')), value: '17' },
               ]}
             ></Select>
+
             <Select
               label={String(t('evsearch.brandfilter'))}
               multiple={true}
