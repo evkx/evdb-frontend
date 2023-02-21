@@ -1,12 +1,4 @@
-import {
-  Page,
-  Panel,
-  PanelVariant,
-  PageContent,
-  Accordion,
-  AccordionHeader,
-  AccordionContent,
-} from '@altinn/altinn-design-system';
+import { Page, Panel, PanelVariant, PageContent } from '@altinn/altinn-design-system';
 import type { MultiSelectOption } from '@digdir/design-system-react';
 import {
   CheckboxGroup,
@@ -14,8 +6,9 @@ import {
   Select,
   Tabs,
   Checkbox,
-  HelpText,
-  HelpTextSize,
+  FieldSet,
+  FieldSetProps,
+  FieldSetSize,
 } from '@digdir/design-system-react';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -37,6 +30,10 @@ import {
   updateAndroidAuto,
   updateAppleCarPlay,
   updateColors,
+  updateAdaptiveAirSuspension,
+  updateFWD,
+  updateRWD,
+  updateRearAxleSteering,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -71,8 +68,8 @@ export const EvSearchPage = () => {
 
   useEffect(() => {
     if (loading) {
-      void fetchData(initSearch);
       void fetchSearchOptionData();
+      void fetchData(initSearch);
     }
   }, []);
 
@@ -102,40 +99,47 @@ export const EvSearchPage = () => {
   };
 
   const handleAllWheelDriveChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isChecked = event.target.checked;
-    dispatch(updateAllWheelDrive(isChecked));
+    dispatch(updateAllWheelDrive(event.target.checked));
+  };
+
+  const handleRWDChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateRWD(event.target.checked));
+  };
+
+  const handleFWDChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateFWD(event.target.checked));
+  };
+
+  const handleRearAxleSteeringChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateRearAxleSteering(event.target.checked));
   };
 
   const handleNightVisionChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isChecked = event.target.checked;
-    dispatch(updateNightVision(isChecked));
+    dispatch(updateNightVision(event.target.checked));
   };
 
   const handleAdaptiveSuspensionChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isChecked = event.target.checked;
-    dispatch(updateAdaptiveDamping(isChecked));
+    dispatch(updateAdaptiveDamping(event.target.checked));
   };
+  const handleAirSuspensionChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateAdaptiveAirSuspension(event.target.checked));
+  };
+
   const handleInstrumentClusterChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isChecked = event.target.checked;
-    dispatch(updateInstrumentCluster(isChecked));
+    dispatch(updateInstrumentCluster(event.target.checked));
   };
   const handleHeadUpDisplayChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isChecked = event.target.checked;
-    dispatch(updateHeadUpDisplay(isChecked));
+    dispatch(updateHeadUpDisplay(event.target.checked));
   };
   const handleAppleCarPlayChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isChecked = event.target.checked;
-    dispatch(updateAppleCarPlay(isChecked));
+    dispatch(updateAppleCarPlay(event.target.checked));
   };
   const handleAndroidAutoChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isChecked = event.target.checked;
-    dispatch(updateAndroidAuto(isChecked));
+    dispatch(updateAndroidAuto(event.target.checked));
   };
   const handleColorChange = (names: string[]) => {
     dispatch(updateColors(names));
   };
-
-  const [open, setOpen] = useState(false);
 
   const delegableApiAccordions = () => {
     if (error) {
@@ -179,48 +183,44 @@ export const EvSearchPage = () => {
       <Page>
         <PageContent>
           <div className={classes.pageContent}>
-            <Accordion
-              open={open}
-              onClick={() => {
-                setOpen(!open);
-              }}
+            <FieldSet
+              legend='Welcome to EVKX EV Search'
+              size={FieldSetSize.Small}
+              className={classes.searchinfo}
+              contentClassName={classes.searchinfoContent}
             >
-              <AccordionHeader>Read about search</AccordionHeader>
-              <AccordionContent>
-                <div>
-                  EVKX provides the most comprehensive EV search.
-                  <ul>
-                    <li>Search on WLTP range</li>
-                    <li>Search on WLTP consumption</li>
-                  </ul>
-                </div>
-              </AccordionContent>
-            </Accordion>
+              <p>
+                EVKX offers the most comprehensive search for EVs.
+                <br />
+                You can search and sort on a whole lot of parameters. Please read our{' '}
+                <a href='/guide/evsearch/'>search guide</a>
+              </p>
+            </FieldSet>
+            <br />
             <Select
               label={String(t('evsearch.sortorder'))}
               multiple={false}
               onChange={handleSortOrderChange}
               options={[
                 { label: String(t('evsearch.sortorderbrand')), value: '1' },
-                { label: String(t('evsearch.sortorderrange')), value: '2' },
+                { label: String(t('evsearch.specwltprange')), value: '2' },
+                { label: String(t('evsearch.specwltpconsumption')), value: '5' },
                 { label: String(t('evsearch.sortordernetsize')), value: '3' },
                 { label: String(t('evsearch.sortordernetsizedesc')), value: '4' },
-                { label: String(t('evsearch.specwltprange')), value: '5' },
                 { label: String(t('evsearch.maxpowersort')), value: '6' },
                 { label: String(t('evsearch.topspeedsort')), value: '7' },
                 { label: String(t('evsearch.maxdcchargingsort')), value: '8' },
-                { label: String(t('evsearch.nominalvoltagesort')), value: '9' },
+                { label: String(t('evsearch.averagechargingspeed0100')), value: '15' },
+                { label: String(t('evsearch.averagechargingspeed10100')), value: '16' },
+                { label: String(t('evsearch.averagechargingspeed1080')), value: '17' },
                 { label: String(t('evsearch.sort0100kmh')), value: '10' },
                 { label: String(t('evsearch.sort1000kmdrivingtime')), value: '11' },
                 { label: String(t('evsearch.sort1000kmaveragespeed')), value: '12' },
                 { label: String(t('evsearch.travelspeedwltpcyclus')), value: '13' },
                 { label: String(t('evsearch.travelspeed120kmh')), value: '14' },
-                { label: String(t('evsearch.averagechargingspeed0100')), value: '15' },
-                { label: String(t('evsearch.averagechargingspeed10100')), value: '16' },
-                { label: String(t('evsearch.averagechargingspeed1080')), value: '17' },
+                { label: String(t('evsearch.nominalvoltagesort')), value: '9' },
               ]}
             ></Select>
-
             <Select
               label={String(t('evsearch.brandfilter'))}
               multiple={true}
@@ -276,11 +276,39 @@ export const EvSearchPage = () => {
                         onChange={handleAllWheelDriveChange}
                         compact={true}
                       ></Checkbox>
-                      <br></br>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.rWD}
+                        label='RWD'
+                        onChange={handleRWDChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.fWD}
+                        label='FWD'
+                        onChange={handleFWDChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
                       <Checkbox
                         checked={initSearch.adaptiveSuspension}
                         label='Adaptive Suspension'
                         onChange={handleAdaptiveSuspensionChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.airSuspension}
+                        label='Air Suspension'
+                        onChange={handleAirSuspensionChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.rearAxleSteering}
+                        label='Rear Axle Steering'
+                        onChange={handleRearAxleSteeringChange}
                         compact={true}
                       ></Checkbox>
                     </PageContent>

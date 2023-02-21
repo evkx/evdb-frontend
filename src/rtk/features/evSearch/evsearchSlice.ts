@@ -33,9 +33,12 @@ export interface EvSearch {
   seatMassageSecondRow: boolean;
   seatVentilationSecondRow: boolean;
   allWheelDrive: boolean;
+  fWD: boolean;
+  rWD: boolean;
   nightVision: boolean;
   adaptiveSuspension: boolean;
   airSuspension: boolean;
+  rearAxleSteering: boolean;
   instrumentCluster: boolean;
   headUpDisplay: boolean;
   androidAuto: boolean;
@@ -86,6 +89,9 @@ const initialState: SliceState = {
     androidAuto: false,
     appleCarPlay: false,
     colors: [],
+    fWD: false,
+    rWD: false,
+    rearAxleSteering: false,
   },
   searchOptions: {
     brands: ['Audi', 'Tesla'],
@@ -153,6 +159,15 @@ const evsearchSlice = createSlice({
       const allWheelDrive = action.payload;
       state.search.allWheelDrive = allWheelDrive;
     },
+    updateRWD: (state: SliceState, action) => {
+      state.search.rWD = action.payload;
+    },
+    updateFWD: (state: SliceState, action) => {
+      state.search.fWD = action.payload;
+    },
+    updateRearAxleSteering: (state: SliceState, action) => {
+      state.search.rearAxleSteering = action.payload;
+    },
     updateNightVision: (state: SliceState, action) => {
       const checked = action.payload;
       state.search.nightVision = checked;
@@ -162,8 +177,7 @@ const evsearchSlice = createSlice({
       state.search.adaptiveSuspension = checked;
     },
     updateAdaptiveAirSuspension: (state: SliceState, action) => {
-      const checked = action.payload;
-      state.search.airSuspension = checked;
+      state.search.airSuspension = action.payload;
     },
     updateInstrumentCluster: (state: SliceState, action) => {
       const checked = action.payload;
@@ -222,4 +236,7 @@ export const {
   updateAndroidAuto,
   updateAppleCarPlay,
   updateColors,
+  updateFWD,
+  updateRWD,
+  updateRearAxleSteering,
 } = evsearchSlice.actions;

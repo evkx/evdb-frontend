@@ -23,3 +23,14 @@
 .searchinput{
  display: flex;
 }
+
+.searchinfo
+{
+
+}
+
+.searchinfoContent
+{
+  background-color: beige;
+  padding: 1rem;
+}
