@@ -219,6 +219,10 @@ export const EvSearchPage = () => {
                 { label: String(t('evsearch.travelspeedwltpcyclus')), value: '13' },
                 { label: String(t('evsearch.travelspeed120kmh')), value: '14' },
                 { label: String(t('evsearch.nominalvoltagesort')), value: '9' },
+                { label: String(t('evsearch.trunksize')), value: '18' },
+                { label: String(t('evsearch.maxtrunksize')), value: '19' },
+                { label: String(t('evsearch.maxload')), value: '21' },
+                { label: String(t('evsearch.maxtrailer')), value: '20' },
               ]}
             ></Select>
             <Select
