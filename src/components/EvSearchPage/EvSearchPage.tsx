@@ -74,7 +74,9 @@ export const EvSearchPage = () => {
   }, []);
 
   useEffect(() => {
-    void fetchData(initSearch);
+    if (!loading) {
+      void fetchData(initSearch);
+    }
   }, [initSearch]);
 
   const handleSortOrderChange = (filterList: string) => {
@@ -223,6 +225,9 @@ export const EvSearchPage = () => {
                 { label: String(t('evsearch.maxtrunksize')), value: '19' },
                 { label: String(t('evsearch.maxload')), value: '21' },
                 { label: String(t('evsearch.maxtrailer')), value: '20' },
+                { label: String(t('evsearch.maxgroundclearance')), value: '22' },
+                { label: String(t('evsearch.mingroundclearance')), value: '23' },
+                { label: String(t('evsearch.suspensionheightadjustment')), value: '24' },
               ]}
             ></Select>
             <Select
