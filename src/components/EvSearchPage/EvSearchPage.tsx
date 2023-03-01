@@ -9,6 +9,8 @@ import {
   FieldSet,
   FieldSetProps,
   FieldSetSize,
+  Spinner,
+  SpinnerProps,
 } from '@digdir/design-system-react';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -157,7 +159,15 @@ export const EvSearchPage = () => {
         </Panel>
       );
     } else if (loading) {
-      return t('evsearch.loading') + '...';
+      return (
+        <center>
+          <Spinner
+            title='Spinner'
+            size='3xLarge'
+            variant='interaction'
+          />
+        </center>
+      );
     }
     return evsearchresult.map((ev: Ev, index: Key | null | undefined) => {
       return (
