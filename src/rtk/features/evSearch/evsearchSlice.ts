@@ -24,7 +24,7 @@ export interface Ev {
 
 export interface EvSearch {
   name: string;
-  sortOrder: number;
+  sortOrder: string;
   evType: string[];
   brands: string[];
   seatConfiguration: string[];
@@ -72,7 +72,7 @@ const initialState: SliceState = {
   },
   search: {
     name: '',
-    sortOrder: 1,
+    sortOrder: 'Name',
     evType: [],
     brands: [],
     seatConfiguration: [],
@@ -102,6 +102,7 @@ const initialState: SliceState = {
       'Hongqi',
       'Hyundai',
       'Kia',
+      'Lucid',
       'Mercedes',
       'Nio',
       'Nissan',
@@ -156,8 +157,7 @@ const evsearchSlice = createSlice({
   initialState,
   reducers: {
     updateSortOrder: (state: SliceState, action) => {
-      const sortOrder = action.payload.trim().toLowerCase();
-      state.search.sortOrder = parseInt(sortOrder);
+      state.search.sortOrder = action.payload;
     },
     updateEvType: (state: SliceState, action) => {
       const evTypes = action.payload;
@@ -215,6 +215,9 @@ const evsearchSlice = createSlice({
       const selections = action.payload;
       state.search.colors = selections;
     },
+    updateSortOrderFromParam: (state: SliceState, action) => {
+      state.search.sortOrder = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -255,4 +258,5 @@ export const {
   updateFWD,
   updateRWD,
   updateRearAxleSteering,
+  updateSortOrderFromParam,
 } = evsearchSlice.actions;

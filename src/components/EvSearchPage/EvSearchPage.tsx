@@ -36,6 +36,7 @@ import {
   updateFWD,
   updateRWD,
   updateRearAxleSteering,
+  updateSortOrderFromParam,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -50,6 +51,9 @@ export const EvSearchPage = () => {
   const loading = useAppSelector((state) => state.evsearchResult.loading);
 
   const dispatch = useAppDispatch();
+
+  const queryParameters = new URLSearchParams(window.location.search);
+  const sortorder = queryParameters.get('sortorder');
 
   const fetchSearchOptionData = async () => await dispatch(fetchSearchOptions());
 
@@ -205,7 +209,7 @@ export const EvSearchPage = () => {
                 EVKX offers the most comprehensive search for EVs.
                 <br />
                 You can search and sort on a whole lot of parameters. Please read our{' '}
-                <a href='/guide/evsearch/'>search guide</a>
+                <a href='/guides/evsearch/'>search guide</a>
               </p>
             </FieldSet>
             <br />
@@ -214,30 +218,54 @@ export const EvSearchPage = () => {
               multiple={false}
               onChange={handleSortOrderChange}
               options={[
-                { label: String(t('evsearch.sortorderbrand')), value: '1' },
-                { label: String(t('evsearch.specwltprange')), value: '2' },
-                { label: String(t('evsearch.specwltpconsumption')), value: '5' },
-                { label: String(t('evsearch.sortordernetsize')), value: '3' },
-                { label: String(t('evsearch.sortordernetsizedesc')), value: '4' },
-                { label: String(t('evsearch.maxpowersort')), value: '6' },
-                { label: String(t('evsearch.topspeedsort')), value: '7' },
-                { label: String(t('evsearch.maxdcchargingsort')), value: '8' },
-                { label: String(t('evsearch.averagechargingspeed0100')), value: '15' },
-                { label: String(t('evsearch.averagechargingspeed10100')), value: '16' },
-                { label: String(t('evsearch.averagechargingspeed1080')), value: '17' },
-                { label: String(t('evsearch.sort0100kmh')), value: '10' },
-                { label: String(t('evsearch.sort1000kmdrivingtime')), value: '11' },
-                { label: String(t('evsearch.sort1000kmaveragespeed')), value: '12' },
-                { label: String(t('evsearch.travelspeedwltpcyclus')), value: '13' },
-                { label: String(t('evsearch.travelspeed120kmh')), value: '14' },
-                { label: String(t('evsearch.nominalvoltagesort')), value: '9' },
-                { label: String(t('evsearch.trunksize')), value: '18' },
-                { label: String(t('evsearch.maxtrunksize')), value: '19' },
-                { label: String(t('evsearch.maxload')), value: '21' },
-                { label: String(t('evsearch.maxtrailer')), value: '20' },
-                { label: String(t('evsearch.maxgroundclearance')), value: '22' },
-                { label: String(t('evsearch.mingroundclearance')), value: '23' },
-                { label: String(t('evsearch.suspensionheightadjustment')), value: '24' },
+                { label: String(t('evsearch.sortorderbrand')), value: 'Name' },
+                { label: String(t('evsearch.specwltprange')), value: 'RangeMinimumWltp' },
+                { label: String(t('evsearch.specwltpconsumption')), value: 'WltpBasicConsumption' },
+                { label: String(t('evsearch.sortordernetsize')), value: 'NetBattery' },
+                { label: String(t('evsearch.sortordernetsizedesc')), value: 'NetBatteryDesc' },
+                { label: String(t('evsearch.maxpowersort')), value: 'PowerDesc' },
+                { label: String(t('evsearch.topspeedsort')), value: 'TopSpeedDesc' },
+                { label: String(t('evsearch.maxdcchargingsort')), value: 'MaxDCCharging' },
+                {
+                  label: String(t('evsearch.averagechargingspeed0100')),
+                  value: 'AverageChargingSpeedDesc',
+                },
+                {
+                  label: String(t('evsearch.averagechargingspeed10100')),
+                  value: 'AverageChargingSpeed10100Desc',
+                },
+                {
+                  label: String(t('evsearch.averagechargingspeed1080')),
+                  value: 'AverageChargingSpeed1080Desc',
+                },
+                { label: String(t('evsearch.sort0100kmh')), value: 'ZeroTo100' },
+                {
+                  label: String(t('evsearch.sort1000kmdrivingtime')),
+                  value: 'DrivingTime1000kmChallenge',
+                },
+                {
+                  label: String(t('evsearch.sort1000kmaveragespeed')),
+                  value: 'AverageSpeed1000kmChallengeDesc',
+                },
+                {
+                  label: String(t('evsearch.travelspeedwltpcyclus')),
+                  value: 'TravelSpeedWltpDesc',
+                },
+                { label: String(t('evsearch.travelspeed120kmh')), value: 'TravelSpeed120kmhDesc' },
+                { label: String(t('evsearch.nominalvoltagesort')), value: 'NominalVoltage' },
+                { label: String(t('evsearch.trunksize')), value: 'TrunkSizeDesc' },
+                { label: String(t('evsearch.maxtrunksize')), value: 'MaxTrunkSizeDesc' },
+                { label: String(t('evsearch.maxload')), value: 'MaxLoadDesc' },
+                { label: String(t('evsearch.maxtrailer')), value: 'MaxTrailerSizeDesc' },
+                {
+                  label: String(t('evsearch.maxgroundclearance')),
+                  value: 'MaxGroundClearanceDesc',
+                },
+                { label: String(t('evsearch.mingroundclearance')), value: 'MinGroundClearance' },
+                {
+                  label: String(t('evsearch.suspensionheightadjustment')),
+                  value: 'SuspensionHeightAdjustment',
+                },
               ]}
             ></Select>
             <Select
