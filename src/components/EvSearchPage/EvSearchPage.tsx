@@ -7,14 +7,12 @@ import {
   Tabs,
   Checkbox,
   FieldSet,
-  FieldSetProps,
   FieldSetSize,
   Spinner,
-  SpinnerProps,
 } from '@digdir/design-system-react';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as React from 'react';
 
 import {
@@ -36,7 +34,8 @@ import {
   updateFWD,
   updateRWD,
   updateRearAxleSteering,
-  updateSortOrderFromParam,
+  updateAdaptiveCruiseControl,
+  updateAutoSteer,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -51,9 +50,6 @@ export const EvSearchPage = () => {
   const loading = useAppSelector((state) => state.evsearchResult.loading);
 
   const dispatch = useAppDispatch();
-
-  const queryParameters = new URLSearchParams(window.location.search);
-  const sortorder = queryParameters.get('sortorder');
 
   const fetchSearchOptionData = async () => await dispatch(fetchSearchOptions());
 
@@ -141,6 +137,12 @@ export const EvSearchPage = () => {
   };
   const handleAppleCarPlayChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateAppleCarPlay(event.target.checked));
+  };
+  const handleAdaptiveCruiseControlChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateAdaptiveCruiseControl(event.target.checked));
+  };
+  const handleAutoSteerChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateAutoSteer(event.target.checked));
   };
   const handleAndroidAutoChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateAndroidAuto(event.target.checked));
@@ -364,12 +366,31 @@ export const EvSearchPage = () => {
                 },
                 {
                   content: (
-                    <Checkbox
-                      checked={initSearch.nightVision}
-                      label='Nightvision'
-                      onChange={handleNightVisionChange}
-                      compact={true}
-                    ></Checkbox>
+                    <PageContent>
+                      <Checkbox
+                        checked={initSearch.nightVision}
+                        label='Nightvision'
+                        onChange={handleNightVisionChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.adaptiveCruiseControl}
+                        label='AdaptiveCruiseControl'
+                        onChange={handleAdaptiveCruiseControlChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.autoSteer}
+                        label='Autosteer'
+                        onChange={handleAutoSteerChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      Read more about Adavanced Driver Assist Systems in our{' '}
+                      <a href='../technology/driverassistance/'>technology section</a>
+                    </PageContent>
                   ),
                   name: 'Driver Assistance',
                 },

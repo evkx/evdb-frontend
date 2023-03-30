@@ -44,6 +44,17 @@ export interface EvSearch {
   androidAuto: boolean;
   appleCarPlay: boolean;
   colors: string[];
+  adaptiveCruiseControl: boolean;
+  autoSteer: boolean;
+  automaticParking: boolean;
+  blindSpotMonitoring: boolean;
+  automatedLaneChange: boolean;
+  driverDrowsinessDetection: boolean;
+  driverMonitoringSystem: boolean;
+  rearCrossTrafficAlert: boolean;
+  exitWarning: boolean;
+  trafficSignRecognition: boolean;
+  efficiencyAssist: boolean;
 }
 
 export interface EvSearchOptions {
@@ -92,6 +103,17 @@ const initialState: SliceState = {
     fWD: false,
     rWD: false,
     rearAxleSteering: false,
+    adaptiveCruiseControl: false,
+    autoSteer: false,
+    automaticParking: false,
+    blindSpotMonitoring: false,
+    automatedLaneChange: false,
+    driverDrowsinessDetection: false,
+    driverMonitoringSystem: false,
+    rearCrossTrafficAlert: false,
+    exitWarning: false,
+    trafficSignRecognition: false,
+    efficiencyAssist: false,
   },
   searchOptions: {
     brands: [
@@ -211,6 +233,12 @@ const evsearchSlice = createSlice({
       const checked = action.payload;
       state.search.appleCarPlay = checked;
     },
+    updateAdaptiveCruiseControl: (state: SliceState, action) => {
+      state.search.adaptiveCruiseControl = action.payload;
+    },
+    updateAutoSteer: (state: SliceState, action) => {
+      state.search.autoSteer = action.payload;
+    },
     updateColors: (state: SliceState, action) => {
       const selections = action.payload;
       state.search.colors = selections;
@@ -259,4 +287,6 @@ export const {
   updateRWD,
   updateRearAxleSteering,
   updateSortOrderFromParam,
+  updateAdaptiveCruiseControl,
+  updateAutoSteer,
 } = evsearchSlice.actions;
