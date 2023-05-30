@@ -1,7 +1,7 @@
 import {
-  Accordion,
-  AccordionHeader,
-  AccordionContent,
+  LegacyAccordion,
+  LegacyAccordionHeader,
+  LegacyAccordionContent,
   List,
   ListItem,
 } from '@digdir/design-system-react';
@@ -49,14 +49,14 @@ export const EvSearchAccordion = ({
 
   return (
     <div>
-      <Accordion
+      <LegacyAccordion
         open={open}
         onClick={() => {
           setOpen(!open);
         }}
       >
-        <AccordionHeader subtitle={subtitle}>{title}</AccordionHeader>
-        <AccordionContent>
+        <LegacyAccordionHeader subtitle={subtitle}>{title}</LegacyAccordionHeader>
+        <LegacyAccordionContent>
           <div className={classes.evsearchAccordionContent}>
             <div className={classes.cards}>
               <div className={classes.card}>
@@ -100,8 +100,8 @@ export const EvSearchAccordion = ({
               </div>
             </div>
           </div>
-        </AccordionContent>
-      </Accordion>
+        </LegacyAccordionContent>
+      </LegacyAccordion>
     </div>
   );
 };
