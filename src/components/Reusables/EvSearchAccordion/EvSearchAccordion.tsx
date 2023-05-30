@@ -1,10 +1,5 @@
-import {
-  LegacyAccordion,
-  LegacyAccordionHeader,
-  LegacyAccordionContent,
-  List,
-  ListItem,
-} from '@digdir/design-system-react';
+import { Accordion, List, ListItem } from '@digdir/design-system-react';
+import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import { useState } from 'react';
 import { t } from 'i18next';
 import * as React from 'react';
@@ -49,59 +44,62 @@ export const EvSearchAccordion = ({
 
   return (
     <div>
-      <LegacyAccordion
-        open={open}
+      <Accordion
         onClick={() => {
           setOpen(!open);
         }}
       >
-        <LegacyAccordionHeader subtitle={subtitle}>{title}</LegacyAccordionHeader>
-        <LegacyAccordionContent>
-          <div className={classes.evsearchAccordionContent}>
-            <div className={classes.cards}>
-              <div className={classes.card}>
-                <div className={classes.thumbcontainer}>
-                  <img
-                    src={thumbUri}
-                    alt={title}
-                    className={classes.thumb}
-                  ></img>
+        <Accordion.Item>
+          <Accordion.Header>
+            {title} {subtitle}
+          </Accordion.Header>
+          <Accordion.Content>
+            <div className={classes.evsearchAccordionContent}>
+              <div className={classes.cards}>
+                <div className={classes.card}>
+                  <div className={classes.thumbcontainer}>
+                    <img
+                      src={thumbUri}
+                      alt={title}
+                      className={classes.thumb}
+                    ></img>
+                  </div>
+                </div>
+                <div className={classes.card}>
+                  Read our <a href={infoUri}>full article</a>, see all{' '}
+                  <a href={infoUri + 'specifications/'}>specifications</a>, or see our{' '}
+                  <a href={infoUri + 'gallery/'}>image gallery</a>.<br></br>
+                  <br></br>
+                  <List borderStyle='dashed'>
+                    <ListItem>
+                      <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.specwltpconsumption')}</b> - {wltpConsumption} kWh/100km
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.specnetbattery')}</b> - {netBattery} kWh
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.zeroto100')}</b> - {zeroTo100} seconds
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.topspeed')}</b>- {topSpeedKph} km/h
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.maxpower')}</b> - {maxPower} kW
+                    </ListItem>
+                    <ListItem>
+                      <b>{t('evsearch.chargingspeed')}</b> - {maxDcChargingSpeed}/
+                      {averageDcChargingSpeed} kW
+                    </ListItem>
+                  </List>
                 </div>
               </div>
-              <div className={classes.card}>
-                Read our <a href={infoUri}>full article</a>, see all{' '}
-                <a href={infoUri + 'specifications/'}>specifications</a>, or see our{' '}
-                <a href={infoUri + 'gallery/'}>image gallery</a>.<br></br>
-                <br></br>
-                <List borderStyle='dashed'>
-                  <ListItem>
-                    <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.specwltpconsumption')}</b> - {wltpConsumption} kWh/100km
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.specnetbattery')}</b> - {netBattery} kWh
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.zeroto100')}</b> - {zeroTo100} seconds
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.topspeed')}</b>- {topSpeedKph} km/h
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.maxpower')}</b> - {maxPower} kW
-                  </ListItem>
-                  <ListItem>
-                    <b>{t('evsearch.chargingspeed')}</b> - {maxDcChargingSpeed}/
-                    {averageDcChargingSpeed} kW
-                  </ListItem>
-                </List>
-              </div>
             </div>
-          </div>
-        </LegacyAccordionContent>
-      </LegacyAccordion>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
     </div>
   );
 };

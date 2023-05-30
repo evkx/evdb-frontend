@@ -6,10 +6,11 @@ import {
   Select,
   Tabs,
   Checkbox,
-  FieldSet,
-  FieldSetSize,
   Spinner,
+  Heading,
+  Ingress,
 } from '@digdir/design-system-react';
+import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
@@ -201,19 +202,16 @@ export const EvSearchPage = () => {
       <Page>
         <PageContent>
           <div className={classes.pageContent}>
-            <FieldSet
-              legend='Welcome to EVKX EV Search'
-              size={FieldSetSize.Small}
-              className={classes.searchinfo}
-              contentClassName={classes.searchinfoContent}
-            >
-              <p>
-                EVKX offers the most comprehensive search for EVs.
-                <br />
-                You can search and sort on a whole lot of parameters. Please read our{' '}
-                <a href='/guides/evsearch/'>search guide</a>
-              </p>
-            </FieldSet>
+            <Heading size='large'>Welcome to EVKX EV Search</Heading>
+
+            <Ingress size='medium'>
+              EVKX offers the most comprehensive search for EVs.
+              <br />
+              You can search and sort on a whole lot of parameters. Please read our{' '}
+              <a href='/guides/evsearch/'>search guide</a>
+            </Ingress>
+            <p></p>
+
             <br />
             <Select
               label={String(t('evsearch.sortorder'))}
