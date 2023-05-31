@@ -203,71 +203,14 @@ export const EvSearchPage = () => {
         <PageContent>
           <div className={classes.pageContent}>
             <Heading size='large'>Welcome to EVKX EV Search</Heading>
-
             <Ingress size='medium'>
               EVKX offers the most comprehensive search for EVs.
               <br />
-              You can search and sort on a whole lot of parameters. Please read our{' '}
-              <a href='/guides/evsearch/'>search guide</a>
+              You can search and sort on a whole lot of parameters. <br />
+              Please read our <a href='/guides/evsearch/'>search guide</a>
+              <br />
+              <br />
             </Ingress>
-            <p></p>
-
-            <br />
-            <Select
-              label={String(t('evsearch.sortorder'))}
-              multiple={false}
-              onChange={handleSortOrderChange}
-              options={[
-                { label: String(t('evsearch.sortorderbrand')), value: 'Name' },
-                { label: String(t('evsearch.specwltprange')), value: 'RangeMinimumWltp' },
-                { label: String(t('evsearch.specwltpconsumption')), value: 'WltpBasicConsumption' },
-                { label: String(t('evsearch.sortordernetsize')), value: 'NetBattery' },
-                { label: String(t('evsearch.sortordernetsizedesc')), value: 'NetBatteryDesc' },
-                { label: String(t('evsearch.maxpowersort')), value: 'PowerDesc' },
-                { label: String(t('evsearch.topspeedsort')), value: 'TopSpeedDesc' },
-                { label: String(t('evsearch.maxdcchargingsort')), value: 'MaxDCCharging' },
-                {
-                  label: String(t('evsearch.averagechargingspeed0100')),
-                  value: 'AverageChargingSpeedDesc',
-                },
-                {
-                  label: String(t('evsearch.averagechargingspeed10100')),
-                  value: 'AverageChargingSpeed10100Desc',
-                },
-                {
-                  label: String(t('evsearch.averagechargingspeed1080')),
-                  value: 'AverageChargingSpeed1080Desc',
-                },
-                { label: String(t('evsearch.sort0100kmh')), value: 'ZeroTo100' },
-                {
-                  label: String(t('evsearch.sort1000kmdrivingtime')),
-                  value: 'DrivingTime1000kmChallenge',
-                },
-                {
-                  label: String(t('evsearch.sort1000kmaveragespeed')),
-                  value: 'AverageSpeed1000kmChallengeDesc',
-                },
-                {
-                  label: String(t('evsearch.travelspeedwltpcyclus')),
-                  value: 'TravelSpeedWltpDesc',
-                },
-                { label: String(t('evsearch.travelspeed120kmh')), value: 'TravelSpeed120kmhDesc' },
-                { label: String(t('evsearch.nominalvoltagesort')), value: 'NominalVoltage' },
-                { label: String(t('evsearch.trunksize')), value: 'TrunkSizeDesc' },
-                { label: String(t('evsearch.maxtrunksize')), value: 'MaxTrunkSizeDesc' },
-                { label: String(t('evsearch.maxload')), value: 'MaxLoadDesc' },
-                { label: String(t('evsearch.maxtrailer')), value: 'MaxTrailerSizeDesc' },
-                {
-                  label: String(t('evsearch.maxgroundclearance')),
-                  value: 'MaxGroundClearanceDesc',
-                },
-                { label: String(t('evsearch.mingroundclearance')), value: 'MinGroundClearance' },
-                {
-                  label: String(t('evsearch.suspensionheightadjustment')),
-                  value: 'SuspensionHeightAdjustment',
-                },
-              ]}
-            ></Select>
             <Select
               label={String(t('evsearch.brandfilter'))}
               multiple={true}
@@ -447,8 +390,61 @@ export const EvSearchPage = () => {
                 },
               ]}
             />
-
-            <br></br>
+            <Select
+              label={String(t('evsearch.sortorder'))}
+              multiple={false}
+              onChange={handleSortOrderChange}
+              options={[
+                { label: String(t('evsearch.sortorderbrand')), value: 'Name' },
+                { label: String(t('evsearch.specwltprange')), value: 'RangeMinimumWltp' },
+                { label: String(t('evsearch.specwltpconsumption')), value: 'WltpBasicConsumption' },
+                { label: String(t('evsearch.sortordernetsize')), value: 'NetBattery' },
+                { label: String(t('evsearch.sortordernetsizedesc')), value: 'NetBatteryDesc' },
+                { label: String(t('evsearch.maxpowersort')), value: 'PowerDesc' },
+                { label: String(t('evsearch.topspeedsort')), value: 'TopSpeedDesc' },
+                { label: String(t('evsearch.maxdcchargingsort')), value: 'MaxDCCharging' },
+                {
+                  label: String(t('evsearch.averagechargingspeed0100')),
+                  value: 'AverageChargingSpeedDesc',
+                },
+                {
+                  label: String(t('evsearch.averagechargingspeed10100')),
+                  value: 'AverageChargingSpeed10100Desc',
+                },
+                {
+                  label: String(t('evsearch.averagechargingspeed1080')),
+                  value: 'AverageChargingSpeed1080Desc',
+                },
+                { label: String(t('evsearch.sort0100kmh')), value: 'ZeroTo100' },
+                {
+                  label: String(t('evsearch.sort1000kmdrivingtime')),
+                  value: 'DrivingTime1000kmChallenge',
+                },
+                {
+                  label: String(t('evsearch.sort1000kmaveragespeed')),
+                  value: 'AverageSpeed1000kmChallengeDesc',
+                },
+                {
+                  label: String(t('evsearch.travelspeedwltpcyclus')),
+                  value: 'TravelSpeedWltpDesc',
+                },
+                { label: String(t('evsearch.travelspeed120kmh')), value: 'TravelSpeed120kmhDesc' },
+                { label: String(t('evsearch.nominalvoltagesort')), value: 'NominalVoltage' },
+                { label: String(t('evsearch.trunksize')), value: 'TrunkSizeDesc' },
+                { label: String(t('evsearch.maxtrunksize')), value: 'MaxTrunkSizeDesc' },
+                { label: String(t('evsearch.maxload')), value: 'MaxLoadDesc' },
+                { label: String(t('evsearch.maxtrailer')), value: 'MaxTrailerSizeDesc' },
+                {
+                  label: String(t('evsearch.maxgroundclearance')),
+                  value: 'MaxGroundClearanceDesc',
+                },
+                { label: String(t('evsearch.mingroundclearance')), value: 'MinGroundClearance' },
+                {
+                  label: String(t('evsearch.suspensionheightadjustment')),
+                  value: 'SuspensionHeightAdjustment',
+                },
+              ]}
+            ></Select>
           </div>
           <div className={classes.pageContentAccordionsContainer}>
             <div className={classes.apiAccordions}>
