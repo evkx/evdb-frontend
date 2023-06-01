@@ -13,8 +13,10 @@ export const PageContainer = ({ children }: PageContainerProps) => {
   const { t } = useTranslation('common');
 
   return (
-    <div className={classes.pageContainer}>
-      <div>{children}</div>
+    <div className={classes.pageMargin}>
+      <div className={classes.pageContainer}>
+        <div>{children}</div>
+      </div>
     </div>
   );
 };
