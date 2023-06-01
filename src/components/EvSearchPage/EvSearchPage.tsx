@@ -15,7 +15,9 @@ import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import * as React from 'react';
+import { FilterIcon } from '@navikt/aksel-icons';
 
+import { Filter, type FilterOption } from '@/components/Filter';
 import {
   fetchEvs,
   fetchSearchOptions,
@@ -40,6 +42,7 @@ import {
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
+import { useMediaQuery } from '@/resources/hooks';
 
 import { PageContainer } from '../Reusables/PageContainer';
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
@@ -53,6 +56,7 @@ export const EvSearchPage = () => {
   const dispatch = useAppDispatch();
 
   const fetchSearchOptionData = async () => await dispatch(fetchSearchOptions());
+  const isSm = useMediaQuery('(max-width: 768px)');
 
   const evsearchresult = useAppSelector((state) => state.evsearchResult.evList.evs);
   const evsearchCount = useAppSelector((state) => state.evsearchResult.evList.count);
@@ -152,6 +156,10 @@ export const EvSearchPage = () => {
     dispatch(updateColors(names));
   };
 
+  const handleFilterChange = (filterList: string[]) => {
+    dispatch(updateBrands(filterList));
+  };
+
   const delegableApiAccordions = () => {
     if (error) {
       return (
@@ -211,13 +219,19 @@ export const EvSearchPage = () => {
               <br />
               <br />
             </Ingress>
-            <Select
-              label={String(t('evsearch.brandfilter'))}
-              multiple={true}
-              onChange={handleBrandChange}
+            <Filter
               options={filterOptions}
-            ></Select>
-            <br></br>
+              icon={<FilterIcon />}
+              label={String(t('evsearch.brandfilter'))}
+              applyButtonLabel={String(t('common.apply'))}
+              resetButtonLabel={String(t('common.reset_choices'))}
+              closeButtonAriaLabel={String(t('common.close'))}
+              searchable={true}
+              onApply={handleFilterChange}
+              fullScreenModal={isSm}
+            />
+            <br />
+            <br />
             <CheckboxGroup
               data-testid='evsearch-evtype'
               variant={CheckboxGroupVariant.Horizontal}
