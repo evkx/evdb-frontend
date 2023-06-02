@@ -363,3 +363,5 @@ MigrationBackup/
 
 # Mac files
 .DS_Store
+dist/manifest.json
+yarn.lock
