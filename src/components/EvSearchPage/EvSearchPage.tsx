@@ -1,4 +1,4 @@
-import { Page, Panel, PanelVariant, PageContent } from '@altinn/altinn-design-system';
+import { Panel, PanelVariant } from '@altinn/altinn-design-system';
 import type { MultiSelectOption } from '@digdir/design-system-react';
 import {
   CheckboxGroup,
@@ -46,6 +46,7 @@ import { useMediaQuery } from '@/resources/hooks';
 
 import { PageContainer } from '../Reusables/PageContainer';
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
+import { Page, PageContent } from '../Page';
 
 import classes from './EvSearchPage.module.css';
 
@@ -103,6 +104,12 @@ export const EvSearchPage = () => {
     label: key,
     value: key,
     checked: initSearch.evType === undefined || initSearch.evType.includes(key),
+  }));
+
+  const paintColorFilterOptions: MultiSelectOption[] = colorResult.map((key) => ({
+    label: key,
+    value: key,
+    checked: initSearch.colors === undefined || initSearch.colors.includes(key),
   }));
 
   const handleTypeChange = (names: string[]) => {
@@ -209,263 +216,258 @@ export const EvSearchPage = () => {
 
   return (
     <PageContainer>
-      <PageContent>
-        <div className={classes.pageContent}>
-          <Heading size='large'>Welcome to EVKX EV Search</Heading>
-          <Ingress size='medium'>
-            EVKX offers the most comprehensive search for EVs.
-            <br />
-            You can search and sort on a whole lot of parameters. <br />
-            Please read our <a href='/guides/evsearch/'>search guide</a>
-            <br />
-          </Ingress>
-          <Filter
-            options={brandFilterOptions}
-            icon={<FilterIcon />}
-            label={String(t('evsearch.brandfilter'))}
-            applyButtonLabel={String(t('common.apply'))}
-            resetButtonLabel={String(t('common.reset_choices'))}
-            closeButtonAriaLabel={String(t('common.close'))}
-            searchable={true}
-            onApply={handleBrandChange}
-            fullScreenModal={isSm}
-          />
-          <br />
-          <Filter
-            options={bodyTypesFilterOptions}
-            icon={<FilterIcon />}
-            label={String(t('evsearch.evtypefilter'))}
-            applyButtonLabel={String(t('common.apply'))}
-            resetButtonLabel={String(t('common.reset_choices'))}
-            closeButtonAriaLabel={String(t('common.close'))}
-            searchable={true}
-            onApply={handleTypeChange}
-            fullScreenModal={isSm}
-          />
+      <Page>
+        <PageContent>
+          <div className={classes.pageContent}>
+            <Heading size='large'>Welcome to EVKX EV Search</Heading>
+            <Ingress size='medium'>
+              EVKX offers the most comprehensive search for EVs.
+              <br />
+              You can search and sort on a whole lot of parameters. <br />
+              Please read our <a href='/guides/evsearch/'>search guide</a>
+              <br />
+            </Ingress>
+            <div className={classes.filterSection}>
+              <Filter
+                options={brandFilterOptions}
+                icon={<FilterIcon />}
+                label={String(t('evsearch.brandfilter'))}
+                applyButtonLabel={String(t('common.apply'))}
+                resetButtonLabel={String(t('common.reset_choices'))}
+                closeButtonAriaLabel={String(t('common.close'))}
+                searchable={true}
+                onApply={handleBrandChange}
+                fullScreenModal={isSm}
+              />
+              <Filter
+                options={bodyTypesFilterOptions}
+                icon={<FilterIcon />}
+                label={String(t('evsearch.evtypefilter'))}
+                applyButtonLabel={String(t('common.apply'))}
+                resetButtonLabel={String(t('common.reset_choices'))}
+                closeButtonAriaLabel={String(t('common.close'))}
+                searchable={true}
+                onApply={handleTypeChange}
+                fullScreenModal={isSm}
+              />
+              <Filter
+                options={paintColorFilterOptions}
+                icon={<FilterIcon />}
+                label={String(t('evsearch.paintColor'))}
+                applyButtonLabel={String(t('common.apply'))}
+                resetButtonLabel={String(t('common.reset_choices'))}
+                closeButtonAriaLabel={String(t('common.close'))}
+                searchable={true}
+                onApply={handleColorChange}
+                fullScreenModal={isSm}
+              />
+            </div>
 
-          <br></br>
+            <br></br>
 
-          <Tabs
-            items={[
-              {
-                content: (
-                  <CheckboxGroup
-                    data-testid='evsearch-seatconfig'
-                    variant={CheckboxGroupVariant.Horizontal}
-                    onChange={(values) => {
-                      handleSeatConfigChange(values);
-                    }}
-                    compact={true}
-                    legend='Number of seats'
-                    items={seatConfigResult.map((key) => ({
-                      label: key,
-                      name: key,
-                      checked:
-                        initSearch.seatConfiguration === undefined ||
-                        initSearch.seatConfiguration.includes(key),
-                    }))}
-                  ></CheckboxGroup>
-                ),
-                name: 'Seats',
-              },
-              {
-                content: (
-                  <PageContent>
-                    <Checkbox
-                      checked={initSearch.allWheelDrive}
-                      label='All wheel drive'
-                      onChange={handleAllWheelDriveChange}
+            <Tabs
+              items={[
+                {
+                  content: (
+                    <CheckboxGroup
+                      data-testid='evsearch-seatconfig'
+                      variant={CheckboxGroupVariant.Horizontal}
+                      onChange={(values) => {
+                        handleSeatConfigChange(values);
+                      }}
                       compact={true}
-                    ></Checkbox>
-                    <br />
-                    <Checkbox
-                      checked={initSearch.rWD}
-                      label='RWD'
-                      onChange={handleRWDChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br />
-                    <Checkbox
-                      checked={initSearch.fWD}
-                      label='FWD'
-                      onChange={handleFWDChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br />
-                    <Checkbox
-                      checked={initSearch.adaptiveSuspension}
-                      label='Adaptive Suspension'
-                      onChange={handleAdaptiveSuspensionChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br />
-                    <Checkbox
-                      checked={initSearch.airSuspension}
-                      label='Air Suspension'
-                      onChange={handleAirSuspensionChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br />
-                    <Checkbox
-                      checked={initSearch.rearAxleSteering}
-                      label='Rear Axle Steering'
-                      onChange={handleRearAxleSteeringChange}
-                      compact={true}
-                    ></Checkbox>
-                  </PageContent>
-                ),
-                name: 'Drivetrain',
-              },
-              {
-                content: (
-                  <PageContent>
-                    <Checkbox
-                      checked={initSearch.nightVision}
-                      label='Nightvision'
-                      onChange={handleNightVisionChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br />
-                    <Checkbox
-                      checked={initSearch.adaptiveCruiseControl}
-                      label='AdaptiveCruiseControl'
-                      onChange={handleAdaptiveCruiseControlChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br />
-                    <Checkbox
-                      checked={initSearch.autoSteer}
-                      label='Autosteer'
-                      onChange={handleAutoSteerChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br />
-                    Read more about Adavanced Driver Assist Systems in our{' '}
-                    <a href='../technology/driverassistance/'>technology section</a>
-                  </PageContent>
-                ),
-                name: 'Driver Assistance',
-              },
-              {
-                content: (
-                  <CheckboxGroup
-                    data-testid='evsearch-evtype'
-                    variant={CheckboxGroupVariant.Horizontal}
-                    onChange={(values) => {
-                      handleColorChange(values);
-                    }}
-                    compact={true}
-                    legend='Select paint color'
-                    items={colorResult.map((key) => ({
-                      label: key,
-                      name: key,
-                      checked: initSearch.colors === undefined || initSearch.colors.includes(key),
-                    }))}
-                  ></CheckboxGroup>
-                ),
-                name: 'Exterior',
-              },
-              {
-                content: (
-                  <div>
-                    <Checkbox
-                      checked={initSearch.headUpDisplay}
-                      label='Head Up Display'
-                      onChange={handleHeadUpDisplayChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br></br>
-                    <Checkbox
-                      checked={initSearch.instrumentCluster}
-                      label='Dedicated Instrument Cluster'
-                      onChange={handleInstrumentClusterChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br></br>
-                    <Checkbox
-                      checked={initSearch.androidAuto}
-                      label='Android Auto Support'
-                      onChange={handleAndroidAutoChange}
-                      compact={true}
-                    ></Checkbox>
-                    <br></br>
-                    <Checkbox
-                      checked={initSearch.appleCarPlay}
-                      label='Apple Car Play Support'
-                      onChange={handleAppleCarPlayChange}
-                      compact={true}
-                    ></Checkbox>
-                  </div>
-                ),
-                name: 'UI & Interface',
-              },
-            ]}
-          />
-          <Select
-            label={String(t('evsearch.sortorder'))}
-            multiple={false}
-            onChange={handleSortOrderChange}
-            options={[
-              { label: String(t('evsearch.sortorderbrand')), value: 'Name' },
-              { label: String(t('evsearch.specwltprange')), value: 'RangeMinimumWltp' },
-              { label: String(t('evsearch.specwltpconsumption')), value: 'WltpBasicConsumption' },
-              { label: String(t('evsearch.sortordernetsize')), value: 'NetBattery' },
-              { label: String(t('evsearch.sortordernetsizedesc')), value: 'NetBatteryDesc' },
-              { label: String(t('evsearch.maxpowersort')), value: 'PowerDesc' },
-              { label: String(t('evsearch.topspeedsort')), value: 'TopSpeedDesc' },
-              { label: String(t('evsearch.maxdcchargingsort')), value: 'MaxDCCharging' },
-              {
-                label: String(t('evsearch.averagechargingspeed0100')),
-                value: 'AverageChargingSpeedDesc',
-              },
-              {
-                label: String(t('evsearch.averagechargingspeed10100')),
-                value: 'AverageChargingSpeed10100Desc',
-              },
-              {
-                label: String(t('evsearch.averagechargingspeed1080')),
-                value: 'AverageChargingSpeed1080Desc',
-              },
-              { label: String(t('evsearch.sort0100kmh')), value: 'ZeroTo100' },
-              {
-                label: String(t('evsearch.sort1000kmdrivingtime')),
-                value: 'DrivingTime1000kmChallenge',
-              },
-              {
-                label: String(t('evsearch.sort1000kmaveragespeed')),
-                value: 'AverageSpeed1000kmChallengeDesc',
-              },
-              {
-                label: String(t('evsearch.travelspeedwltpcyclus')),
-                value: 'TravelSpeedWltpDesc',
-              },
-              { label: String(t('evsearch.travelspeed120kmh')), value: 'TravelSpeed120kmhDesc' },
-              { label: String(t('evsearch.nominalvoltagesort')), value: 'NominalVoltage' },
-              { label: String(t('evsearch.trunksize')), value: 'TrunkSizeDesc' },
-              { label: String(t('evsearch.maxtrunksize')), value: 'MaxTrunkSizeDesc' },
-              { label: String(t('evsearch.maxload')), value: 'MaxLoadDesc' },
-              { label: String(t('evsearch.maxtrailer')), value: 'MaxTrailerSizeDesc' },
-              {
-                label: String(t('evsearch.maxgroundclearance')),
-                value: 'MaxGroundClearanceDesc',
-              },
-              { label: String(t('evsearch.mingroundclearance')), value: 'MinGroundClearance' },
-              {
-                label: String(t('evsearch.suspensionheightadjustment')),
-                value: 'SuspensionHeightAdjustment',
-              },
-            ]}
-          ></Select>
-        </div>
-        <div className={classes.pageContentAccordionsContainer}>
-          <div className={classes.apiAccordions}>
-            <h4 className={classes.resultInfo}>
-              {evsearchCount} {t('evsearch.searchresult')}:
-            </h4>
-            <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
+                      legend='Number of seats'
+                      items={seatConfigResult.map((key) => ({
+                        label: key,
+                        name: key,
+                        checked:
+                          initSearch.seatConfiguration === undefined ||
+                          initSearch.seatConfiguration.includes(key),
+                      }))}
+                    ></CheckboxGroup>
+                  ),
+                  name: 'Seats',
+                },
+                {
+                  content: (
+                    <PageContent>
+                      <Checkbox
+                        checked={initSearch.allWheelDrive}
+                        label='All wheel drive'
+                        onChange={handleAllWheelDriveChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.rWD}
+                        label='RWD'
+                        onChange={handleRWDChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.fWD}
+                        label='FWD'
+                        onChange={handleFWDChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.adaptiveSuspension}
+                        label='Adaptive Suspension'
+                        onChange={handleAdaptiveSuspensionChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.airSuspension}
+                        label='Air Suspension'
+                        onChange={handleAirSuspensionChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.rearAxleSteering}
+                        label='Rear Axle Steering'
+                        onChange={handleRearAxleSteeringChange}
+                        compact={true}
+                      ></Checkbox>
+                    </PageContent>
+                  ),
+                  name: 'Drivetrain',
+                },
+                {
+                  content: (
+                    <PageContent>
+                      <Checkbox
+                        checked={initSearch.nightVision}
+                        label='Nightvision'
+                        onChange={handleNightVisionChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.adaptiveCruiseControl}
+                        label='AdaptiveCruiseControl'
+                        onChange={handleAdaptiveCruiseControlChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      <Checkbox
+                        checked={initSearch.autoSteer}
+                        label='Autosteer'
+                        onChange={handleAutoSteerChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br />
+                      Read more about Adavanced Driver Assist Systems in our{' '}
+                      <a href='../technology/driverassistance/'>technology section</a>
+                    </PageContent>
+                  ),
+                  name: 'Driver Assistance',
+                },
+                {
+                  content: (
+                    <div>
+                      <Checkbox
+                        checked={initSearch.headUpDisplay}
+                        label='Head Up Display'
+                        onChange={handleHeadUpDisplayChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.instrumentCluster}
+                        label='Dedicated Instrument Cluster'
+                        onChange={handleInstrumentClusterChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.androidAuto}
+                        label='Android Auto Support'
+                        onChange={handleAndroidAutoChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.appleCarPlay}
+                        label='Apple Car Play Support'
+                        onChange={handleAppleCarPlayChange}
+                        compact={true}
+                      ></Checkbox>
+                    </div>
+                  ),
+                  name: 'UI & Interface',
+                },
+              ]}
+            />
+            <Select
+              label={String(t('evsearch.sortorder'))}
+              multiple={false}
+              onChange={handleSortOrderChange}
+              options={[
+                { label: String(t('evsearch.sortorderbrand')), value: 'Name' },
+                { label: String(t('evsearch.specwltprange')), value: 'RangeMinimumWltp' },
+                { label: String(t('evsearch.specwltpconsumption')), value: 'WltpBasicConsumption' },
+                { label: String(t('evsearch.sortordernetsize')), value: 'NetBattery' },
+                { label: String(t('evsearch.sortordernetsizedesc')), value: 'NetBatteryDesc' },
+                { label: String(t('evsearch.maxpowersort')), value: 'PowerDesc' },
+                { label: String(t('evsearch.topspeedsort')), value: 'TopSpeedDesc' },
+                { label: String(t('evsearch.maxdcchargingsort')), value: 'MaxDCCharging' },
+                {
+                  label: String(t('evsearch.averagechargingspeed0100')),
+                  value: 'AverageChargingSpeedDesc',
+                },
+                {
+                  label: String(t('evsearch.averagechargingspeed10100')),
+                  value: 'AverageChargingSpeed10100Desc',
+                },
+                {
+                  label: String(t('evsearch.averagechargingspeed1080')),
+                  value: 'AverageChargingSpeed1080Desc',
+                },
+                { label: String(t('evsearch.sort0100kmh')), value: 'ZeroTo100' },
+                {
+                  label: String(t('evsearch.sort1000kmdrivingtime')),
+                  value: 'DrivingTime1000kmChallenge',
+                },
+                {
+                  label: String(t('evsearch.sort1000kmaveragespeed')),
+                  value: 'AverageSpeed1000kmChallengeDesc',
+                },
+                {
+                  label: String(t('evsearch.travelspeedwltpcyclus')),
+                  value: 'TravelSpeedWltpDesc',
+                },
+                { label: String(t('evsearch.travelspeed120kmh')), value: 'TravelSpeed120kmhDesc' },
+                { label: String(t('evsearch.nominalvoltagesort')), value: 'NominalVoltage' },
+                { label: String(t('evsearch.trunksize')), value: 'TrunkSizeDesc' },
+                { label: String(t('evsearch.maxtrunksize')), value: 'MaxTrunkSizeDesc' },
+                { label: String(t('evsearch.maxload')), value: 'MaxLoadDesc' },
+                { label: String(t('evsearch.maxtrailer')), value: 'MaxTrailerSizeDesc' },
+                {
+                  label: String(t('evsearch.maxgroundclearance')),
+                  value: 'MaxGroundClearanceDesc',
+                },
+                { label: String(t('evsearch.mingroundclearance')), value: 'MinGroundClearance' },
+                {
+                  label: String(t('evsearch.suspensionheightadjustment')),
+                  value: 'SuspensionHeightAdjustment',
+                },
+              ]}
+            ></Select>
           </div>
-        </div>
-      </PageContent>
+          <div className={classes.pageContentAccordionsContainer}>
+            <div className={classes.apiAccordions}>
+              <h4 className={classes.resultInfo}>
+                {evsearchCount} {t('evsearch.searchresult')}:
+              </h4>
+              <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
+            </div>
+          </div>
+        </PageContent>
+      </Page>
     </PageContainer>
   );
 };

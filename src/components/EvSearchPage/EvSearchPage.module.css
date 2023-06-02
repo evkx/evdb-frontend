@@ -34,3 +34,9 @@
   background-color: beige;
   padding: 1rem;
 }
+
+.filterSection{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
