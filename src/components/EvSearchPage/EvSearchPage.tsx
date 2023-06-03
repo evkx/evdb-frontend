@@ -1,19 +1,18 @@
 import { Panel, PanelVariant } from '@altinn/altinn-design-system';
 import type { MultiSelectOption } from '@digdir/design-system-react';
 import {
-  CheckboxGroup,
-  CheckboxGroupVariant,
   Select,
   Tabs,
   Checkbox,
   Spinner,
   Heading,
   Ingress,
+  Accordion,
 } from '@digdir/design-system-react';
 import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { FilterIcon } from '@navikt/aksel-icons';
 
@@ -66,6 +65,7 @@ export const EvSearchPage = () => {
   const seatConfigResult = useAppSelector(
     (state) => state.evsearchResult.searchOptions.seatConfiguration,
   );
+  const [open, setOpen] = useState(false);
 
   const brandsResult = useAppSelector((state) => state.evsearchResult.searchOptions.brands);
 
@@ -110,6 +110,13 @@ export const EvSearchPage = () => {
     label: key,
     value: key,
     checked: initSearch.colors === undefined || initSearch.colors.includes(key),
+  }));
+
+  const numberOfSeatsOptions: MultiSelectOption[] = seatConfigResult.map((key) => ({
+    label: key,
+    value: key,
+    checked:
+      initSearch.seatConfiguration === undefined || initSearch.seatConfiguration.includes(key),
   }));
 
   const handleTypeChange = (names: string[]) => {
@@ -250,6 +257,8 @@ export const EvSearchPage = () => {
                 onApply={handleTypeChange}
                 fullScreenModal={isSm}
               />
+            </div>
+            <div className={classes.filterSection}>
               <Filter
                 options={paintColorFilterOptions}
                 icon={<FilterIcon />}
@@ -261,36 +270,31 @@ export const EvSearchPage = () => {
                 onApply={handleColorChange}
                 fullScreenModal={isSm}
               />
+              <Filter
+                options={numberOfSeatsOptions}
+                icon={<FilterIcon />}
+                label={String(t('evsearch.numberOfSeasts'))}
+                applyButtonLabel={String(t('common.apply'))}
+                resetButtonLabel={String(t('common.reset_choices'))}
+                closeButtonAriaLabel={String(t('common.close'))}
+                searchable={true}
+                onApply={handleSeatConfigChange}
+                fullScreenModal={isSm}
+              />
             </div>
-
-            <br></br>
-
-            <Tabs
-              items={[
-                {
-                  content: (
-                    <CheckboxGroup
-                      data-testid='evsearch-seatconfig'
-                      variant={CheckboxGroupVariant.Horizontal}
-                      onChange={(values) => {
-                        handleSeatConfigChange(values);
-                      }}
-                      compact={true}
-                      legend='Number of seats'
-                      items={seatConfigResult.map((key) => ({
-                        label: key,
-                        name: key,
-                        checked:
-                          initSearch.seatConfiguration === undefined ||
-                          initSearch.seatConfiguration.includes(key),
-                      }))}
-                    ></CheckboxGroup>
-                  ),
-                  name: 'Seats',
-                },
-                {
-                  content: (
-                    <PageContent>
+            <Accordion
+              border={true}
+              color='subtle'
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              <Accordion.Item>
+                <Accordion.Header>{String(t('evsearch.advanced'))}</Accordion.Header>
+                <Accordion.Content>
+                  <div className={classes.cards}>
+                    <div className={classes.card}>
+                      <Heading size='small'>{String(t('evsearch.drivetrain'))}</Heading>
                       <Checkbox
                         checked={initSearch.allWheelDrive}
                         label='All wheel drive'
@@ -332,13 +336,9 @@ export const EvSearchPage = () => {
                         onChange={handleRearAxleSteeringChange}
                         compact={true}
                       ></Checkbox>
-                    </PageContent>
-                  ),
-                  name: 'Drivetrain',
-                },
-                {
-                  content: (
-                    <PageContent>
+                    </div>
+                    <div className={classes.card}>
+                      <Heading size='small'>{String(t('evsearch.adas'))}</Heading>
                       <Checkbox
                         checked={initSearch.nightVision}
                         label='Nightvision'
@@ -362,13 +362,9 @@ export const EvSearchPage = () => {
                       <br />
                       Read more about Adavanced Driver Assist Systems in our{' '}
                       <a href='../technology/driverassistance/'>technology section</a>
-                    </PageContent>
-                  ),
-                  name: 'Driver Assistance',
-                },
-                {
-                  content: (
-                    <div>
+                    </div>
+                    <div className={classes.card}>
+                      <Heading size='small'>{String(t('evsearch.interface'))}</Heading>
                       <Checkbox
                         checked={initSearch.headUpDisplay}
                         label='Head Up Display'
@@ -397,11 +393,11 @@ export const EvSearchPage = () => {
                         compact={true}
                       ></Checkbox>
                     </div>
-                  ),
-                  name: 'UI & Interface',
-                },
-              ]}
-            />
+                  </div>
+                </Accordion.Content>
+              </Accordion.Item>
+            </Accordion>
+
             <Select
               label={String(t('evsearch.sortorder'))}
               multiple={false}

@@ -39,4 +39,20 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card {
+  padding: 0rem;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 800px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
 }
