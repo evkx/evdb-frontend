@@ -51,7 +51,10 @@ export const EvSearchAccordion = ({
       >
         <Accordion.Item>
           <Accordion.Header>
-            {title} {subtitle}
+            {title}{' '}
+            <b>
+              <i>{subtitle}</i>
+            </b>
           </Accordion.Header>
           <Accordion.Content>
             <div className={classes.evsearchAccordionContent}>
