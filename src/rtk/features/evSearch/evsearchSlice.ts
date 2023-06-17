@@ -55,6 +55,9 @@ export interface EvSearch {
   exitWarning: boolean;
   trafficSignRecognition: boolean;
   efficiencyAssist: boolean;
+  lfpChemistry: boolean;
+  batteryHeatingNavigation: boolean;
+  batteryHeatingManual: boolean;
 }
 
 export interface EvSearchOptions {
@@ -114,6 +117,9 @@ const initialState: SliceState = {
     exitWarning: false,
     trafficSignRecognition: false,
     efficiencyAssist: false,
+    lfpChemistry: false,
+    batteryHeatingNavigation: false,
+    batteryHeatingManual: false,
   },
   searchOptions: {
     brands: [
@@ -239,6 +245,15 @@ const evsearchSlice = createSlice({
     updateAutoSteer: (state: SliceState, action) => {
       state.search.autoSteer = action.payload;
     },
+    updateLfpChemistry: (state: SliceState, action) => {
+      state.search.lfpChemistry = action.payload;
+    },
+    updateBatteryHeatingNavigation: (state: SliceState, action) => {
+      state.search.batteryHeatingNavigation = action.payload;
+    },
+    updateBatteryHeatingManual: (state: SliceState, action) => {
+      state.search.batteryHeatingManual = action.payload;
+    },
     updateColors: (state: SliceState, action) => {
       const selections = action.payload;
       state.search.colors = selections;
@@ -289,4 +304,7 @@ export const {
   updateSortOrderFromParam,
   updateAdaptiveCruiseControl,
   updateAutoSteer,
+  updateBatteryHeatingManual,
+  updateBatteryHeatingNavigation,
+  updateLfpChemistry,
 } = evsearchSlice.actions;

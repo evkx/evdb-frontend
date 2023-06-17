@@ -38,6 +38,9 @@ import {
   updateRearAxleSteering,
   updateAdaptiveCruiseControl,
   updateAutoSteer,
+  updateBatteryHeatingManual,
+  updateBatteryHeatingNavigation,
+  updateLfpChemistry,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -172,6 +175,17 @@ export const EvSearchPage = () => {
   const handleAndroidAutoChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateAndroidAuto(event.target.checked));
   };
+  const handleLfpChemistryChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateLfpChemistry(event.target.checked));
+  };
+  const handleBatteryHeatingNavigationChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    dispatch(updateBatteryHeatingNavigation(event.target.checked));
+  };
+  const handleBatteryHeatingManualChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateBatteryHeatingManual(event.target.checked));
+  };
   const handleColorChange = (names: string[]) => {
     dispatch(updateColors(names));
   };
@@ -232,6 +246,7 @@ export const EvSearchPage = () => {
               <br />
               You can search and sort on a whole lot of parameters. <br />
               Please read our <a href='/guides/evsearch/'>search guide</a>
+              <br />
               <br />
             </Ingress>
             <div className={classes.filterSection}>
@@ -393,6 +408,32 @@ export const EvSearchPage = () => {
                         compact={true}
                       ></Checkbox>
                     </div>
+                    <div className={classes.card}>
+                      <Heading size='small'>{String(t('evsearch.battery'))}</Heading>
+                      <Checkbox
+                        checked={initSearch.lfpChemistry}
+                        label='LFP Chemistry'
+                        onChange={handleLfpChemistryChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.batteryHeatingManual}
+                        label='Manual battery heating'
+                        onChange={handleBatteryHeatingManualChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.batteryHeatingNavigation}
+                        label='Battery heating when navigating to charger'
+                        onChange={handleBatteryHeatingNavigationChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      Read more about EV batteries in our{' '}
+                      <a href='../technology/battery/'>technology section</a>
+                    </div>
                   </div>
                 </Accordion.Content>
               </Accordion.Item>
@@ -450,6 +491,18 @@ export const EvSearchPage = () => {
                 {
                   label: String(t('evsearch.suspensionheightadjustment')),
                   value: 'SuspensionHeightAdjustment',
+                },
+                {
+                  label: String(t('evsearch.length')),
+                  value: 'Length',
+                },
+                {
+                  label: String(t('evsearch.wheelbase')),
+                  value: 'Wheelbase',
+                },
+                {
+                  label: String(t('evsearch.grossweight')),
+                  value: 'WeightUnladenDINKg',
                 },
               ]}
             ></Select>
