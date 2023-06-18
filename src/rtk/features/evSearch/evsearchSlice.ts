@@ -58,6 +58,12 @@ export interface EvSearch {
   lfpChemistry: boolean;
   batteryHeatingNavigation: boolean;
   batteryHeatingManual: boolean;
+  firstRowSeatsHeating: boolean;
+  firstRowSeatsVentilation: boolean;
+  firstRowSeatsMassage: boolean;
+  secondRowSeatsHeating: boolean;
+  secondRowSeatsVentilation: boolean;
+  secondRowSeatsMassage: boolean;
 }
 
 export interface EvSearchOptions {
@@ -120,6 +126,12 @@ const initialState: SliceState = {
     lfpChemistry: false,
     batteryHeatingNavigation: false,
     batteryHeatingManual: false,
+    firstRowSeatsHeating: false,
+    firstRowSeatsMassage: false,
+    firstRowSeatsVentilation: false,
+    secondRowSeatsHeating: false,
+    secondRowSeatsMassage: false,
+    secondRowSeatsVentilation: false,
   },
   searchOptions: {
     brands: [
@@ -254,6 +266,24 @@ const evsearchSlice = createSlice({
     updateBatteryHeatingManual: (state: SliceState, action) => {
       state.search.batteryHeatingManual = action.payload;
     },
+    updateFirstRowSeatsHeating: (state: SliceState, action) => {
+      state.search.firstRowSeatsHeating = action.payload;
+    },
+    updateFirstRowSeatsVentilation: (state: SliceState, action) => {
+      state.search.firstRowSeatsVentilation = action.payload;
+    },
+    updateFirstRowSeatsMassage: (state: SliceState, action) => {
+      state.search.firstRowSeatsMassage = action.payload;
+    },
+    updateSecondRowSeatsHeating: (state: SliceState, action) => {
+      state.search.secondRowSeatsHeating = action.payload;
+    },
+    updateSecondRowSeatsVentilation: (state: SliceState, action) => {
+      state.search.secondRowSeatsVentilation = action.payload;
+    },
+    updateSecondRowSeatsMassage: (state: SliceState, action) => {
+      state.search.secondRowSeatsMassage = action.payload;
+    },
     updateColors: (state: SliceState, action) => {
       const selections = action.payload;
       state.search.colors = selections;
@@ -307,4 +337,10 @@ export const {
   updateBatteryHeatingManual,
   updateBatteryHeatingNavigation,
   updateLfpChemistry,
+  updateFirstRowSeatsHeating,
+  updateFirstRowSeatsMassage,
+  updateFirstRowSeatsVentilation,
+  updateSecondRowSeatsHeating,
+  updateSecondRowSeatsVentilation,
+  updateSecondRowSeatsMassage,
 } = evsearchSlice.actions;

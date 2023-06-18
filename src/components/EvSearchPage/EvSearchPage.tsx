@@ -41,6 +41,12 @@ import {
   updateBatteryHeatingManual,
   updateBatteryHeatingNavigation,
   updateLfpChemistry,
+  updateFirstRowSeatsHeating,
+  updateFirstRowSeatsMassage,
+  updateFirstRowSeatsVentilation,
+  updateSecondRowSeatsHeating,
+  updateSecondRowSeatsMassage,
+  updateSecondRowSeatsVentilation,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -188,6 +194,28 @@ export const EvSearchPage = () => {
   };
   const handleColorChange = (names: string[]) => {
     dispatch(updateColors(names));
+  };
+  const handleFirstRowSeatsHeatingChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateFirstRowSeatsHeating(event.target.checked));
+  };
+  const handleFirstRowSeatsVentilationChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    dispatch(updateFirstRowSeatsVentilation(event.target.checked));
+  };
+  const handleFirstRowSeatsMassageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateFirstRowSeatsMassage(event.target.checked));
+  };
+  const handleSecondRowSeatsHeatingChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateSecondRowSeatsHeating(event.target.checked));
+  };
+  const handleSecondRowSeatsVentilationChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    dispatch(updateSecondRowSeatsVentilation(event.target.checked));
+  };
+  const handleSecondRowSeatsMassageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateSecondRowSeatsMassage(event.target.checked));
   };
 
   const delegableApiAccordions = () => {
@@ -433,6 +461,50 @@ export const EvSearchPage = () => {
                       <br></br>
                       Read more about EV batteries in our{' '}
                       <a href='../technology/battery/'>technology section</a>
+                    </div>
+                    <div className={classes.card}>
+                      <Heading size='small'>{String(t('evsearch.seats'))}</Heading>
+                      <Checkbox
+                        checked={initSearch.firstRowSeatsHeating}
+                        label='First row seat Heating'
+                        onChange={handleFirstRowSeatsHeatingChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.firstRowSeatsVentilation}
+                        label='First row seat ventilation'
+                        onChange={handleFirstRowSeatsVentilationChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.firstRowSeatsMassage}
+                        label='First row seat massage'
+                        onChange={handleFirstRowSeatsMassageChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.secondRowSeatsHeating}
+                        label='Second row seat Heating'
+                        onChange={handleSecondRowSeatsHeatingChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.secondRowSeatsVentilation}
+                        label='Second row seat ventilation'
+                        onChange={handleSecondRowSeatsVentilationChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.secondRowSeatsMassage}
+                        label='Second row seat massage'
+                        onChange={handleSecondRowSeatsMassageChange}
+                        compact={true}
+                      ></Checkbox>
                     </div>
                   </div>
                 </Accordion.Content>
