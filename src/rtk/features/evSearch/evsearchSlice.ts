@@ -61,9 +61,12 @@ export interface EvSearch {
   firstRowSeatsHeating: boolean;
   firstRowSeatsVentilation: boolean;
   firstRowSeatsMassage: boolean;
+  firstRowAdjustableThighSupport: boolean;
   secondRowSeatsHeating: boolean;
   secondRowSeatsVentilation: boolean;
   secondRowSeatsMassage: boolean;
+  secondRowRecline: boolean;
+  secondRowExecutiveSeat: boolean;
 }
 
 export interface EvSearchOptions {
@@ -132,6 +135,9 @@ const initialState: SliceState = {
     secondRowSeatsHeating: false,
     secondRowSeatsMassage: false,
     secondRowSeatsVentilation: false,
+    firstRowAdjustableThighSupport: false,
+    secondRowRecline: false,
+    secondRowExecutiveSeat: false,
   },
   searchOptions: {
     brands: [
@@ -275,6 +281,9 @@ const evsearchSlice = createSlice({
     updateFirstRowSeatsMassage: (state: SliceState, action) => {
       state.search.firstRowSeatsMassage = action.payload;
     },
+    updateFirstRowAdjustableThighSupport: (state: SliceState, action) => {
+      state.search.firstRowAdjustableThighSupport = action.payload;
+    },
     updateSecondRowSeatsHeating: (state: SliceState, action) => {
       state.search.secondRowSeatsHeating = action.payload;
     },
@@ -283,6 +292,12 @@ const evsearchSlice = createSlice({
     },
     updateSecondRowSeatsMassage: (state: SliceState, action) => {
       state.search.secondRowSeatsMassage = action.payload;
+    },
+    updateSecondRowRecline: (state: SliceState, action) => {
+      state.search.secondRowRecline = action.payload;
+    },
+    updateSecondRowExecutiveSeat: (state: SliceState, action) => {
+      state.search.secondRowExecutiveSeat = action.payload;
     },
     updateColors: (state: SliceState, action) => {
       const selections = action.payload;
@@ -343,4 +358,7 @@ export const {
   updateSecondRowSeatsHeating,
   updateSecondRowSeatsVentilation,
   updateSecondRowSeatsMassage,
+  updateFirstRowAdjustableThighSupport,
+  updateSecondRowExecutiveSeat,
+  updateSecondRowRecline,
 } = evsearchSlice.actions;

@@ -47,6 +47,9 @@ import {
   updateSecondRowSeatsHeating,
   updateSecondRowSeatsMassage,
   updateSecondRowSeatsVentilation,
+  updateFirstRowAdjustableThighSupport,
+  updateSecondRowExecutiveSeat,
+  updateSecondRowRecline,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -216,6 +219,17 @@ export const EvSearchPage = () => {
   };
   const handleSecondRowSeatsMassageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateSecondRowSeatsMassage(event.target.checked));
+  };
+  const handleFirstRowAdjustableThighSupportChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    dispatch(updateFirstRowAdjustableThighSupport(event.target.checked));
+  };
+  const handleSecondRowReclineChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateSecondRowRecline(event.target.checked));
+  };
+  const handleSecondRowExecutiveSeatChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateSecondRowExecutiveSeat(event.target.checked));
   };
 
   const delegableApiAccordions = () => {
@@ -486,6 +500,13 @@ export const EvSearchPage = () => {
                       ></Checkbox>
                       <br></br>
                       <Checkbox
+                        checked={initSearch.firstRowAdjustableThighSupport}
+                        label='First row adjustable thigh support'
+                        onChange={handleFirstRowAdjustableThighSupportChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
                         checked={initSearch.secondRowSeatsHeating}
                         label='Second row seat Heating'
                         onChange={handleSecondRowSeatsHeatingChange}
@@ -503,6 +524,20 @@ export const EvSearchPage = () => {
                         checked={initSearch.secondRowSeatsMassage}
                         label='Second row seat massage'
                         onChange={handleSecondRowSeatsMassageChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.secondRowRecline}
+                        label='Second row recline'
+                        onChange={handleSecondRowReclineChange}
+                        compact={true}
+                      ></Checkbox>
+                      <br></br>
+                      <Checkbox
+                        checked={initSearch.secondRowExecutiveSeat}
+                        label='Second row executive seat'
+                        onChange={handleSecondRowExecutiveSeatChange}
                         compact={true}
                       ></Checkbox>
                     </div>
