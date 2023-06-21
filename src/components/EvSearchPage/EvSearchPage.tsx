@@ -1,5 +1,6 @@
 import { Panel, PanelVariant } from '@altinn/altinn-design-system';
 import type { MultiSelectOption } from '@digdir/design-system-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Select,
   Tabs,
@@ -86,12 +87,43 @@ export const EvSearchPage = () => {
 
   const error = useAppSelector((state) => state.evsearchResult.error);
 
+  const location = useLocation();
+  const history = useNavigate();
+  const [isReady, setIsReady] = useState<boolean>(false);
+
   useEffect(() => {
-    if (loading) {
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.get('secondRowExecutiveSeat') != null) {
+      dispatch(updateSecondRowExecutiveSeat(true));
+    }
+    if (queryParams.get('airSuspension') != null) {
+      dispatch(updateAdaptiveAirSuspension(true));
+    }
+    if (queryParams.get('sortOrder') != null) {
+      dispatch(updateSortOrder(queryParams.get('sortOrder')));
+    }
+    setIsReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      const queryParams = new URLSearchParams();
+      Object.entries(initSearch).forEach(([key, value]) => {
+        if (value) {
+          queryParams.set(key, value);
+        }
+      });
+      location.search = queryParams.toString();
+      history(location, { replace: true });
+    }
+  }, [initSearch]);
+
+  useEffect(() => {
+    if (isReady) {
       void fetchSearchOptionData();
       void fetchData(initSearch);
     }
-  }, []);
+  }, [isReady]);
 
   useEffect(() => {
     if (!loading) {
@@ -549,6 +581,7 @@ export const EvSearchPage = () => {
             <Select
               label={String(t('evsearch.sortorder'))}
               multiple={false}
+              value={initSearch.sortOrder}
               onChange={handleSortOrderChange}
               options={[
                 { label: String(t('evsearch.sortorderbrand')), value: 'Name' },
