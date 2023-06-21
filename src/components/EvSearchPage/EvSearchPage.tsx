@@ -93,15 +93,34 @@ export const EvSearchPage = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    if (queryParams.get('secondRowExecutiveSeat') != null) {
+    if (
+      queryParams.get('secondRowExecutiveSeat') != null &&
+      queryParams.get('secondRowExecutiveSeat') === 'true'
+    ) {
       dispatch(updateSecondRowExecutiveSeat(true));
     }
-    if (queryParams.get('airSuspension') != null) {
+    if (queryParams.get('airSuspension') != null && queryParams.get('airSuspension') === 'true') {
       dispatch(updateAdaptiveAirSuspension(true));
     }
     if (queryParams.get('sortOrder') != null) {
       dispatch(updateSortOrder(queryParams.get('sortOrder')));
     }
+    if (queryParams.get('headUpDisplay') != null && queryParams.get('headUpDisplay') === 'true') {
+      dispatch(updateHeadUpDisplay(true));
+    }
+    if (
+      queryParams.get('instrumentCluster') != null &&
+      queryParams.get('instrumentCluster') === 'true'
+    ) {
+      dispatch(updateInstrumentCluster(true));
+    }
+    if (queryParams.get('androidAuto') != null && queryParams.get('androidAuto') === 'true') {
+      dispatch(updateAndroidAuto(true));
+    }
+    if (queryParams.get('appleCarPlay') != null && queryParams.get('appleCarPlay') === 'true') {
+      dispatch(updateAppleCarPlay(true));
+    }
+
     setIsReady(true);
   }, []);
 
@@ -109,7 +128,7 @@ export const EvSearchPage = () => {
     if (!loading) {
       const queryParams = new URLSearchParams();
       Object.entries(initSearch).forEach(([key, value]) => {
-        if (value) {
+        if (value && value !== '') {
           queryParams.set(key, value);
         }
       });
