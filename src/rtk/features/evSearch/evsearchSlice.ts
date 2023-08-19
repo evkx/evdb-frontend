@@ -67,6 +67,11 @@ export interface EvSearch {
   secondRowSeatsMassage: boolean;
   secondRowRecline: boolean;
   secondRowExecutiveSeat: boolean;
+  chargePortFront: boolean;
+  chargePortFrontLeft: boolean;
+  chargePortFrontRight: boolean;
+  chargePortRearLeft: boolean;
+  chargePortRearRight: boolean;
 }
 
 export interface EvSearchOptions {
@@ -138,6 +143,11 @@ const initialState: SliceState = {
     firstRowAdjustableThighSupport: false,
     secondRowRecline: false,
     secondRowExecutiveSeat: false,
+    chargePortFront: false,
+    chargePortFrontLeft: false,
+    chargePortFrontRight: false,
+    chargePortRearLeft: false,
+    chargePortRearRight: false,
   },
   searchOptions: {
     brands: [
@@ -299,6 +309,21 @@ const evsearchSlice = createSlice({
     updateSecondRowExecutiveSeat: (state: SliceState, action) => {
       state.search.secondRowExecutiveSeat = action.payload;
     },
+    updateChargePortFront: (state: SliceState, action) => {
+      state.search.chargePortFront = action.payload;
+    },
+    updateChargePortFrontLeft: (state: SliceState, action) => {
+      state.search.chargePortFrontLeft = action.payload;
+    },
+    updateChargePortFrontRight: (state: SliceState, action) => {
+      state.search.chargePortFrontRight = action.payload;
+    },
+    updateChargePortRearLeft: (state: SliceState, action) => {
+      state.search.chargePortRearLeft = action.payload;
+    },
+    updateChargePortRearRight: (state: SliceState, action) => {
+      state.search.chargePortRearRight = action.payload;
+    },
     updateColors: (state: SliceState, action) => {
       const selections = action.payload;
       state.search.colors = selections;
@@ -361,4 +386,9 @@ export const {
   updateFirstRowAdjustableThighSupport,
   updateSecondRowExecutiveSeat,
   updateSecondRowRecline,
+  updateChargePortFront,
+  updateChargePortFrontLeft,
+  updateChargePortFrontRight,
+  updateChargePortRearLeft,
+  updateChargePortRearRight,
 } = evsearchSlice.actions;

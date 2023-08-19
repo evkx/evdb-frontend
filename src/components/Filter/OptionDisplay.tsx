@@ -114,8 +114,8 @@ export const OptionDisplay = ({
               handleSelection(option.value);
             }}
             checked={isSelected}
-            label={option.label}
-            compact={compact}
+            children={option.label}
+            size='small'
           />
         </div>
       </button>

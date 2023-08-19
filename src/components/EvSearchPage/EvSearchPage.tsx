@@ -51,6 +51,11 @@ import {
   updateFirstRowAdjustableThighSupport,
   updateSecondRowExecutiveSeat,
   updateSecondRowRecline,
+  updateChargePortFront,
+  updateChargePortFrontLeft,
+  updateChargePortFrontRight,
+  updateChargePortRearLeft,
+  updateChargePortRearRight,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -282,6 +287,21 @@ export const EvSearchPage = () => {
   const handleSecondRowExecutiveSeatChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateSecondRowExecutiveSeat(event.target.checked));
   };
+  const handleChargePortFrontChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateChargePortFront(event.target.checked));
+  };
+  const handleChargePortFrontLeftChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateChargePortFrontLeft(event.target.checked));
+  };
+  const handleChargePortFrontRightChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateChargePortFrontRight(event.target.checked));
+  };
+  const handleChargePortRearLeftChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateChargePortRearLeft(event.target.checked));
+  };
+  const handleChargePortRearRightChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateChargePortRearRight(event.target.checked));
+  };
 
   const delegableApiAccordions = () => {
     if (error) {
@@ -405,69 +425,70 @@ export const EvSearchPage = () => {
                       <Heading size='small'>{String(t('evsearch.drivetrain'))}</Heading>
                       <Checkbox
                         checked={initSearch.allWheelDrive}
-                        label='All wheel drive'
+                        children='All wheel drive'
                         onChange={handleAllWheelDriveChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       <Checkbox
                         checked={initSearch.rWD}
-                        label='RWD'
+                        children='RWD'
                         onChange={handleRWDChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       <Checkbox
                         checked={initSearch.fWD}
-                        label='FWD'
+                        children='FWD'
                         onChange={handleFWDChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       <Checkbox
                         checked={initSearch.adaptiveSuspension}
-                        label='Adaptive Suspension'
+                        children='Adaptive Suspension'
                         onChange={handleAdaptiveSuspensionChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       <Checkbox
                         checked={initSearch.airSuspension}
-                        label='Air Suspension'
+                        children='Air Suspension'
                         onChange={handleAirSuspensionChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       <Checkbox
                         checked={initSearch.rearAxleSteering}
-                        label='Rear Axle Steering'
+                        children='Rear Axle Steering'
                         onChange={handleRearAxleSteeringChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
                     </div>
                     <div className={classes.card}>
                       <Heading size='small'>{String(t('evsearch.adas'))}</Heading>
                       <Checkbox
                         checked={initSearch.nightVision}
-                        label='Nightvision'
+                        children='Nightvision'
                         onChange={handleNightVisionChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       <Checkbox
                         checked={initSearch.adaptiveCruiseControl}
-                        label='AdaptiveCruiseControl'
+                        children='AdaptiveCruiseControl'
                         onChange={handleAdaptiveCruiseControlChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       <Checkbox
                         checked={initSearch.autoSteer}
-                        label='Autosteer'
+                        children='Autosteer'
                         onChange={handleAutoSteerChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br />
                       Read more about Adavanced Driver Assist Systems in our{' '}
                       <a href='../technology/driverassistance/'>technology section</a>
                     </div>
@@ -475,123 +496,166 @@ export const EvSearchPage = () => {
                       <Heading size='small'>{String(t('evsearch.interface'))}</Heading>
                       <Checkbox
                         checked={initSearch.headUpDisplay}
-                        label='Head Up Display'
+                        children='Head Up Display'
                         onChange={handleHeadUpDisplayChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.instrumentCluster}
-                        label='Dedicated Instrument Cluster'
+                        children='Dedicated Instrument Cluster'
                         onChange={handleInstrumentClusterChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.androidAuto}
-                        label='Android Auto Support'
+                        children='Android Auto Support'
                         onChange={handleAndroidAutoChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.appleCarPlay}
-                        label='Apple Car Play Support'
+                        children='Apple Car Play Support'
                         onChange={handleAppleCarPlayChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
                     </div>
                     <div className={classes.card}>
                       <Heading size='small'>{String(t('evsearch.battery'))}</Heading>
                       <Checkbox
                         checked={initSearch.lfpChemistry}
-                        label='LFP Chemistry'
+                        children='LFP Chemistry'
                         onChange={handleLfpChemistryChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.batteryHeatingManual}
-                        label='Manual battery heating'
+                        children='Manual battery heating'
                         onChange={handleBatteryHeatingManualChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.batteryHeatingNavigation}
-                        label='Battery heating when navigating to charger'
+                        children='Battery heating when navigating to charger'
                         onChange={handleBatteryHeatingNavigationChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       Read more about EV batteries in our{' '}
                       <a href='../technology/battery/'>technology section</a>
+                    </div>
+                    <div className={classes.card}>
+                      <Heading size='small'>{String(t('evsearch.charging'))}</Heading>
+                      <Checkbox
+                        checked={initSearch.chargePortFront}
+                        children='Chargeport located front'
+                        onChange={handleChargePortFrontChange}
+                        size='xsmall'
+                        value='true'
+                      ></Checkbox>
+                      <Checkbox
+                        checked={initSearch.chargePortFrontLeft}
+                        children='Chargeport located front left side'
+                        onChange={handleChargePortFrontLeftChange}
+                        size='xsmall'
+                        value='true'
+                      ></Checkbox>
+                      <Checkbox
+                        checked={initSearch.chargePortFrontRight}
+                        children='Chargeport located front right side'
+                        onChange={handleChargePortFrontRightChange}
+                        size='xsmall'
+                        value='true'
+                      ></Checkbox>
+                      <Checkbox
+                        checked={initSearch.chargePortRearLeft}
+                        children='Chargeport located rear left side'
+                        onChange={handleChargePortRearLeftChange}
+                        size='xsmall'
+                        value='true'
+                      ></Checkbox>
+                      <Checkbox
+                        checked={initSearch.chargePortRearRight}
+                        children='Chargeport located rear right side'
+                        onChange={handleChargePortRearRightChange}
+                        size='xsmall'
+                        value='true'
+                      ></Checkbox>
+                      Read more about charging in our{' '}
+                      <a href='../technology/charging/'>technology section</a>
                     </div>
                     <div className={classes.card}>
                       <Heading size='small'>{String(t('evsearch.seats'))}</Heading>
                       <Checkbox
                         checked={initSearch.firstRowSeatsHeating}
-                        label='First row seat Heating'
+                        children='First row seat Heating'
                         onChange={handleFirstRowSeatsHeatingChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.firstRowSeatsVentilation}
-                        label='First row seat ventilation'
+                        children='First row seat ventilation'
                         onChange={handleFirstRowSeatsVentilationChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.firstRowSeatsMassage}
-                        label='First row seat massage'
+                        children='First row seat massage'
                         onChange={handleFirstRowSeatsMassageChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.firstRowAdjustableThighSupport}
-                        label='First row adjustable thigh support'
+                        children='First row adjustable thigh support'
                         onChange={handleFirstRowAdjustableThighSupportChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.secondRowSeatsHeating}
-                        label='Second row seat Heating'
+                        children='Second row seat Heating'
                         onChange={handleSecondRowSeatsHeatingChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.secondRowSeatsVentilation}
-                        label='Second row seat ventilation'
+                        children='Second row seat ventilation'
                         onChange={handleSecondRowSeatsVentilationChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.secondRowSeatsMassage}
-                        label='Second row seat massage'
+                        children='Second row seat massage'
                         onChange={handleSecondRowSeatsMassageChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.secondRowRecline}
-                        label='Second row recline'
+                        children='Second row recline'
                         onChange={handleSecondRowReclineChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
-                      <br></br>
                       <Checkbox
                         checked={initSearch.secondRowExecutiveSeat}
-                        label='Second row executive seat'
+                        children='Second row executive seat'
                         onChange={handleSecondRowExecutiveSeatChange}
-                        compact={true}
+                        size='xsmall'
+                        value='true'
                       ></Checkbox>
                     </div>
+                    
                   </div>
                 </Accordion.Content>
               </Accordion.Item>
@@ -662,6 +726,66 @@ export const EvSearchPage = () => {
                 {
                   label: String(t('evsearch.grossweight')),
                   value: 'WeightUnladenDINKg',
+                },
+                {
+                  label: String(t('evsearch.EnergyCharged10Percent10Min')),
+                  value: 'EnergyCharged10Percent10Min',
+                },
+                {
+                  label: String(t('evsearch.EnergyCharged10Percent15Min')),
+                  value: 'EnergyCharged10Percent15Min',
+                },
+                {
+                  label: String(t('evsearch.EnergyCharged10Percent20Min')),
+                  value: 'EnergyCharged10Percent20Min',
+                },
+                {
+                  label: String(t('evsearch.EnergyCharged10Percent25Min')),
+                  value: 'EnergyCharged10Percent25Min',
+                },
+                {
+                  label: String(t('evsearch.EnergyCharged10Percent30Min')),
+                  value: 'EnergyCharged10Percent30Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent10Min')),
+                  value: 'DrivingDistance120kmhCharged10Percent10Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent15Min')),
+                  value: 'DrivingDistance120kmhCharged10Percent15Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent20Min')),
+                  value: 'DrivingDistance120kmhCharged10Percent20Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent25Min')),
+                  value: 'DrivingDistance120kmhCharged10Percent25Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent30Min')),
+                  value: 'DrivingDistance120kmhCharged10Percent30Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent10Min')),
+                  value: 'DrivingDistanceWltpCharged10Percent10Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent15Min')),
+                  value: 'DrivingDistanceWltpCharged10Percent15Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent20Min')),
+                  value: 'DrivingDistanceWltpCharged10Percent20Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent25Min')),
+                  value: 'DrivingDistanceWltpCharged10Percent25Min',
+                },
+                {
+                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent30Min')),
+                  value: 'DrivingDistanceWltpCharged10Percent30Min',
                 },
               ]}
             ></Select>
