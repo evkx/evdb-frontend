@@ -15,7 +15,7 @@ import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { FilterIcon } from '@navikt/aksel-icons';
+import { FilterIcon, CarIcon, PaletteIcon, PersonGroupIcon } from '@navikt/aksel-icons';
 
 import { Filter, type FilterOption } from '@/components/Filter';
 import {
@@ -399,7 +399,7 @@ export const EvSearchPage = () => {
               />
               <Filter
                 options={bodyTypesFilterOptions}
-                icon={<FilterIcon />}
+                icon={<CarIcon />}
                 label={String(t('evsearch.evtypefilter'))}
                 applyButtonLabel={String(t('common.apply'))}
                 resetButtonLabel={String(t('common.reset_choices'))}
@@ -412,7 +412,7 @@ export const EvSearchPage = () => {
             <div className={classes.filterSection}>
               <Filter
                 options={paintColorFilterOptions}
-                icon={<FilterIcon />}
+                icon={<PaletteIcon />}
                 label={String(t('evsearch.paintColor'))}
                 applyButtonLabel={String(t('common.apply'))}
                 resetButtonLabel={String(t('common.reset_choices'))}
@@ -423,7 +423,7 @@ export const EvSearchPage = () => {
               />
               <Filter
                 options={numberOfSeatsOptions}
-                icon={<FilterIcon />}
+                icon={<PersonGroupIcon />}
                 label={String(t('evsearch.numberOfSeasts'))}
                 applyButtonLabel={String(t('common.apply'))}
                 resetButtonLabel={String(t('common.reset_choices'))}
