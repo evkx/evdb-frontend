@@ -115,7 +115,8 @@ export const OptionDisplay = ({
             }}
             checked={isSelected}
             children={option.label}
-            size='small'
+            value={option.value}
+            size='xsmall'
           />
         </div>
       </button>

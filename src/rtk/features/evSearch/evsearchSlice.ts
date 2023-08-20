@@ -72,6 +72,12 @@ export interface EvSearch {
   chargePortFrontRight: boolean;
   chargePortRearLeft: boolean;
   chargePortRearRight: boolean;
+  liftOfRegen: boolean;
+  liftOfRegenWithHoldMode: boolean;
+  blendedBrakes: boolean;
+  adaptiveRegen: boolean;
+ liftOfRegenLevels: boolean;
+ coasting: boolean;
 }
 
 export interface EvSearchOptions {
@@ -148,6 +154,12 @@ const initialState: SliceState = {
     chargePortFrontRight: false,
     chargePortRearLeft: false,
     chargePortRearRight: false,
+    liftOfRegen: false,
+    liftOfRegenWithHoldMode: false,
+    blendedBrakes: false,
+    adaptiveRegen: false,
+    liftOfRegenLevels: false,
+    coasting: false,
   },
   searchOptions: {
     brands: [
@@ -324,6 +336,24 @@ const evsearchSlice = createSlice({
     updateChargePortRearRight: (state: SliceState, action) => {
       state.search.chargePortRearRight = action.payload;
     },
+    updateLiftOfRegen: (state: SliceState, action) => {
+      state.search.liftOfRegen = action.payload;
+    },
+    updateLiftOfRegenWithHoldMode: (state: SliceState, action) => {
+      state.search.liftOfRegenWithHoldMode = action.payload;
+    },
+    updateBlendedBrakes: (state: SliceState, action) => {
+      state.search.blendedBrakes = action.payload;
+    },
+    updateAdaptiveRegen: (state: SliceState, action) => {
+      state.search.adaptiveRegen = action.payload;
+    },
+    updateLiftOfRegenLevels: (state: SliceState, action) => {
+      state.search.liftOfRegenLevels = action.payload;
+    },
+    updateCoasting: (state: SliceState, action) => {
+      state.search.coasting = action.payload;
+    },
     updateColors: (state: SliceState, action) => {
       const selections = action.payload;
       state.search.colors = selections;
@@ -391,4 +421,10 @@ export const {
   updateChargePortFrontRight,
   updateChargePortRearLeft,
   updateChargePortRearRight,
+  updateLiftOfRegen,
+  updateLiftOfRegenWithHoldMode,
+  updateBlendedBrakes,
+  updateAdaptiveRegen,
+  updateLiftOfRegenLevels,
+  updateCoasting,
 } = evsearchSlice.actions;

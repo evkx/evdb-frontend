@@ -70,8 +70,8 @@ export const EvSearchAccordion = ({
                 </div>
                 <div className={classes.card}>
                   Read our <a href={infoUri}>full article</a>, see all{' '}
-                  <a href={infoUri + 'specifications/'}>specifications</a>, or see our{' '}
-                  <a href={infoUri + 'gallery/'}>image gallery</a>.<br></br>
+                  <a href={infoUri + 'specifications/'}>specifications</a>, see our{' '}
+                  <a href={infoUri + 'gallery/'}>image gallery</a>, see all <a href={infoUri + 'rangeandconsumption/'}>range info</a> or <a href={infoUri + 'chargingcurve/'}>full charging info</a>.<br></br>
                   <br></br>
                   <List borderStyle='dashed'>
                     <ListItem>
