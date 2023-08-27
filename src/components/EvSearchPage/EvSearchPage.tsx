@@ -104,15 +104,122 @@ export const EvSearchPage = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
+
+    if (queryParams.get('brands') != null && queryParams.get('brands') != "") {
+        dispatch(updateBrands(queryParams.get('brands')?.split(",")));
+    }
+
+    if (queryParams.get('evType') != null && queryParams.get('evType') != "") {
+      dispatch(updateEvType(queryParams.get('evType')?.split(",")));
+    }
+
+    if (queryParams.get('colors') != null && queryParams.get('colors') != "") {
+      dispatch(updateColors(queryParams.get('colors')?.split(",")));
+    }
+    
+    if (queryParams.get('seatConfiguration') != null && queryParams.get('seatConfiguration') != "") {
+      dispatch(updateSeatConfig(queryParams.get('seatConfiguration')?.split(",")));
+    }
+
+    if (queryParams.get('allWheelDrive') != null && queryParams.get('allWheelDrive') === 'true') {
+      dispatch(updateAllWheelDrive(true));
+    }
+    if (queryParams.get('rWD') != null && queryParams.get('rWD') === 'true') {
+      dispatch(updateRWD(true));
+    }
+    if (queryParams.get('fWD') != null && queryParams.get('fWD') === 'true') {
+      dispatch(updateFWD(true));
+    }
+    if (queryParams.get('adaptiveSuspension') != null && queryParams.get('adaptiveSuspension') === 'true') {
+      dispatch(updateAdaptiveDamping(true));
+    }
+    if (queryParams.get('airSuspension') != null && queryParams.get('airSuspension') === 'true') {
+      dispatch(updateAdaptiveAirSuspension(true));
+    }
+    if (queryParams.get('rearAxleSteering') != null && queryParams.get('rearAxleSteering') === 'true') {
+      dispatch(updateRearAxleSteering(true));
+    }
+
+
+    if (queryParams.get('nightVision') != null && queryParams.get('nightVision') === 'true') {
+      dispatch(updateNightVision(true));
+    }
+        
+    if (queryParams.get('adaptiveCruiseControl') != null && queryParams.get('adaptiveCruiseControl') === 'true') {
+      dispatch(updateAdaptiveCruiseControl(true));
+    }
+    if (queryParams.get('autoSteer') != null && queryParams.get('autoSteer') === 'true') {
+      dispatch(updateAutoSteer(true));
+    }
+
+    //
+
+    if (queryParams.get('chargePortFront') != null && queryParams.get('chargePortFront') === 'true') {
+      dispatch(updateChargePortFront(true));
+    }
+
+    if (queryParams.get('chargePortFrontLeft') != null && queryParams.get('chargePortFrontLeft') === 'true') {
+      dispatch(updateChargePortFrontLeft(true));
+    }
+
+    if (queryParams.get('chargePortFrontRight') != null && queryParams.get('chargePortFrontRight') === 'true') {
+      dispatch(updateChargePortFrontRight(true));
+    }
+
+    if (queryParams.get('chargePortRearLeft') != null && queryParams.get('chargePortRearLeft') === 'true') {
+      dispatch(updateChargePortRearLeft(true));
+    }
+
+    if (queryParams.get('chargePortRearRight') != null && queryParams.get('chargePortRearRight') === 'true') {
+      dispatch(updateChargePortRearRight(true));
+    }
+
+    // Regen query params
+
+    if (queryParams.get('liftOfRegen') != null && queryParams.get('liftOfRegen') === 'true') {
+      dispatch(updateLiftOfRegen(true));
+    }
+
+    if (queryParams.get('liftOfRegenWithHoldMode') != null && queryParams.get('liftOfRegenWithHoldMode') === 'true') {
+      dispatch(updateLiftOfRegenWithHoldMode(true));
+    }
+
+    if (queryParams.get('liftOfRegenLevels') != null && queryParams.get('liftOfRegenLevels') === 'true') {
+      dispatch(updateLiftOfRegenLevels(true));
+    }
+
+    if (queryParams.get('coasting') != null && queryParams.get('coasting') === 'true') {
+      dispatch(updateCoasting(true));
+    }
+
+    if (queryParams.get('adaptiveRegen') != null && queryParams.get('adaptiveRegen') === 'true') {
+      dispatch(updateAdaptiveRegen(true));
+    }
+
+    // Battery
+
+    if (queryParams.get('lfpChemistry') != null && queryParams.get('lfpChemistry') === 'true') {
+      dispatch(updateLfpChemistry(true));
+    }
+
+    if (queryParams.get('batteryHeatingManual') != null && queryParams.get('batteryHeatingManual') === 'true') {
+      dispatch(updateBatteryHeatingManual(true));
+    }
+
+    if (queryParams.get('batteryHeatingNavigation') != null && queryParams.get('batteryHeatingNavigation') === 'true') {
+      dispatch(updateBatteryHeatingNavigation(true));
+    }
+
+    // Seats
+
+
     if (
       queryParams.get('secondRowExecutiveSeat') != null &&
       queryParams.get('secondRowExecutiveSeat') === 'true'
     ) {
       dispatch(updateSecondRowExecutiveSeat(true));
     }
-    if (queryParams.get('airSuspension') != null && queryParams.get('airSuspension') === 'true') {
-      dispatch(updateAdaptiveAirSuspension(true));
-    }
+
     if (queryParams.get('sortOrder') != null) {
       dispatch(updateSortOrder(queryParams.get('sortOrder')));
     }
@@ -132,6 +239,7 @@ export const EvSearchPage = () => {
       dispatch(updateAppleCarPlay(true));
     }
 
+
     setIsReady(true);
   }, []);
 
@@ -139,7 +247,7 @@ export const EvSearchPage = () => {
     if (!loading) {
       const queryParams = new URLSearchParams();
       Object.entries(initSearch).forEach(([key, value]) => {
-        if (value && value !== '') {
+        if (value && (value !== '' && value.length == undefined || value.length > 0)) {
           queryParams.set(key, value);
         }
       });
@@ -474,7 +582,7 @@ export const EvSearchPage = () => {
                           ></Checkbox>
                           <Checkbox
                             checked={initSearch.adaptiveSuspension}
-                            children='Adaptive Suspension'
+                            children='Adaptive damping'
                             onChange={handleAdaptiveSuspensionChange}
                             size='xsmall'
                             value='true'
@@ -662,49 +770,40 @@ export const EvSearchPage = () => {
                     </div>
                     <div className={classes.card}>
                       <Checkbox.Group
-                          description="Select charging features"
+                          description="Select UI features"
                           error=""
-                          legend={String(t('evsearch.charging'))}
+                          legend={String(t('evsearch.interface'))}
                           onChange={function noRefCheck(){}}
-                            >
-                            <Checkbox
-                              checked={initSearch.chargePortFront}
-                              children='Chargeport located front'
-                              onChange={handleChargePortFrontChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortFrontLeft}
-                              children='Chargeport located front left side'
-                              onChange={handleChargePortFrontLeftChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortFrontRight}
-                              children='Chargeport located front right side'
-                              onChange={handleChargePortFrontRightChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortRearLeft}
-                              children='Chargeport located rear left side'
-                              onChange={handleChargePortRearLeftChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortRearRight}
-                              children='Chargeport located rear right side'
-                              onChange={handleChargePortRearRightChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
+                          >
+                        <Checkbox
+                          checked={initSearch.headUpDisplay}
+                          children='Head Up Display'
+                          onChange={handleHeadUpDisplayChange}
+                          size='xsmall'
+                          value='true'
+                        ></Checkbox>
+                        <Checkbox
+                          checked={initSearch.instrumentCluster}
+                          children='Dedicated Instrument Cluster'
+                          onChange={handleInstrumentClusterChange}
+                          size='xsmall'
+                          value='true'
+                        ></Checkbox>
+                        <Checkbox
+                          checked={initSearch.androidAuto}
+                          children='Android Auto Support'
+                          onChange={handleAndroidAutoChange}
+                          size='xsmall'
+                          value='true'
+                        ></Checkbox>
+                        <Checkbox
+                          checked={initSearch.appleCarPlay}
+                          children='Apple Car Play Support'
+                          onChange={handleAppleCarPlayChange}
+                          size='xsmall'
+                          value='true'
+                        ></Checkbox>
                       </Checkbox.Group>
-                      Read more about charging in our{' '}
-                      <a href='../technology/charging/'>technology section</a>
                     </div>
                     <div className={classes.card}>
                       <Checkbox.Group
@@ -778,43 +877,7 @@ export const EvSearchPage = () => {
                               ></Checkbox>
                       </Checkbox.Group>
                     </div>
-                   <div className={classes.card}>
-                      <Checkbox.Group
-                          description="Select UI features"
-                          error=""
-                          legend={String(t('evsearch.interface'))}
-                          onChange={function noRefCheck(){}}
-                          >
-                        <Checkbox
-                          checked={initSearch.headUpDisplay}
-                          children='Head Up Display'
-                          onChange={handleHeadUpDisplayChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.instrumentCluster}
-                          children='Dedicated Instrument Cluster'
-                          onChange={handleInstrumentClusterChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.androidAuto}
-                          children='Android Auto Support'
-                          onChange={handleAndroidAutoChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.appleCarPlay}
-                          children='Apple Car Play Support'
-                          onChange={handleAppleCarPlayChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                      </Checkbox.Group>
-                    </div>
+            
              
 
                     
