@@ -493,7 +493,8 @@ export const EvSearchPage = () => {
               <br />
               <br />
             </Ingress>
-            <div className={classes.filterSection}>
+            <div className={classes.filtergrid}>
+              <div>
               <Filter
                 options={brandFilterOptions}
                 icon={<FilterIcon />}
@@ -504,7 +505,10 @@ export const EvSearchPage = () => {
                 searchable={true}
                 onApply={handleBrandChange}
                 fullScreenModal={isSm}
+                values={initSearch.brands}
               />
+              </div>
+              <div>
               <Filter
                 options={bodyTypesFilterOptions}
                 icon={<CarIcon />}
@@ -515,10 +519,11 @@ export const EvSearchPage = () => {
                 searchable={true}
                 onApply={handleTypeChange}
                 fullScreenModal={isSm}
+                values={initSearch.evType}
               />
-            </div>
-            <div className={classes.filterSection}>
-              <Filter
+              </div>
+              <div>
+                <Filter
                 options={paintColorFilterOptions}
                 icon={<PaletteIcon />}
                 label={String(t('evsearch.paintColor'))}
@@ -528,7 +533,10 @@ export const EvSearchPage = () => {
                 searchable={true}
                 onApply={handleColorChange}
                 fullScreenModal={isSm}
+                values={initSearch.colors}
               />
+              </div>
+              <div>
               <Filter
                 options={numberOfSeatsOptions}
                 icon={<PersonGroupIcon />}
@@ -539,7 +547,9 @@ export const EvSearchPage = () => {
                 searchable={true}
                 onApply={handleSeatConfigChange}
                 fullScreenModal={isSm}
+                values={initSearch.seatConfiguration}
               />
+              </div>
             </div>
             <Accordion
               border={true}

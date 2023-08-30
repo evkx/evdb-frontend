@@ -35,11 +35,11 @@
   padding: 1rem;
 }
 
-.filterSection{
-  display: flex;
-  align-items: center;
+.filtergrid{
+  display: grid;
   gap: 1rem;
-  padding-bottom: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin-bottom: 20px;
 }
 
 .card {
