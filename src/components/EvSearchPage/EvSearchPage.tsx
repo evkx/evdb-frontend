@@ -9,6 +9,7 @@ import {
   Heading,
   Ingress,
   Accordion,
+  Button,
 } from '@digdir/design-system-react';
 import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import type { Key } from 'react';
@@ -86,6 +87,7 @@ export const EvSearchPage = () => {
   const evsearchCount = useAppSelector((state) => state.evsearchResult.evList.count);
   const bodyTypesResult = useAppSelector((state) => state.evsearchResult.searchOptions.bodyTypes);
   const colorResult = useAppSelector((state) => state.evsearchResult.searchOptions.colors);
+  const compareList = useAppSelector((state) => state.evsearchResult.compareList);
   const seatConfigResult = useAppSelector(
     (state) => state.evsearchResult.searchOptions.seatConfiguration,
   );
@@ -101,6 +103,14 @@ export const EvSearchPage = () => {
   const location = useLocation();
   const history = useNavigate();
   const [isReady, setIsReady] = useState<boolean>(false);
+
+    const openUrl = () => {
+      const queryParamName = "evs";
+      const valuesCombined = compareList.join(','); // Join the values with ','
+      const baseUrl = "https://localhost:7033/evcompare";
+      const completeUrl = `${baseUrl}?${queryParamName}=${encodeURIComponent(valuesCombined)}`;
+      window.open(completeUrl, '_blank');
+    };
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -474,6 +484,7 @@ export const EvSearchPage = () => {
           thumbUri={ev.thumbUri}
           averageDcChargingSpeed={ev.averageDcChargingSpeed}
           maxDcChargingSpeed={ev.maxDcChargingSpeed}
+          evid={ev.evId}
         ></EvSearchAccordion>
       );
     });
@@ -1031,6 +1042,9 @@ export const EvSearchPage = () => {
                 {evsearchCount} {t('evsearch.searchresult')}:
               </h4>
               <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
+              <Button fullWidth onClick={openUrl}>
+                Compare Evs
+              </Button>
             </div>
           </div>
         </PageContent>

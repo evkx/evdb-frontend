@@ -1,15 +1,20 @@
-import { Accordion, List, ListItem } from '@digdir/design-system-react';
+import { Accordion, Checkbox, List, ListItem } from '@digdir/design-system-react';
 import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import { useState } from 'react';
 import { t } from 'i18next';
 import * as React from 'react';
-
+import {
+  updateCompareList
+} from '@/rtk/features/evSearch/evsearchSlice';
+import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
 import classes from './EvSearchAccordion.module.css';
 
 export enum EvSearchAccordionButtonType {
   Add = 'add',
   Remove = 'remove',
 }
+
+
 
 export interface EvSearchAccordionProps {
   title?: string;
@@ -24,6 +29,7 @@ export interface EvSearchAccordionProps {
   thumbUri?: string;
   maxDcChargingSpeed?: number;
   averageDcChargingSpeed?: number;
+  evid?: string;
 }
 
 export const EvSearchAccordion = ({
@@ -39,8 +45,27 @@ export const EvSearchAccordion = ({
   thumbUri = '',
   maxDcChargingSpeed = 0,
   averageDcChargingSpeed = 0,
+  evid = '',
 }: EvSearchAccordionProps) => {
   const [open, setOpen] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const compareList = useAppSelector((state) => state.evsearchResult.compareList);
+
+  const handleCompareEvChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if(event.target.checked)
+    {
+      const updatedCompareList = [...compareList, event.target.value];
+      dispatch(updateCompareList(updatedCompareList));
+    }
+    else
+    {
+      const updatedCompareList = compareList.filter(element => element !== event.target.value);
+      dispatch(updateCompareList(updatedCompareList));
+    }
+
+  };
 
   return (
     <div>
@@ -72,7 +97,13 @@ export const EvSearchAccordion = ({
                   Read our <a href={infoUri}>full article</a>, see all{' '}
                   <a href={infoUri + 'specifications/'}>specifications</a>, see our{' '}
                   <a href={infoUri + 'gallery/'}>image gallery</a>, see all <a href={infoUri + 'rangeandconsumption/'}>range info</a> or <a href={infoUri + 'chargingcurve/'}>full charging info</a>.<br></br>
-                  <br></br>
+                  
+                  <Checkbox
+                            children='Compare'
+                            onChange={handleCompareEvChange}
+                            size='xsmall'
+                            value={evid}
+                          ></Checkbox>
                   <List borderStyle='dashed'>
                     <ListItem>
                       <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km

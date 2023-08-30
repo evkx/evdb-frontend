@@ -7,6 +7,7 @@ export interface EvSearchResult {
 }
 
 export interface Ev {
+  evId: string;
   name: string;
   sortParameter: string;
   sortValue: string;
@@ -95,6 +96,7 @@ export interface SliceState {
   search: EvSearch;
   searchOptions: EvSearchOptions;
   error: string | undefined;
+  compareList: string[];
 }
 
 const initialState: SliceState = {
@@ -186,6 +188,7 @@ const initialState: SliceState = {
     colors: ['Red'],
   },
   error: '',
+  compareList: [],
 };
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
@@ -361,6 +364,11 @@ const evsearchSlice = createSlice({
     updateSortOrderFromParam: (state: SliceState, action) => {
       state.search.sortOrder = action.payload;
     },
+    updateCompareList:  (state: SliceState, action) => {
+      const selections = action.payload;
+      state.compareList = selections;
+    },
+
   },
   extraReducers: (builder) => {
     builder
@@ -427,4 +435,5 @@ export const {
   updateAdaptiveRegen,
   updateLiftOfRegenLevels,
   updateCoasting,
+  updateCompareList,
 } = evsearchSlice.actions;
