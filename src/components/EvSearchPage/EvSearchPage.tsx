@@ -63,6 +63,7 @@ import {
   updateAdaptiveRegen,
   updateLiftOfRegenLevels,
   updateCoasting,
+  updateCompareList,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -70,6 +71,7 @@ import { useMediaQuery } from '@/resources/hooks';
 
 import { PageContainer } from '../Reusables/PageContainer';
 import { EvSearchAccordion } from '../Reusables/EvSearchAccordion';
+import { EvSearchActionBar } from '../Reusables/EvSearchActionBar';
 import { Page, PageContent } from '../Page';
 
 import classes from './EvSearchPage.module.css';
@@ -449,6 +451,23 @@ export const EvSearchPage = () => {
   const handleCoastingChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateCoasting(event.target.checked));
   };
+
+  const OnAdd = (evid: string): void => {
+   
+      const updatedCompareList = [...compareList, evid];
+      dispatch(updateCompareList(updatedCompareList));
+    };
+   
+   
+  const OnRemove = (evid: string): void => {
+    {
+      const updatedCompareList = compareList.filter(element => element !== evid);
+      dispatch(updateCompareList(updatedCompareList));
+    }
+ };
+  
+ const disableCompare = compareList.length === 0;
+
   const delegableApiAccordions = () => {
     if (error) {
       return (
@@ -494,6 +513,67 @@ export const EvSearchPage = () => {
       );
     });
   };
+
+  const delegableActionBar = () => {
+    if (error) {
+      return (
+        <Panel
+          title={t('api_delegation.data_retrieval_failed')}
+          variant={PanelVariant.Error}
+          forceMobileLayout
+        >
+          <div>
+            {t('api_delegation.error_message')}: {error}
+          </div>
+        </Panel>
+      );
+    } else if (loading) {
+      return (
+        <center>
+          <Spinner
+            title='Spinner'
+            size='3xLarge'
+            variant='interaction'
+          />
+        </center>
+      );
+    }
+    return evsearchresult.map((ev: Ev, index: Key | null | undefined) => {
+      
+      const exists = compareList.includes(ev.evId);
+      const status = exists ? "Compared" : "NotCompared";
+
+
+ 
+      return (
+        <EvSearchActionBar
+          title={ev.name}
+          subtitle={ev.sortValue + ' ' + ev.sortParameter}
+          key={index}
+          maxPower={ev.maxPowerKw}
+          topSpeedKph={ev.topSpeedKph}
+          infoUri={ev.infoUri}
+          wltpConsumption={ev.wltpConsumption}
+          wltpRange={ev.wltpRange}
+          netBattery={ev.netBattery}
+          zeroTo100={ev.zeroTo100}
+          thumbUri={ev.thumbUri}
+          averageDcChargingSpeed={ev.averageDcChargingSpeed}
+          maxDcChargingSpeed={ev.maxDcChargingSpeed}
+          evid={ev.evId}
+          onAddClick={() => {
+            OnAdd(ev.evId);
+          }}
+          onRemoveClick={() => {
+            OnRemove(ev.evId);
+          }}
+          status={status}
+          compact={isSm}
+        ></EvSearchActionBar>
+      );
+    });
+  };
+
 
   return (
     <PageContainer>
@@ -1043,11 +1123,15 @@ export const EvSearchPage = () => {
           </div>
           <div className={classes.pageContentAccordionsContainer}>
             <div className={classes.apiAccordions}>
+          
               <h4 className={classes.resultInfo}>
                 {evsearchCount} {t('evsearch.searchresult')}:
               </h4>
-              <div className={classes.accordionScrollContainer}>{delegableApiAccordions()}</div>
-              <Button fullWidth onClick={openUrl}>
+              <Button fullWidth onClick={openUrl} disabled={disableCompare}>
+                Compare Evs
+              </Button>
+              <div className={classes.accordionScrollContainer}>{delegableActionBar()}</div>
+              <Button fullWidth onClick={openUrl} disabled={disableCompare}>
                 Compare Evs
               </Button>
             </div>

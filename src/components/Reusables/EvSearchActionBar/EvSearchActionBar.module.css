@@ -1,0 +1,63 @@
+.content
+{
+  margin-top: 1rem;
+   margin-bottom: 1rem;
+}
+
+.evsearchAccordionContent{
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 1.1rem;
+}
+
+.evText{
+  font-weight: 500;
+}
+
+.scopeItems {
+  margin-top: 10px;
+}
+
+.line{
+  margin-top: 25px;
+  margin-right: 5px;
+}
+
+.contentTexts{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.bottomContentTexts{
+  margin-bottom: 20px;
+}
+
+.thumb
+{
+  height: auto;
+  max-width: 100%;
+  border: 2px;
+  border-style: solid;
+  border-color: black;
+}
+
+.card {
+  padding: 0rem;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 800px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+.thumbcontainer{
+  display: flex;
+justify-content: center;
+}
