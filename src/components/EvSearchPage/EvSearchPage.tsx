@@ -105,9 +105,14 @@ export const EvSearchPage = () => {
   const [isReady, setIsReady] = useState<boolean>(false);
 
     const openUrl = () => {
+      const currentUri = window.location.href;
+      let baseUrl = 'https://db.evkx.net/evcompare';
+      if (currentUri.startsWith('http://localhost')) {
+        baseUrl = 'https://localhost:7033/evcompare';
+      }
+
       const queryParamName = "evs";
       const valuesCombined = compareList.join(','); // Join the values with ','
-      const baseUrl = "https://localhost:7033/evcompare";
       const completeUrl = `${baseUrl}?${queryParamName}=${encodeURIComponent(valuesCombined)}`;
       window.open(completeUrl, '_blank');
     };

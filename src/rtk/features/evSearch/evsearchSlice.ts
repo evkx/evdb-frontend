@@ -79,6 +79,7 @@ export interface EvSearch {
   adaptiveRegen: boolean;
  liftOfRegenLevels: boolean;
  coasting: boolean;
+ includeDiscontinued: boolean;
 }
 
 export interface EvSearchOptions {
@@ -162,6 +163,7 @@ const initialState: SliceState = {
     adaptiveRegen: false,
     liftOfRegenLevels: false,
     coasting: false,
+    includeDiscontinued: false,
   },
   searchOptions: {
     brands: [
