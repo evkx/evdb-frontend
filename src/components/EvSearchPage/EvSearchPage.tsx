@@ -10,6 +10,7 @@ import {
   Ingress,
   Accordion,
   Button,
+  TextField,
 } from '@digdir/design-system-react';
 import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import type { Key } from 'react';
@@ -64,6 +65,9 @@ import {
   updateLiftOfRegenLevels,
   updateCoasting,
   updateCompareList,
+  updateMinimumHp,
+  updateMinimumWltpRange,
+  updateMinumTrailerWeight,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -451,6 +455,15 @@ export const EvSearchPage = () => {
   const handleCoastingChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateCoasting(event.target.checked));
   };
+  const handleMinimumHpChange =({ target }: { target: HTMLInputElement }) =>
+    dispatch(updateMinimumHp(target.value)
+  );
+   const handleMinimumWltpRangeChange = ({ target }: { target: HTMLInputElement }) =>
+    dispatch(updateMinimumWltpRange(target.value)
+    );
+  const handleMinimumTrailerWeightChange =  ({ target }: { target: HTMLInputElement }) =>
+    dispatch(updateMinumTrailerWeight(target.value)
+    );
 
   const OnAdd = (evid: string): void => {
    
@@ -646,6 +659,36 @@ export const EvSearchPage = () => {
                 values={initSearch.seatConfiguration}
               />
               </div>
+           
+            </div>
+            <div  className={classes.filtergrid}>
+             <div>
+              <TextField
+                onChange={handleMinimumWltpRangeChange}  
+                label={String(t('evsearch.minimumwltprange'))}
+                type='number'
+                inputMode='numeric'
+                />
+
+              </div>
+              <div>
+              <TextField
+                onChange={handleMinimumHpChange}  
+                label={String(t('evsearch.minimumhp'))}
+                type='number'
+                inputMode='numeric'
+                />
+              </div>
+              <div>
+              <TextField
+                onChange={handleMinimumTrailerWeightChange}  
+                label={String(t('evsearch.minimumtrailerweight'))}
+                type='number'
+                inputMode='numeric'
+                />
+              </div>
+
+
             </div>
             <Accordion
               border={true}
@@ -1124,14 +1167,14 @@ export const EvSearchPage = () => {
           <div className={classes.pageContentAccordionsContainer}>
             <div className={classes.apiAccordions}>
           
-              <h4 className={classes.resultInfo}>
+              <h2 className={classes.resultInfo}>
                 {evsearchCount} {t('evsearch.searchresult')}:
-              </h4>
-              <Button fullWidth onClick={openUrl} disabled={disableCompare}>
+              </h2>
+              <Button fullWidth onClick={openUrl} disabled={disableCompare} className={classes.comparebutton} color='success' icon={<CarIcon />}>
                 Compare Evs
               </Button>
               <div className={classes.accordionScrollContainer}>{delegableActionBar()}</div>
-              <Button fullWidth onClick={openUrl} disabled={disableCompare}>
+              <Button fullWidth onClick={openUrl} disabled={disableCompare} className={classes.comparebutton} color='success' icon={<CarIcon />}>
                 Compare Evs
               </Button>
             </div>

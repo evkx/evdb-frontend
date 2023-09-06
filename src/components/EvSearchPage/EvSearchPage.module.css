@@ -56,3 +56,9 @@
 @media (min-width: 800px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
 }
+
+.comparebutton
+{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

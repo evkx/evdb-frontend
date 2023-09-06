@@ -80,6 +80,9 @@ export interface EvSearch {
  liftOfRegenLevels: boolean;
  coasting: boolean;
  includeDiscontinued: boolean;
+ minimumWltpRange: string;
+ minimumHp: string; 
+ minimumTrailerWeight: string;
 }
 
 export interface EvSearchOptions {
@@ -164,6 +167,9 @@ const initialState: SliceState = {
     liftOfRegenLevels: false,
     coasting: false,
     includeDiscontinued: false,
+    minimumHp: '',
+    minimumTrailerWeight: '',
+    minimumWltpRange: '',
   },
   searchOptions: {
     brands: [
@@ -370,7 +376,15 @@ const evsearchSlice = createSlice({
       const selections = action.payload;
       state.compareList = selections;
     },
-
+    updateMinimumHp: (state: SliceState, action) => {
+      state.search.minimumHp = action.payload;
+    },
+    updateMinimumWltpRange: (state: SliceState, action) => {
+      state.search.minimumWltpRange = action.payload;
+    },
+    updateMinumTrailerWeight: (state: SliceState, action) => {
+      state.search.minimumTrailerWeight = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -438,4 +452,7 @@ export const {
   updateLiftOfRegenLevels,
   updateCoasting,
   updateCompareList,
+  updateMinimumHp,
+  updateMinimumWltpRange,
+  updateMinumTrailerWeight,
 } = evsearchSlice.actions;
