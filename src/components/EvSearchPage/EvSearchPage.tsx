@@ -595,12 +595,11 @@ export const EvSearchPage = () => {
           <div className={classes.pageContent}>
             <Heading size='large'>Welcome to EVKX EV Search</Heading>
             <Ingress size='medium'>
-              EVKX offers the most comprehensive search for EVs.
-              <br />
-              You can search and sort on a whole lot of parameters. <br />
-              Please read our <a href='/guides/evsearch/'>search guide</a>
-              <br />
-              <br />
+            The EVKX EV database is a comprehensive and up-to-date source of information on various EV models, features, prices, and performance. 
+            You can search and filter on EVs based on your preferences and needs, such as battery size, range, charging time, power, speed, safety, and more. You can also view detailed specifications, reviews, ratings, and images of each EV. 
+            <br />
+              Please read our <a href='/guides/evsearch/'>search guide</a> to get the most of the database.
+              <br /><br />
             </Ingress>
             <div className={classes.filtergrid}>
               <div>
