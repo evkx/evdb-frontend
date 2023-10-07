@@ -3,15 +3,16 @@ import type { MultiSelectOption } from '@digdir/design-system-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Select,
-  Tabs,
   Checkbox,
   Spinner,
   Heading,
   Ingress,
   Accordion,
   Button,
-  TextField,
+  Textfield,
+  Tabs,
 } from '@digdir/design-system-react';
+import { LegacyTabs } from '@digdir/design-system-react';
 import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -662,7 +663,7 @@ export const EvSearchPage = () => {
             </div>
             <div  className={classes.filtergrid}>
              <div>
-              <TextField
+              <Textfield
                 onChange={handleMinimumWltpRangeChange}  
                 label={String(t('evsearch.minimumwltprange'))}
                 type='number'
@@ -671,7 +672,7 @@ export const EvSearchPage = () => {
 
               </div>
               <div>
-              <TextField
+              <Textfield
                 onChange={handleMinimumHpChange}  
                 label={String(t('evsearch.minimumhp'))}
                 type='number'
@@ -679,7 +680,7 @@ export const EvSearchPage = () => {
                 />
               </div>
               <div>
-              <TextField
+              <Textfield
                 onChange={handleMinimumTrailerWeightChange}  
                 label={String(t('evsearch.minimumtrailerweight'))}
                 type='number'
@@ -699,9 +700,57 @@ export const EvSearchPage = () => {
               <Accordion.Item>
                 <Accordion.Header>{String(t('evsearch.advanced'))}</Accordion.Header>
                 <Accordion.Content>
+
+                <Tabs  defaultValue='value1'>
+                  <Tabs.List>
+                    <Tabs.Tab value='value1'>Driver Assistance</Tabs.Tab>
+                    <Tabs.Tab value='value2'>Drivetrain</Tabs.Tab>
+                    <Tabs.Tab value='value3'>Charging & Battery</Tabs.Tab>
+                    <Tabs.Tab value='value4'>Interior</Tabs.Tab>
+                  </Tabs.List>
+                  <Tabs.Content value='value1'>
                   <div className={classes.cards}>
                     <div className={classes.card}>
+      
                       <Checkbox.Group
+                          description="Select ADAS features"
+                          error=""
+                          legend={String(t('evsearch.adas'))}
+                          onChange={function noRefCheck(){}}
+                          >
+                        <Checkbox
+                          checked={initSearch.nightVision}
+                          children='Nightvision'
+                          onChange={handleNightVisionChange}
+                          size='xsmall'
+                          value='true'
+                        ></Checkbox>
+                        <Checkbox
+                          checked={initSearch.adaptiveCruiseControl}
+                          children='AdaptiveCruiseControl'
+                          onChange={handleAdaptiveCruiseControlChange}
+                          size='xsmall'
+                          value='true'
+                        ></Checkbox>
+                        <Checkbox
+                          checked={initSearch.autoSteer}
+                          children='Autosteer'
+                          onChange={handleAutoSteerChange}
+                          size='xsmall'
+                          value='true'
+                        ></Checkbox>
+                      </Checkbox.Group>
+                      Read more about Adavanced Driver Assist Systems in our{' '}
+                      <a href='../technology/driverassistance/'>technology section</a>
+                    </div>
+                </div>
+                  
+                  </Tabs.Content>
+                  <Tabs.Content value='value2'>
+                    
+                  <div className={classes.cards}>
+                    <div className={classes.card}>
+                        <Checkbox.Group
                           description="Select drivetrain features"
                           error=""
                           legend={String(t('evsearch.drivetrain'))}
@@ -749,174 +798,153 @@ export const EvSearchPage = () => {
                             size='xsmall'
                             value='true'
                           ></Checkbox>
-                      </Checkbox.Group>
-                    </div>
-                    <div className={classes.card}>
-      
-                      <Checkbox.Group
-                          description="Select regen features"
-                          error=""
-                          legend={String(t('evsearch.regen'))}
-                          onChange={function noRefCheck(){}}
-                          >
-                        <Checkbox
-                          checked={initSearch.liftOfRegen}
-                          children='Lift-of regen (one-pedal-driving)'
-                          onChange={handleLiftOfRegenChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.liftOfRegenWithHoldMode}
-                          children='Lift-of regen with hold mode'
-                          onChange={handleLiftOfRegenWithHoldModeChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.liftOfRegenLevels}
-                          children='Adjustable lif-of regel levels'
-                          onChange={handleLiftOfRegenLevelsChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.blendedBrakes}
-                          children='Blended brakes (regen on brake pedal)'
-                          onChange={handleBlendedBrakesChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.coasting}
-                          children='Car can coast (roll freely without regen)'
-                          onChange={handleCoastingChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.adaptiveRegen}
-                          children='Adaptive regen (automatic regen when needed when coasting)'
-                          onChange={handleAdaptiveRegenChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                      </Checkbox.Group>
-                      Read more about regenerative braking in our{' '}
-                      <a href='../technology/regen/'>technology section</a>
-                    </div>
-                    <div className={classes.card}>
-      
-                      <Checkbox.Group
-                          description="Select ADAS features"
-                          error=""
-                          legend={String(t('evsearch.adas'))}
-                          onChange={function noRefCheck(){}}
-                          >
-                        <Checkbox
-                          checked={initSearch.nightVision}
-                          children='Nightvision'
-                          onChange={handleNightVisionChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.adaptiveCruiseControl}
-                          children='AdaptiveCruiseControl'
-                          onChange={handleAdaptiveCruiseControlChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.autoSteer}
-                          children='Autosteer'
-                          onChange={handleAutoSteerChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                      </Checkbox.Group>
-                      Read more about Adavanced Driver Assist Systems in our{' '}
-                      <a href='../technology/driverassistance/'>technology section</a>
-                    </div>
-                    <div className={classes.card}>
-                    <Checkbox.Group
-                          description="Select battery features"
-                          error=""
-                          legend={String(t('evsearch.battery'))}
-                          onChange={function noRefCheck(){}}
-                            >
-                        <Checkbox
-                          checked={initSearch.lfpChemistry}
-                          children='LFP Chemistry'
-                          onChange={handleLfpChemistryChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.batteryHeatingManual}
-                          children='Manual battery heating'
-                          onChange={handleBatteryHeatingManualChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                        <Checkbox
-                          checked={initSearch.batteryHeatingNavigation}
-                          children='Battery heating when navigating to charger'
-                          onChange={handleBatteryHeatingNavigationChange}
-                          size='xsmall'
-                          value='true'
-                        ></Checkbox>
-                      </Checkbox.Group>
-                      Read more about EV batteries in our{' '}
-                      <a href='../technology/battery/'>technology section</a>
-                    </div>
-                    <div className={classes.card}>
-                      <Checkbox.Group
-                          description="Select charging features"
-                          error=""
-                          legend={String(t('evsearch.charging'))}
-                          onChange={function noRefCheck(){}}
-                            >
-                            <Checkbox
-                              checked={initSearch.chargePortFront}
-                              children='Chargeport located front'
-                              onChange={handleChargePortFrontChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortFrontLeft}
-                              children='Chargeport located front left side'
-                              onChange={handleChargePortFrontLeftChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortFrontRight}
-                              children='Chargeport located front right side'
-                              onChange={handleChargePortFrontRightChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortRearLeft}
-                              children='Chargeport located rear left side'
-                              onChange={handleChargePortRearLeftChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                            <Checkbox
-                              checked={initSearch.chargePortRearRight}
-                              children='Chargeport located rear right side'
-                              onChange={handleChargePortRearRightChange}
-                              size='xsmall'
-                              value='true'
-                            ></Checkbox>
-                      </Checkbox.Group>
-                      Read more about charging in our{' '}
-                      <a href='../technology/charging/'>technology section</a>
-                    </div>
-                    <div className={classes.card}>
+                  </Checkbox.Group>
+                          </div>
+
+                          <div className={classes.card}>
+                              
+                              <Checkbox.Group
+                                  description="Select regen features"
+                                  error=""
+                                  legend={String(t('evsearch.regen'))}
+                                  onChange={function noRefCheck(){}}
+                                  >
+                                <Checkbox
+                                  checked={initSearch.liftOfRegen}
+                                  children='Lift-of regen (one-pedal-driving)'
+                                  onChange={handleLiftOfRegenChange}
+                                  size='xsmall'
+                                  value='true'
+                                ></Checkbox>
+                                <Checkbox
+                                  checked={initSearch.liftOfRegenWithHoldMode}
+                                  children='Lift-of regen with hold mode'
+                                  onChange={handleLiftOfRegenWithHoldModeChange}
+                                  size='xsmall'
+                                  value='true'
+                                ></Checkbox>
+                                <Checkbox
+                                  checked={initSearch.liftOfRegenLevels}
+                                  children='Adjustable lif-of regel levels'
+                                  onChange={handleLiftOfRegenLevelsChange}
+                                  size='xsmall'
+                                  value='true'
+                                ></Checkbox>
+                                <Checkbox
+                                  checked={initSearch.blendedBrakes}
+                                  children='Blended brakes (regen on brake pedal)'
+                                  onChange={handleBlendedBrakesChange}
+                                  size='xsmall'
+                                  value='true'
+                                ></Checkbox>
+                                <Checkbox
+                                  checked={initSearch.coasting}
+                                  children='Car can coast (roll freely without regen)'
+                                  onChange={handleCoastingChange}
+                                  size='xsmall'
+                                  value='true'
+                                ></Checkbox>
+                                <Checkbox
+                                  checked={initSearch.adaptiveRegen}
+                                  children='Adaptive regen (automatic regen when needed when coasting)'
+                                  onChange={handleAdaptiveRegenChange}
+                                  size='xsmall'
+                                  value='true'
+                                ></Checkbox>
+                              </Checkbox.Group>
+                              Read more about regenerative braking in our{' '}
+                              <a href='../technology/regen/'>technology section</a>
+                            </div>
+                      </div>
+
+                  </Tabs.Content>
+                  <Tabs.Content value='value3'>
+                    
+                  <div className={classes.cards}>
+                 
+                 <div className={classes.card}>
+                 <Checkbox.Group
+                       description="Select battery features"
+                       error=""
+                       legend={String(t('evsearch.battery'))}
+                       onChange={function noRefCheck(){}}
+                         >
+                     <Checkbox
+                       checked={initSearch.lfpChemistry}
+                       children='LFP Chemistry'
+                       onChange={handleLfpChemistryChange}
+                       size='xsmall'
+                       value='true'
+                     ></Checkbox>
+                     <Checkbox
+                       checked={initSearch.batteryHeatingManual}
+                       children='Manual battery heating'
+                       onChange={handleBatteryHeatingManualChange}
+                       size='xsmall'
+                       value='true'
+                     ></Checkbox>
+                     <Checkbox
+                       checked={initSearch.batteryHeatingNavigation}
+                       children='Battery heating when navigating to charger'
+                       onChange={handleBatteryHeatingNavigationChange}
+                       size='xsmall'
+                       value='true'
+                     ></Checkbox>
+                   </Checkbox.Group>
+                   Read more about EV batteries in our{' '}
+                   <a href='../technology/battery/'>technology section</a>
+                 </div>
+                 <div className={classes.card}>
+                   <Checkbox.Group
+                       description="Select charging features"
+                       error=""
+                       legend={String(t('evsearch.charging'))}
+                       onChange={function noRefCheck(){}}
+                         >
+                         <Checkbox
+                           checked={initSearch.chargePortFront}
+                           children='Chargeport located front'
+                           onChange={handleChargePortFrontChange}
+                           size='xsmall'
+                           value='true'
+                         ></Checkbox>
+                         <Checkbox
+                           checked={initSearch.chargePortFrontLeft}
+                           children='Chargeport located front left side'
+                           onChange={handleChargePortFrontLeftChange}
+                           size='xsmall'
+                           value='true'
+                         ></Checkbox>
+                         <Checkbox
+                           checked={initSearch.chargePortFrontRight}
+                           children='Chargeport located front right side'
+                           onChange={handleChargePortFrontRightChange}
+                           size='xsmall'
+                           value='true'
+                         ></Checkbox>
+                         <Checkbox
+                           checked={initSearch.chargePortRearLeft}
+                           children='Chargeport located rear left side'
+                           onChange={handleChargePortRearLeftChange}
+                           size='xsmall'
+                           value='true'
+                         ></Checkbox>
+                         <Checkbox
+                           checked={initSearch.chargePortRearRight}
+                           children='Chargeport located rear right side'
+                           onChange={handleChargePortRearRightChange}
+                           size='xsmall'
+                           value='true'
+                         ></Checkbox>
+                   </Checkbox.Group>
+                   Read more about charging in our{' '}
+                   <a href='../technology/charging/'>technology section</a>
+                 </div>
+                 </div>
+                 </Tabs.Content>
+                 <Tabs.Content value='value4'>
+                 <div className={classes.cards}>
+                   <div className={classes.card}>
                       <Checkbox.Group
                           description="Select UI features"
                           error=""
@@ -1030,6 +1058,10 @@ export const EvSearchPage = () => {
 
                     
                   </div>
+                 </Tabs.Content>
+                </Tabs>
+
+           
                 </Accordion.Content>
               </Accordion.Item>
             </Accordion>
