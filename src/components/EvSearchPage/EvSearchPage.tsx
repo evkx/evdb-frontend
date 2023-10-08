@@ -701,9 +701,9 @@ export const EvSearchPage = () => {
                 <Accordion.Header>{String(t('evsearch.advanced'))}</Accordion.Header>
                 <Accordion.Content>
 
-                <Tabs  defaultValue='value1'>
+                <Tabs  defaultValue='value1' size='small'>
                   <Tabs.List>
-                    <Tabs.Tab value='value1'>Driver Assistance</Tabs.Tab>
+                    <Tabs.Tab value='value1'>ADAS</Tabs.Tab>
                     <Tabs.Tab value='value2'>Drivetrain</Tabs.Tab>
                     <Tabs.Tab value='value3'>Charging & Battery</Tabs.Tab>
                     <Tabs.Tab value='value4'>Interior</Tabs.Tab>
