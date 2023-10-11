@@ -8,6 +8,7 @@ export const Router = createBrowserRouter(
   [
     {
       path: '/',
+      element: <EvSearchPage />,
       errorElement: <ErrorPage />,
     },
     {

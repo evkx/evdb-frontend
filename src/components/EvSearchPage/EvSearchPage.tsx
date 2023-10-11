@@ -18,7 +18,7 @@ import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { FilterIcon, CarIcon, PaletteIcon, PersonGroupIcon } from '@navikt/aksel-icons';
+import { FilterIcon, CarIcon, PaletteIcon, PersonGroupIcon, RobotSmileIcon, LightningIcon, FingerButtonIcon  } from '@navikt/aksel-icons';
 
 import { Filter, type FilterOption } from '@/components/Filter';
 import {
@@ -700,14 +700,19 @@ export const EvSearchPage = () => {
               <Accordion.Item>
                 <Accordion.Header>{String(t('evsearch.advanced'))}</Accordion.Header>
                 <Accordion.Content>
-
-                <Tabs  defaultValue='value1' size='small'>
+                <b>Select advanced filters area below</b><br />
+                 <CarIcon fontSize={20} title='Advanced Driver Assist Systems' /> Drivetrain (motor, regen, suspension ++) <br />
+                <LightningIcon fontSize={20} title='Battery & Charging' /> Battery & Charging <br />
+                <FingerButtonIcon fontSize={20} title='Advanced Driver Assist Systems' /> User interface, screens, controls, interior ++<br />
+                <RobotSmileIcon fontSize={20} title='Advanced Driver Assist Systems' /> Advanced Driver Assist Systems <br />
+             
+                <Tabs  defaultValue='value2' size='small'>
                   <Tabs.List>
-                    <Tabs.Tab value='value1'>ADAS</Tabs.Tab>
-                    <Tabs.Tab value='value2'>Drivetrain</Tabs.Tab>
-                    <Tabs.Tab value='value3'>Charging & Battery</Tabs.Tab>
-                    <Tabs.Tab value='value4'>Interior</Tabs.Tab>
-                  </Tabs.List>
+                    <Tabs.Tab value='value2' icon={<CarIcon title='Drivetrain' />} />
+                    <Tabs.Tab value='value3' icon={<LightningIcon title='Battery & Charging' />} />
+                    <Tabs.Tab value='value4' icon={<FingerButtonIcon title='User interface, controls and interior' />}/>
+                    <Tabs.Tab value='value1' icon={<RobotSmileIcon title='Advanced Driver Assist Systems' />} />
+                   </Tabs.List>
                   <Tabs.Content value='value1'>
                   <div className={classes.cards}>
                     <div className={classes.card}>

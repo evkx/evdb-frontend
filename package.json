@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@altinn/altinn-design-system": "^0.29.1",
-    "@digdir/design-system-react": "^0.29.0",
+    "@digdir/design-system-react": "^0.30.0",
     "@digdir/design-system-tokens": "0.8.0",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
