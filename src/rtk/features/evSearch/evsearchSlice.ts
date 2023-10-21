@@ -122,6 +122,7 @@ const initialState: SliceState = {
     seatVentilationSecondRow: false,
     allWheelDrive: false,
     nightVision: false,
+    includeDiscontinued: false,
     adaptiveSuspension: false,
     airSuspension: false,
     instrumentCluster: false,
@@ -166,7 +167,6 @@ const initialState: SliceState = {
     adaptiveRegen: false,
     liftOfRegenLevels: false,
     coasting: false,
-    includeDiscontinued: false,
     minimumHp: '',
     minimumTrailerWeight: '',
     minimumWltpRange: '',
@@ -266,6 +266,9 @@ const evsearchSlice = createSlice({
     updateNightVision: (state: SliceState, action) => {
       const checked = action.payload;
       state.search.nightVision = checked;
+    },
+    updateIncludeDiscontinued: (state: SliceState, action) => {
+      state.search.includeDiscontinued = action.payload;
     },
     updateAdaptiveDamping: (state: SliceState, action) => {
       const checked = action.payload;
@@ -415,6 +418,7 @@ export const {
   updateSeatConfig,
   updateAllWheelDrive,
   updateNightVision,
+  updateIncludeDiscontinued,
   updateAdaptiveDamping,
   updateAdaptiveAirSuspension,
   updateInstrumentCluster,

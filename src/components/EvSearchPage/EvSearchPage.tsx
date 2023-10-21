@@ -11,6 +11,8 @@ import {
   Button,
   Textfield,
   Tabs,
+  Switch, 
+  Alert
 } from '@digdir/design-system-react';
 import { LegacyTabs } from '@digdir/design-system-react';
 import '@digdir/design-system-tokens/brand/digdir/tokens.css';
@@ -69,6 +71,7 @@ import {
   updateMinimumHp,
   updateMinimumWltpRange,
   updateMinumTrailerWeight,
+  updateIncludeDiscontinued,
 } from '@/rtk/features/evSearch/evsearchSlice';
 import type { Ev, EvSearch } from '@/rtk/features/evSearch/evsearchSlice';
 import { useAppDispatch, useAppSelector } from '@/rtk/app/hooks';
@@ -165,6 +168,10 @@ export const EvSearchPage = () => {
 
     if (queryParams.get('nightVision') != null && queryParams.get('nightVision') === 'true') {
       dispatch(updateNightVision(true));
+    }
+
+    if (queryParams.get('includediscontined') != null && queryParams.get('includediscontined') === 'true') {
+      dispatch(updateIncludeDiscontinued(true));
     }
         
     if (queryParams.get('adaptiveCruiseControl') != null && queryParams.get('adaptiveCruiseControl') === 'true') {
@@ -441,6 +448,9 @@ export const EvSearchPage = () => {
   const handleLiftOfRegenChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateLiftOfRegen(event.target.checked));
   };
+  const handleIncludeDiscontinedChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(updateIncludeDiscontinued(event.target.checked));
+  };
   const handleLiftOfRegenWithHoldModeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateLiftOfRegenWithHoldMode(event.target.checked));
   };
@@ -594,13 +604,13 @@ export const EvSearchPage = () => {
       <Page>
         <PageContent>
           <div className={classes.pageContent}>
-            <Heading size='large'>Welcome to EVKX EV Search</Heading>
+            <Heading size='large'>{String(t('evsearch.welcome'))}</Heading>
             <Ingress size='medium'>
-            The EVKX EV database is a comprehensive and up-to-date source of information on various EV models, features, prices, and performance. 
-            You can search and filter on EVs based on your preferences and needs, such as battery size, range, charging time, power, speed, safety, and more. You can also view detailed specifications, reviews, ratings, and images of each EV. 
+            {String(t('evsearch.searchintro'))}
+            <Alert severity="info">
+            {String(t('evsearch.guide'))}
+            </Alert>
             <br />
-              Please read our <a href='/guides/evsearch/'>search guide</a> to get the most of the database.
-              <br /><br />
             </Ingress>
             <div className={classes.filtergrid}>
               <div>
@@ -687,9 +697,11 @@ export const EvSearchPage = () => {
                 inputMode='numeric'
                 />
               </div>
-
-
             </div>
+            <Switch value='true' onChange={handleIncludeDiscontinedChange}>
+              {String(t('evsearch.includediscontinued'))}
+            </Switch>
+
             <Accordion
               border={true}
               color='subtle'
@@ -698,27 +710,26 @@ export const EvSearchPage = () => {
               }}
             >
               <Accordion.Item>
-                <Accordion.Header>{String(t('evsearch.advanced'))}</Accordion.Header>
+                <Accordion.Header><FilterIcon fontSize={20}></FilterIcon> {String(t('evsearch.advanced'))}</Accordion.Header>
                 <Accordion.Content>
                 <b>Select advanced filters area below</b><br />
-                 <CarIcon fontSize={20} title='Advanced Driver Assist Systems' /> Drivetrain (motor, regen, suspension ++) <br />
-                <LightningIcon fontSize={20} title='Battery & Charging' /> Battery & Charging <br />
-                <FingerButtonIcon fontSize={20} title='Advanced Driver Assist Systems' /> User interface, screens, controls, interior ++<br />
-                <RobotSmileIcon fontSize={20} title='Advanced Driver Assist Systems' /> Advanced Driver Assist Systems <br />
+                 <CarIcon fontSize={20} title={String(t('evsearch.advanceddrivetrain'))} /> {String(t('evsearch.advanceddrivetrain'))}<br />
+                <LightningIcon fontSize={20} title={String(t('evsearch.advancedbattery'))} /> {String(t('evsearch.advancedbattery'))}<br />
+                <FingerButtonIcon fontSize={20} title={String(t('evsearch.advanceduserinterface'))} /> {String(t('evsearch.advanceduserinterface'))}<br />
+                <RobotSmileIcon fontSize={20} title={String(t('evsearch.advancedadas'))} /> {String(t('evsearch.advancedadas'))}<br />
              
                 <Tabs  defaultValue='value2' size='small'>
                   <Tabs.List>
-                    <Tabs.Tab value='value2' icon={<CarIcon title='Drivetrain' />} />
-                    <Tabs.Tab value='value3' icon={<LightningIcon title='Battery & Charging' />} />
-                    <Tabs.Tab value='value4' icon={<FingerButtonIcon title='User interface, controls and interior' />}/>
-                    <Tabs.Tab value='value1' icon={<RobotSmileIcon title='Advanced Driver Assist Systems' />} />
+                    <Tabs.Tab value='value2' icon={<CarIcon title={String(t('evsearch.advanceddrivetrain'))} />} />
+                    <Tabs.Tab value='value3' icon={<LightningIcon title={String(t('evsearch.advancedbattery'))} />} />
+                    <Tabs.Tab value='value4' icon={<FingerButtonIcon title={String(t('evsearch.advanceduserinterface'))} />}/>
+                    <Tabs.Tab value='value1' icon={<RobotSmileIcon title={String(t('evsearch.advancedadas'))} />} />
                    </Tabs.List>
                   <Tabs.Content value='value1'>
                   <div className={classes.cards}>
                     <div className={classes.card}>
-      
-                      <Checkbox.Group
-                          description="Select ADAS features"
+                     <Checkbox.Group
+                          description={String(t('evsearch.adas_description'))}
                           error=""
                           legend={String(t('evsearch.adas'))}
                           onChange={function noRefCheck(){}}
