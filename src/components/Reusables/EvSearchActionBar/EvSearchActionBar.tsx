@@ -71,7 +71,7 @@ export const EvSearchActionBar = ({
   
   const addButton = (
     <Button
-      variant='quiet'
+      variant={'tertiary'}
       icon={<PlusCircleIcon title='add' />}
       size={compact ? 'large' : 'medium'}
       onClick={onAddClick}
@@ -83,7 +83,7 @@ export const EvSearchActionBar = ({
 
   const removeButton = (
     <Button
-      variant='quiet'
+      variant={'tertiary'}
       icon={<ArrowUndoIcon title={t('common.undo')} />}
       size={compact ? 'large' : 'medium'}
       onClick={onRemoveClick}
@@ -129,7 +129,7 @@ export const EvSearchActionBar = ({
                     Read our <a href={infoUri}>full article</a>, see all{' '}
                     <a href={infoUri + 'specifications/'}>specifications</a>, see our{' '}
                     <a href={infoUri + 'gallery/'}>image gallery</a>, see all <a href={infoUri + 'rangeandconsumption/'}>range info</a> or <a href={infoUri + 'chargingcurve/'}>full charging info</a>.<br></br>
-                    <List borderStyle='dashed'>
+                    <List size='small'>
                       <ListItem>
                         <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
                       </ListItem>

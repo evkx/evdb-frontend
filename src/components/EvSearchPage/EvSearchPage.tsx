@@ -510,7 +510,7 @@ export const EvSearchPage = () => {
         <center>
           <Spinner
             title='Spinner'
-            size='3xLarge'
+            size='xlarge'
             variant='interaction'
           />
         </center>
@@ -556,7 +556,7 @@ export const EvSearchPage = () => {
         <center>
           <Spinner
             title='Spinner'
-            size='3xLarge'
+            size='xlarge'
             variant='interaction'
           />
         </center>
