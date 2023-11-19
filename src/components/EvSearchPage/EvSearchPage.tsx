@@ -1208,6 +1208,14 @@ export const EvSearchPage = () => {
                   label: String(t('evsearch.DrivingDistanceWltpCharged10Percent30Min')),
                   value: 'DrivingDistanceWltpCharged10Percent30Min',
                 },
+                {
+                  label: String(t('evsearch.MaxCRating')),
+                  value: 'MaxCRating',
+                },
+                {
+                  label: String(t('evsearch.AverageCRating')),
+                  value: 'AverageCRating',
+                },
               ]}
             ></Select>
           </div>
