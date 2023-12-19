@@ -1,8 +1,7 @@
 import { Panel, PanelVariant } from '@altinn/altinn-design-system';
-import type { MultiSelectOption } from '@digdir/design-system-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
-  Select,
+  Combobox,
   Checkbox,
   Spinner,
   Heading,
@@ -298,32 +297,32 @@ export const EvSearchPage = () => {
     }
   }, [initSearch]);
 
-  const handleSortOrderChange = (filterList: string) => {
-    dispatch(updateSortOrder(filterList));
+  const handleSortOrderChange = (filter: string[]) => {
+    dispatch(updateSortOrder(filter[0]));
   };
 
   const handleBrandChange = (filterList: string[]) => {
     dispatch(updateBrands(filterList));
   };
 
-  const brandFilterOptions: MultiSelectOption[] = brandsResult.map((provider: string) => ({
+  const brandFilterOptions = brandsResult.map((provider: string) => ({
     label: provider,
     value: provider,
   }));
 
-  const bodyTypesFilterOptions: MultiSelectOption[] = bodyTypesResult.map((key) => ({
+  const bodyTypesFilterOptions = bodyTypesResult.map((key) => ({
     label: key,
     value: key,
     checked: initSearch.evType === undefined || initSearch.evType.includes(key),
   }));
 
-  const paintColorFilterOptions: MultiSelectOption[] = colorResult.map((key) => ({
+  const paintColorFilterOptions = colorResult.map((key) => ({
     label: key,
     value: key,
     checked: initSearch.colors === undefined || initSearch.colors.includes(key),
   }));
 
-  const numberOfSeatsOptions: MultiSelectOption[] = seatConfigResult.map((key) => ({
+  const numberOfSeatsOptions = seatConfigResult.map((key) => ({
     label: key,
     value: key,
     checked:
@@ -333,6 +332,8 @@ export const EvSearchPage = () => {
   const handleTypeChange = (names: string[]) => {
     dispatch(updateEvType(names));
   };
+
+  
 
   const handleSeatConfigChange = (names: string[]) => {
     dispatch(updateSeatConfig(names));
@@ -738,21 +739,21 @@ export const EvSearchPage = () => {
                           checked={initSearch.nightVision}
                           children='Nightvision'
                           onChange={handleNightVisionChange}
-                          size='xsmall'
+                          size='small'
                           value='true'
                         ></Checkbox>
                         <Checkbox
                           checked={initSearch.adaptiveCruiseControl}
                           children='AdaptiveCruiseControl'
                           onChange={handleAdaptiveCruiseControlChange}
-                          size='xsmall'
+                          size='small'
                           value='true'
                         ></Checkbox>
                         <Checkbox
                           checked={initSearch.autoSteer}
                           children='Autosteer'
                           onChange={handleAutoSteerChange}
-                          size='xsmall'
+                          size='small'
                           value='true'
                         ></Checkbox>
                       </Checkbox.Group>
@@ -776,42 +777,42 @@ export const EvSearchPage = () => {
                             checked={initSearch.allWheelDrive}
                             children='All wheel drive'
                             onChange={handleAllWheelDriveChange}
-                            size='xsmall'
+                            size='small'
                             value='true'
                           ></Checkbox>
                           <Checkbox
                             checked={initSearch.rWD}
                             children='RWD'
                             onChange={handleRWDChange}
-                            size='xsmall'
+                            size='small'
                             value='true'
                           ></Checkbox>
                           <Checkbox
                             checked={initSearch.fWD}
                             children='FWD'
                             onChange={handleFWDChange}
-                            size='xsmall'
+                            size='small'
                             value='true'
                           ></Checkbox>
                           <Checkbox
                             checked={initSearch.adaptiveSuspension}
                             children='Adaptive damping'
                             onChange={handleAdaptiveSuspensionChange}
-                            size='xsmall'
+                            size='small'
                             value='true'
                           ></Checkbox>
                           <Checkbox
                             checked={initSearch.airSuspension}
                             children='Air Suspension'
                             onChange={handleAirSuspensionChange}
-                            size='xsmall'
+                            size='small'
                             value='true'
                           ></Checkbox>
                           <Checkbox
                             checked={initSearch.rearAxleSteering}
                             children='Rear Axle Steering'
                             onChange={handleRearAxleSteeringChange}
-                            size='xsmall'
+                            size='small'
                             value='true'
                           ></Checkbox>
                   </Checkbox.Group>
@@ -829,42 +830,42 @@ export const EvSearchPage = () => {
                                   checked={initSearch.liftOfRegen}
                                   children='Lift-of regen (one-pedal-driving)'
                                   onChange={handleLiftOfRegenChange}
-                                  size='xsmall'
+                                  size='small'
                                   value='true'
                                 ></Checkbox>
                                 <Checkbox
                                   checked={initSearch.liftOfRegenWithHoldMode}
                                   children='Lift-of regen with hold mode'
                                   onChange={handleLiftOfRegenWithHoldModeChange}
-                                  size='xsmall'
+                                  size='small'
                                   value='true'
                                 ></Checkbox>
                                 <Checkbox
                                   checked={initSearch.liftOfRegenLevels}
                                   children='Adjustable lif-of regel levels'
                                   onChange={handleLiftOfRegenLevelsChange}
-                                  size='xsmall'
+                                  size='small'
                                   value='true'
                                 ></Checkbox>
                                 <Checkbox
                                   checked={initSearch.blendedBrakes}
                                   children='Blended brakes (regen on brake pedal)'
                                   onChange={handleBlendedBrakesChange}
-                                  size='xsmall'
+                                  size='small'
                                   value='true'
                                 ></Checkbox>
                                 <Checkbox
                                   checked={initSearch.coasting}
                                   children='Car can coast (roll freely without regen)'
                                   onChange={handleCoastingChange}
-                                  size='xsmall'
+                                  size='small'
                                   value='true'
                                 ></Checkbox>
                                 <Checkbox
                                   checked={initSearch.adaptiveRegen}
                                   children='Adaptive regen (automatic regen when needed when coasting)'
                                   onChange={handleAdaptiveRegenChange}
-                                  size='xsmall'
+                                  size='small'
                                   value='true'
                                 ></Checkbox>
                               </Checkbox.Group>
@@ -889,21 +890,21 @@ export const EvSearchPage = () => {
                        checked={initSearch.lfpChemistry}
                        children='LFP Chemistry'
                        onChange={handleLfpChemistryChange}
-                       size='xsmall'
+                       size='small'
                        value='true'
                      ></Checkbox>
                      <Checkbox
                        checked={initSearch.batteryHeatingManual}
                        children='Manual battery heating'
                        onChange={handleBatteryHeatingManualChange}
-                       size='xsmall'
+                       size='small'
                        value='true'
                      ></Checkbox>
                      <Checkbox
                        checked={initSearch.batteryHeatingNavigation}
                        children='Battery heating when navigating to charger'
                        onChange={handleBatteryHeatingNavigationChange}
-                       size='xsmall'
+                       size='small'
                        value='true'
                      ></Checkbox>
                    </Checkbox.Group>
@@ -921,35 +922,35 @@ export const EvSearchPage = () => {
                            checked={initSearch.chargePortFront}
                            children='Chargeport located front'
                            onChange={handleChargePortFrontChange}
-                           size='xsmall'
+                           size='small'
                            value='true'
                          ></Checkbox>
                          <Checkbox
                            checked={initSearch.chargePortFrontLeft}
                            children='Chargeport located front left side'
                            onChange={handleChargePortFrontLeftChange}
-                           size='xsmall'
+                           size='small'
                            value='true'
                          ></Checkbox>
                          <Checkbox
                            checked={initSearch.chargePortFrontRight}
                            children='Chargeport located front right side'
                            onChange={handleChargePortFrontRightChange}
-                           size='xsmall'
+                           size='small'
                            value='true'
                          ></Checkbox>
                          <Checkbox
                            checked={initSearch.chargePortRearLeft}
                            children='Chargeport located rear left side'
                            onChange={handleChargePortRearLeftChange}
-                           size='xsmall'
+                           size='small'
                            value='true'
                          ></Checkbox>
                          <Checkbox
                            checked={initSearch.chargePortRearRight}
                            children='Chargeport located rear right side'
                            onChange={handleChargePortRearRightChange}
-                           size='xsmall'
+                           size='small'
                            value='true'
                          ></Checkbox>
                    </Checkbox.Group>
@@ -971,28 +972,28 @@ export const EvSearchPage = () => {
                           checked={initSearch.headUpDisplay}
                           children='Head Up Display'
                           onChange={handleHeadUpDisplayChange}
-                          size='xsmall'
+                          size='small'
                           value='true'
                         ></Checkbox>
                         <Checkbox
                           checked={initSearch.instrumentCluster}
                           children='Dedicated Instrument Cluster'
                           onChange={handleInstrumentClusterChange}
-                          size='xsmall'
+                          size='small'
                           value='true'
                         ></Checkbox>
                         <Checkbox
                           checked={initSearch.androidAuto}
                           children='Android Auto Support'
                           onChange={handleAndroidAutoChange}
-                          size='xsmall'
+                          size='small'
                           value='true'
                         ></Checkbox>
                         <Checkbox
                           checked={initSearch.appleCarPlay}
                           children='Apple Car Play Support'
                           onChange={handleAppleCarPlayChange}
-                          size='xsmall'
+                          size='small'
                           value='true'
                         ></Checkbox>
                       </Checkbox.Group>
@@ -1008,63 +1009,63 @@ export const EvSearchPage = () => {
                                 checked={initSearch.firstRowSeatsHeating}
                                 children='First row seat Heating'
                                 onChange={handleFirstRowSeatsHeatingChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.firstRowSeatsVentilation}
                                 children='First row seat ventilation'
                                 onChange={handleFirstRowSeatsVentilationChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.firstRowSeatsMassage}
                                 children='First row seat massage'
                                 onChange={handleFirstRowSeatsMassageChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.firstRowAdjustableThighSupport}
                                 children='First row adjustable thigh support'
                                 onChange={handleFirstRowAdjustableThighSupportChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.secondRowSeatsHeating}
                                 children='Second row seat Heating'
                                 onChange={handleSecondRowSeatsHeatingChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.secondRowSeatsVentilation}
                                 children='Second row seat ventilation'
                                 onChange={handleSecondRowSeatsVentilationChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.secondRowSeatsMassage}
                                 children='Second row seat massage'
                                 onChange={handleSecondRowSeatsMassageChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.secondRowRecline}
                                 children='Second row recline'
                                 onChange={handleSecondRowReclineChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                               <Checkbox
                                 checked={initSearch.secondRowExecutiveSeat}
                                 children='Second row executive seat'
                                 onChange={handleSecondRowExecutiveSeatChange}
-                                size='xsmall'
+                                size='small'
                                 value='true'
                               ></Checkbox>
                       </Checkbox.Group>
@@ -1082,142 +1083,146 @@ export const EvSearchPage = () => {
               </Accordion.Item>
             </Accordion>
 
-            <Select
+            <Combobox
               label={String(t('evsearch.sortorder'))}
               multiple={false}
-              value={initSearch.sortOrder}
-              onChange={handleSortOrderChange}
-              options={[
-                { label: String(t('evsearch.sortorderbrand')), value: 'Name' },
-                { label: String(t('evsearch.specwltprange')), value: 'RangeMinimumWltp' },
-                { label: String(t('evsearch.specwltpconsumption')), value: 'WltpBasicConsumption' },
-                { label: String(t('evsearch.sortordernetsize')), value: 'NetBattery' },
-                { label: String(t('evsearch.sortordernetsizedesc')), value: 'NetBatteryDesc' },
-                { label: String(t('evsearch.maxpowersort')), value: 'PowerDesc' },
-                { label: String(t('evsearch.topspeedsort')), value: 'TopSpeedDesc' },
-                { label: String(t('evsearch.maxdcchargingsort')), value: 'MaxDCCharging' },
-                {
-                  label: String(t('evsearch.averagechargingspeed0100')),
-                  value: 'AverageChargingSpeedDesc',
-                },
-                {
-                  label: String(t('evsearch.averagechargingspeed10100')),
-                  value: 'AverageChargingSpeed10100Desc',
-                },
-                {
-                  label: String(t('evsearch.averagechargingspeed1080')),
-                  value: 'AverageChargingSpeed1080Desc',
-                },
-                { label: String(t('evsearch.sort0100kmh')), value: 'ZeroTo100' },
-                {
-                  label: String(t('evsearch.sort1000kmdrivingtime')),
-                  value: 'DrivingTime1000kmChallenge',
-                },
-                {
-                  label: String(t('evsearch.sort1000kmaveragespeed')),
-                  value: 'AverageSpeed1000kmChallengeDesc',
-                },
-                {
-                  label: String(t('evsearch.travelspeedwltpcyclus')),
-                  value: 'TravelSpeedWltpDesc',
-                },
-                { label: String(t('evsearch.travelspeed120kmh')), value: 'TravelSpeed120kmhDesc' },
-                { label: String(t('evsearch.nominalvoltagesort')), value: 'NominalVoltage' },
-                { label: String(t('evsearch.trunksize')), value: 'TrunkSizeDesc' },
-                { label: String(t('evsearch.maxtrunksize')), value: 'MaxTrunkSizeDesc' },
-                { label: String(t('evsearch.maxload')), value: 'MaxLoadDesc' },
-                { label: String(t('evsearch.maxtrailer')), value: 'MaxTrailerSizeDesc' },
-                {
-                  label: String(t('evsearch.maxgroundclearance')),
-                  value: 'MaxGroundClearanceDesc',
-                },
-                { label: String(t('evsearch.mingroundclearance')), value: 'MinGroundClearance' },
-                {
-                  label: String(t('evsearch.suspensionheightadjustment')),
-                  value: 'SuspensionHeightAdjustment',
-                },
-                {
-                  label: String(t('evsearch.length')),
-                  value: 'Length',
-                },
-                {
-                  label: String(t('evsearch.wheelbase')),
-                  value: 'Wheelbase',
-                },
-                {
-                  label: String(t('evsearch.grossweight')),
-                  value: 'WeightUnladenDINKg',
-                },
-                {
-                  label: String(t('evsearch.EnergyCharged10Percent10Min')),
-                  value: 'EnergyCharged10Percent10Min',
-                },
-                {
-                  label: String(t('evsearch.EnergyCharged10Percent15Min')),
-                  value: 'EnergyCharged10Percent15Min',
-                },
-                {
-                  label: String(t('evsearch.EnergyCharged10Percent20Min')),
-                  value: 'EnergyCharged10Percent20Min',
-                },
-                {
-                  label: String(t('evsearch.EnergyCharged10Percent25Min')),
-                  value: 'EnergyCharged10Percent25Min',
-                },
-                {
-                  label: String(t('evsearch.EnergyCharged10Percent30Min')),
-                  value: 'EnergyCharged10Percent30Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent10Min')),
-                  value: 'DrivingDistance120kmhCharged10Percent10Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent15Min')),
-                  value: 'DrivingDistance120kmhCharged10Percent15Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent20Min')),
-                  value: 'DrivingDistance120kmhCharged10Percent20Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent25Min')),
-                  value: 'DrivingDistance120kmhCharged10Percent25Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistance120kmhCharged10Percent30Min')),
-                  value: 'DrivingDistance120kmhCharged10Percent30Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent10Min')),
-                  value: 'DrivingDistanceWltpCharged10Percent10Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent15Min')),
-                  value: 'DrivingDistanceWltpCharged10Percent15Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent20Min')),
-                  value: 'DrivingDistanceWltpCharged10Percent20Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent25Min')),
-                  value: 'DrivingDistanceWltpCharged10Percent25Min',
-                },
-                {
-                  label: String(t('evsearch.DrivingDistanceWltpCharged10Percent30Min')),
-                  value: 'DrivingDistanceWltpCharged10Percent30Min',
-                },
-                {
-                  label: String(t('evsearch.MaxCRating')),
-                  value: 'MaxCRating',
-                },
-                {
-                  label: String(t('evsearch.AverageCRating')),
-                  value: 'AverageCRating',
-                },
-              ]}
-            ></Select>
+              value={[initSearch.sortOrder]}
+              onValueChange={handleSortOrderChange}
+              >
+                <Combobox.Option value="Name">
+                  {String(t('evsearch.sortorderbrand'))}
+                </Combobox.Option>
+                <Combobox.Option value="RangeMinimumWltp">
+                  {String(t('evsearch.specwltprange'))}
+                </Combobox.Option>
+                <Combobox.Option value="WltpBasicConsumption">
+                  {String(t('evsearch.specwltpconsumption'))}
+                </Combobox.Option>
+                <Combobox.Option value="NetBattery">
+                  {String(t('evsearch.sortordernetsize'))}
+                </Combobox.Option>
+                <Combobox.Option value="NetBatteryDesc">
+                  {String(t('evsearch.sortordernetsizedesc'))}
+                </Combobox.Option>
+                <Combobox.Option value="PowerDesc">
+                  {String(t('evsearch.maxpowersort'))}
+                </Combobox.Option>
+                <Combobox.Option value="TopSpeedDesc">
+                  {String(t('evsearch.topspeedsort'))}
+                </Combobox.Option>
+                <Combobox.Option value="MaxDCCharging">
+                  {String(t('evsearch.maxdcchargingsort'))}
+                </Combobox.Option>
+                <Combobox.Option value="AverageChargingSpeedDesc">
+                  {String(t('evsearch.averagechargingspeed0100'))}
+                </Combobox.Option>
+                <Combobox.Option value="AverageChargingSpeed10100Desc">
+                  {String(t('evsearch.averagechargingspeed10100'))}
+                </Combobox.Option>
+                <Combobox.Option value="AverageChargingSpeed1080Desc">
+                  {String(t('evsearch.averagechargingspeed1080'))}
+                </Combobox.Option>
+                <Combobox.Option value="ZeroTo100">
+                  {String(t('evsearch.sort0100kmh'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingTime1000kmChallenge">
+                  {String(t('evsearch.sort1000kmdrivingtime'))}
+                </Combobox.Option>
+                <Combobox.Option value="AverageSpeed1000kmChallengeDesc">
+                  {String(t('evsearch.sort1000kmaveragespeed'))}
+                </Combobox.Option>
+                <Combobox.Option value="TravelSpeedWltpDesc">
+                  {String(t('evsearch.travelspeedwltpcyclus'))}
+                </Combobox.Option>
+                <Combobox.Option value="TravelSpeed120kmhDesc">
+                  {String(t('evsearch.travelspeed120kmh'))}
+                </Combobox.Option>
+                <Combobox.Option value="NominalVoltage">
+                  {String(t('evsearch.nominalvoltagesort'))}
+                </Combobox.Option>
+                <Combobox.Option value="TrunkSizeDesc">
+                  {String(t('evsearch.trunksize'))}
+                </Combobox.Option>
+                <Combobox.Option value="MaxTrunkSizeDesc">
+                  {String(t('evsearch.maxtrunksize'))}
+                </Combobox.Option>
+                <Combobox.Option value="MaxLoadDesc">
+                  {String(t('evsearch.maxload'))}
+                </Combobox.Option>
+                <Combobox.Option value="MaxTrailerSizeDesc">
+                  {String(t('evsearch.maxtrailer'))}
+                </Combobox.Option>
+                <Combobox.Option value="MaxGroundClearanceDesc">
+                  {String(t('evsearch.maxgroundclearance'))}
+                </Combobox.Option>
+                <Combobox.Option value="MinGroundClearance">
+                  {String(t('evsearch.mingroundclearance'))}
+                </Combobox.Option>
+                <Combobox.Option value="SuspensionHeightAdjustment">
+                  {String(t('evsearch.suspensionheightadjustment'))}
+                </Combobox.Option>
+                <Combobox.Option value="Length">
+                  {String(t('evsearch.length'))}
+                </Combobox.Option>
+                <Combobox.Option value="Wheelbase">
+                  {String(t('evsearch.wheelbase'))}
+                </Combobox.Option>
+                <Combobox.Option value="WeightUnladenDINKg">
+                  {String(t('evsearch.grossweight'))}
+                </Combobox.Option>
+                <Combobox.Option value="EnergyCharged10Percent10Min">
+                  {String(t('evsearch.EnergyCharged10Percent10Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="EnergyCharged10Percent15Min">
+                  {String(t('evsearch.EnergyCharged10Percent15Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="EnergyCharged10Percent20Min">
+                  {String(t('evsearch.EnergyCharged10Percent20Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="EnergyCharged10Percent25Min">
+                  {String(t('evsearch.EnergyCharged10Percent25Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="EnergyCharged10Percent30Min">
+                  {String(t('evsearch.EnergyCharged10Percent30Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistance120kmhCharged10Percent10Min">
+                  {String(t('evsearch.DrivingDistance120kmhCharged10Percent10Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistance120kmhCharged10Percent15Min">
+                  {String(t('evsearch.DrivingDistance120kmhCharged10Percent15Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistance120kmhCharged10Percent20Min">
+                  {String(t('evsearch.DrivingDistance120kmhCharged10Percent20Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistance120kmhCharged10Percent25Min">
+                  {String(t('evsearch.DrivingDistance120kmhCharged10Percent25Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistance120kmhCharged10Percent30Min">
+                  {String(t('evsearch.DrivingDistance120kmhCharged10Percent30Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistanceWltpCharged10Percent10Min">
+                  {String(t('evsearch.DrivingDistanceWltpCharged10Percent10Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistanceWltpCharged10Percent15Min">
+                  {String(t('evsearch.DrivingDistanceWltpCharged10Percent15Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistanceWltpCharged10Percent20Min">
+                  {String(t('evsearch.DrivingDistanceWltpCharged10Percent20Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistanceWltpCharged10Percent25Min">
+                  {String(t('evsearch.DrivingDistanceWltpCharged10Percent25Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="DrivingDistanceWltpCharged10Percent30Min">
+                  {String(t('evsearch.DrivingDistanceWltpCharged10Percent30Min'))}
+                </Combobox.Option>
+                <Combobox.Option value="MaxCRating">
+                  {String(t('evsearch.MaxCRating'))}
+                </Combobox.Option>
+                <Combobox.Option value="AverageCRating">
+                  {String(t('evsearch.AverageCRating'))}
+                </Combobox.Option>
+
+              </Combobox>
           </div>
           <div className={classes.pageContentAccordionsContainer}>
             <div className={classes.apiAccordions}>
