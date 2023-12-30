@@ -28,6 +28,10 @@ const initLanguage = (lang) => {
     return 'no_nb';
   } else if (lang === 'en') {
     return 'en';
+  } else if (lang === 'sv') {
+    return 'sv';
+  } else if (lang === 'da') {
+    return 'da';
   } else if (lang === 'no_nn') {
     return 'no_nn';
   }

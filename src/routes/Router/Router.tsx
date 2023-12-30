@@ -21,6 +21,16 @@ export const Router = createBrowserRouter(
       element: <EvSearchPage />,
       errorElement: <ErrorPage />,
     },
+    {
+      path: 'sv/evsearch',
+      element: <EvSearchPage />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: 'da/evsearch',
+      element: <EvSearchPage />,
+      errorElement: <ErrorPage />,
+    },
   ],
   { basename: '/' },
 );
