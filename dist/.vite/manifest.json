@@ -1,0 +1,10 @@
+{
+  "entrypoint.js": {
+    "css": [
+      "assets/entrypoint-XPY4Ufnp.css"
+    ],
+    "file": "assets/entrypoint-LLGSbZNM.js",
+    "isEntry": true,
+    "src": "entrypoint.js"
+  }
+}
