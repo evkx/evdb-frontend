@@ -31,6 +31,21 @@ export const Router = createBrowserRouter(
       element: <EvSearchPage />,
       errorElement: <ErrorPage />,
     },
+    {
+      path: 'es/evsearch',
+      element: <EvSearchPage />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: 'fr/evsearch',
+      element: <EvSearchPage />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: 'de/evsearch',
+      element: <EvSearchPage />,
+      errorElement: <ErrorPage />,
+    },
   ],
   { basename: '/' },
 );

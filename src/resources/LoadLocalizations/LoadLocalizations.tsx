@@ -20,6 +20,15 @@ const LoadLocalizations = ({ children }: Props) => {
   else if (currentUri.includes('da/')) {
     lang = 'da';
   }
+  else if (currentUri.includes('es/')) {
+    lang = 'es';
+  }
+  else if (currentUri.includes('fr/')) {
+    lang = 'fr';
+  }
+  else if (currentUri.includes('de/')) {
+    lang = 'de';
+  }
 
   const baseUrl = import.meta.env.BASE_URL;
   const localizationsFilePath = `${baseUrl}public/localizations/${lang}.json`;
