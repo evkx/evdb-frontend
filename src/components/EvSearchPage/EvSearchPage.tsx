@@ -721,10 +721,18 @@ export const EvSearchPage = () => {
              
                 <Tabs  defaultValue='value2' size='small'>
                   <Tabs.List>
-                    <Tabs.Tab value='value2' icon={<CarIcon title={String(t('evsearch.advanceddrivetrain'))} />} />
-                    <Tabs.Tab value='value3' icon={<LightningIcon title={String(t('evsearch.advancedbattery'))} />} />
-                    <Tabs.Tab value='value4' icon={<FingerButtonIcon title={String(t('evsearch.advanceduserinterface'))} />}/>
-                    <Tabs.Tab value='value1' icon={<RobotSmileIcon title={String(t('evsearch.advancedadas'))} />} />
+                    <Tabs.Tab value='value2'>
+                        <CarIcon title={String(t('evsearch.advanceddrivetrain'))} />
+                    </Tabs.Tab>
+                    <Tabs.Tab value='value3'>
+                      <LightningIcon title={String(t('evsearch.advancedbattery'))} />
+                    </Tabs.Tab>
+                    <Tabs.Tab value='value4'>
+                      <FingerButtonIcon title={String(t('evsearch.advanceduserinterface'))} />
+                    </Tabs.Tab>
+                    <Tabs.Tab value='value1'>
+                      <RobotSmileIcon title={String(t('evsearch.advancedadas'))} />
+                    </Tabs.Tab>
                    </Tabs.List>
                   <Tabs.Content value='value1'>
                   <div className={classes.cards}>
@@ -1230,11 +1238,13 @@ export const EvSearchPage = () => {
               <h2 className={classes.resultInfo}>
                 {evsearchCount} {t('evsearch.searchresult')}:
               </h2>
-              <Button fullWidth onClick={openUrl} disabled={disableCompare} className={classes.comparebutton} color='success' icon={<CarIcon />}>
+              <Button fullWidth onClick={openUrl} disabled={disableCompare} className={classes.comparebutton} color='success'>
+                <CarIcon />
                 Compare Evs
               </Button>
               <div className={classes.accordionScrollContainer}>{delegableActionBar()}</div>
-              <Button fullWidth onClick={openUrl} disabled={disableCompare} className={classes.comparebutton} color='success' icon={<CarIcon />}>
+              <Button fullWidth onClick={openUrl} disabled={disableCompare} className={classes.comparebutton} color='success'>
+              <CarIcon />
                 Compare Evs
               </Button>
             </div>

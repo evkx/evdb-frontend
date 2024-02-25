@@ -72,11 +72,11 @@ export const EvSearchActionBar = ({
   const addButton = (
     <Button
       variant={'tertiary'}
-      icon={<PlusCircleIcon title='add' />}
       size={compact ? 'large' : 'medium'}
       onClick={onAddClick}
       iconPlacement='right'
     >
+      <PlusCircleIcon title='add' />
       {!compact && t('evsearch.compare')}
     </Button>
   );
@@ -84,11 +84,11 @@ export const EvSearchActionBar = ({
   const removeButton = (
     <Button
       variant={'tertiary'}
-      icon={<ArrowUndoIcon title={t('common.undo')} />}
       size={compact ? 'large' : 'medium'}
       onClick={onRemoveClick}
       iconPlacement='right'
     >
+      <ArrowUndoIcon title={t('common.undo')} />
       {!compact && t('evsearch.removecompare')}
     </Button>
   );
@@ -129,7 +129,7 @@ export const EvSearchActionBar = ({
                     Read our <a href={infoUri}>full article</a>, see all{' '}
                     <a href={infoUri + 'specifications/'}>specifications</a>, see our{' '}
                     <a href={infoUri + 'gallery/'}>image gallery</a>, see all <a href={infoUri + 'rangeandconsumption/'}>range info</a> or <a href={infoUri + 'chargingcurve/'}>full charging info</a>.<br></br>
-                    <List size='small'>
+                    <List.Root size='small'>
                       <ListItem>
                         <b>{t('evsearch.specwltprange')}</b> - {wltpRange} km
                       </ListItem>
@@ -152,7 +152,7 @@ export const EvSearchActionBar = ({
                         <b>{t('evsearch.chargingspeed')}</b> - {maxDcChargingSpeed}/
                         {averageDcChargingSpeed} kW
                       </ListItem>
-                    </List>
+                    </List.Root>
                   </div>
                 </div>
               </div>
