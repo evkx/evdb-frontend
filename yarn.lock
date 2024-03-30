@@ -768,7 +768,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digdir/designsystemet-react@npm:^0.55.0":
+"@digdir/designsystemet-css@npm:0.2.3":
+  version: 0.2.3
+  resolution: "@digdir/designsystemet-css@npm:0.2.3"
+  dependencies:
+    "@digdir/designsystemet-react": ^0.55.0
+  checksum: 600f18ac1bc78e972855fb84a03d8eddd47c52fb69d767d81a24c797f9e7e1a39c421cb77b4f9e0c791980cf53c9eeb8b8f5846310a3c9d318e6169e64c70ba0
+  languageName: node
+  linkType: hard
+
+"@digdir/designsystemet-react@npm:0.55.0, @digdir/designsystemet-react@npm:^0.55.0":
   version: 0.55.0
   resolution: "@digdir/designsystemet-react@npm:0.55.0"
   dependencies:
@@ -780,6 +789,13 @@ __metadata:
     react: ">=18.2.0"
     react-dom: ">=18.2.0"
   checksum: a672a7a9b326c4db82eeebdbeb5a174835c9b119e8f8900c2730e69b8c5a0cd8709dc4474c24c2cd9765cca7d1896a6da6f1b7677d33a32d813df6f1a62528fe
+  languageName: node
+  linkType: hard
+
+"@digdir/designsystemet-theme@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "@digdir/designsystemet-theme@npm:0.15.0"
+  checksum: 3e27b40db3e84ba37c86c6b100d87499fec8f37c072a29956e0231c167cc93333404582587d541b6eb72c5ab8c400d3db3452fbd1b1a2067e1260df6510ab5ee
   languageName: node
   linkType: hard
 
@@ -6838,6 +6854,9 @@ __metadata:
     "@altinn/altinn-design-system": ^0.30.0
     "@digdir/design-system-react": ^0.53.3
     "@digdir/design-system-tokens": 0.13.0
+    "@digdir/designsystemet-css": 0.2.3
+    "@digdir/designsystemet-react": 0.55.0
+    "@digdir/designsystemet-theme": ^0.15.0
     "@reduxjs/toolkit": ^2.2.2
     "@types/react": ^18.2.73
     "@types/react-dom": ^18.2.23

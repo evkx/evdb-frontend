@@ -1,3 +1,4 @@
+import '@digdir/designsystemet-css';
 import { Panel, PanelVariant } from '@altinn/altinn-design-system';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -12,9 +13,8 @@ import {
   Tabs,
   Switch, 
   Alert
-} from '@digdir/design-system-react';
-import { LegacyTabs } from '@digdir/design-system-react';
-import '@digdir/design-system-tokens/brand/digdir/tokens.css';
+} from '@digdir/designsystemet-react';
+import '@digdir/designsystemet-theme/brand/digdir/tokens.css';
 import type { Key } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';

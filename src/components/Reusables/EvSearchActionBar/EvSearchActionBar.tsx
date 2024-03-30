@@ -1,7 +1,8 @@
-import { List, ListItem } from '@digdir/design-system-react';
-import '@digdir/design-system-tokens/brand/digdir/tokens.css';
+import '@digdir/designsystemet-css';
+import { List, ListItem } from '@digdir/designsystemet-react';
+import '@digdir/designsystemet-theme/brand/digdir/tokens.css';
 import { useState } from 'react';
-import { Button } from '@digdir/design-system-react';
+import { Button } from '@digdir/designsystemet-react';
 import { PlusCircleIcon, ArrowUndoIcon } from '@navikt/aksel-icons';
 import { t } from 'i18next';
 import * as React from 'react';
