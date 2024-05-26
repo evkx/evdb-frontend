@@ -362,29 +362,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digdir/design-system-react@npm:^0.53.3":
-  version: 0.53.12
-  resolution: "@digdir/design-system-react@npm:0.53.12"
-  dependencies:
-    "@altinn/figma-design-tokens": ^6.0.1
-    "@digdir/designsystemet-react": ^0.62.0
-    "@floating-ui/react": 0.26.4
-    "@navikt/aksel-icons": ^5.12.2
-    react-number-format: 5.3.1
-  peerDependencies:
-    react: ">=18.3.1"
-    react-dom: ">=18.3.1"
-  checksum: 8852c4e49196f7fe11951eecada2dd664dad583183e6e5920099988351d960fdb291399ee338c4a487c31509c3ccadc7916629c2c2fa4904e287bc4476604f3f
-  languageName: node
-  linkType: hard
-
-"@digdir/design-system-tokens@npm:0.13.0":
-  version: 0.13.0
-  resolution: "@digdir/design-system-tokens@npm:0.13.0"
-  checksum: 9eef237f72b176224c19e0e61bec06f1fe0bbb9d678ec609a73db303b2ea8c5009c494b68f5e8c0949ced6374093d9bf9f170a017b103e8c3fdd272af04e248c
-  languageName: node
-  linkType: hard
-
 "@digdir/design-system-tokens@npm:^0.1.4":
   version: 0.1.7
   resolution: "@digdir/design-system-tokens@npm:0.1.7"
@@ -392,31 +369,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digdir/designsystemet-css@npm:0.2.3":
-  version: 0.2.3
-  resolution: "@digdir/designsystemet-css@npm:0.2.3"
-  dependencies:
-    "@digdir/designsystemet-react": ^0.55.0
-  checksum: 600f18ac1bc78e972855fb84a03d8eddd47c52fb69d767d81a24c797f9e7e1a39c421cb77b4f9e0c791980cf53c9eeb8b8f5846310a3c9d318e6169e64c70ba0
+"@digdir/designsystemet-css@npm:0.9.0":
+  version: 0.9.0
+  resolution: "@digdir/designsystemet-css@npm:0.9.0"
+  checksum: 4ebfd0f7bb0c46310753f800bb60138223419c203aeeed7f569f3e78f68dfbf73bf57f267cb2638c239a9beae59cba8006305103a7c20844a73b933bdb6fe37f
   languageName: node
   linkType: hard
 
-"@digdir/designsystemet-react@npm:0.55.0, @digdir/designsystemet-react@npm:^0.55.0":
-  version: 0.55.0
-  resolution: "@digdir/designsystemet-react@npm:0.55.0"
-  dependencies:
-    "@floating-ui/react": 0.26.4
-    "@navikt/aksel-icons": ^5.12.2
-    "@radix-ui/react-slot": ^1.0.2
-    "@tanstack/react-virtual": ^3.0.1
-  peerDependencies:
-    react: ">=18.2.0"
-    react-dom: ">=18.2.0"
-  checksum: a672a7a9b326c4db82eeebdbeb5a174835c9b119e8f8900c2730e69b8c5a0cd8709dc4474c24c2cd9765cca7d1896a6da6f1b7677d33a32d813df6f1a62528fe
-  languageName: node
-  linkType: hard
-
-"@digdir/designsystemet-react@npm:^0.62.0":
+"@digdir/designsystemet-react@npm:0.62.0":
   version: 0.62.0
   resolution: "@digdir/designsystemet-react@npm:0.62.0"
   dependencies:
@@ -431,7 +391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digdir/designsystemet-theme@npm:^0.15.0":
+"@digdir/designsystemet-theme@npm:^0.15.3":
   version: 0.15.3
   resolution: "@digdir/designsystemet-theme@npm:0.15.3"
   checksum: 7acfd7d8c56bcad4ee6f82fc9f56225d896a6761379b64a10c190c19970a43e17323a828d252de5bb34792eca215ff0e01e1ebfe2ba3130be03a48d4652bf4a9
@@ -660,7 +620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/react-dom@npm:^2.0.0, @floating-ui/react-dom@npm:^2.0.3":
+"@floating-ui/react-dom@npm:^2.0.0":
   version: 2.1.0
   resolution: "@floating-ui/react-dom@npm:2.1.0"
   dependencies:
@@ -697,27 +657,6 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: cb3c20937ae1ba2217321432a5fb7c8455b25e6060a6bb9fa93489a27a0f643a63583a7ce303279098b85db5d1beb87bb0ec3fd0d17e9971aed5518851e6deed
-  languageName: node
-  linkType: hard
-
-"@floating-ui/react@npm:0.26.4":
-  version: 0.26.4
-  resolution: "@floating-ui/react@npm:0.26.4"
-  dependencies:
-    "@floating-ui/react-dom": ^2.0.3
-    "@floating-ui/utils": ^0.1.5
-    tabbable: ^6.0.1
-  peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  checksum: 0cf27b223e7c0f6c5f1cf1c8a765d6f7fc58bf9c825930a39bd9ab2700e4d44873ba763135fc0055bc63d6b26e719a2cae287bbdbc35fb8a84992a7708b85efb
-  languageName: node
-  linkType: hard
-
-"@floating-ui/utils@npm:^0.1.5":
-  version: 0.1.6
-  resolution: "@floating-ui/utils@npm:0.1.6"
-  checksum: b34d4b5470869727f52e312e08272edef985ba5a450a76de0917ba0a9c6f5df2bdbeb99448e2c60f39b177fb8981c772ff1831424e75123471a27ebd5b52c1eb
   languageName: node
   linkType: hard
 
@@ -1591,7 +1530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-virtual@npm:^3.0.1, @tanstack/react-virtual@npm:^3.2.0":
+"@tanstack/react-virtual@npm:^3.2.0":
   version: 3.5.0
   resolution: "@tanstack/react-virtual@npm:3.5.0"
   dependencies:
@@ -5876,11 +5815,9 @@ __metadata:
   resolution: "react-app@workspace:."
   dependencies:
     "@altinn/altinn-design-system": ^0.30.0
-    "@digdir/design-system-react": ^0.53.3
-    "@digdir/design-system-tokens": 0.13.0
-    "@digdir/designsystemet-css": 0.2.3
-    "@digdir/designsystemet-react": 0.55.0
-    "@digdir/designsystemet-theme": ^0.15.0
+    "@digdir/designsystemet-css": 0.9.0
+    "@digdir/designsystemet-react": 0.62.0
+    "@digdir/designsystemet-theme": ^0.15.3
     "@reduxjs/toolkit": ^2.2.5
     "@types/react": ^18.3.3
     "@types/react-dom": ^18.3.0
@@ -5975,18 +5912,6 @@ __metadata:
     react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: ae788b550b759f3f3e475e5805f7c650472f3d06fe633a046288f62cf5deedbfa597cb8fea08f29538b04931d7453ffbbe653bdd50cfca6ac43e12397502fec3
-  languageName: node
-  linkType: hard
-
-"react-number-format@npm:5.3.1":
-  version: 5.3.1
-  resolution: "react-number-format@npm:5.3.1"
-  dependencies:
-    prop-types: ^15.7.2
-  peerDependencies:
-    react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 316054bc8aa03d4fe5b283b1e498389393858728b69acc32e2546e9ce2e54e4e937ca4fdd0fa6e771f1b5f2d8b3c883cbc19c39799a27e91265c133d79103aaa
   languageName: node
   linkType: hard
 
