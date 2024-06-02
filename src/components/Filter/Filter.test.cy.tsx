@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 import * as React from 'react';
 import { mount } from 'cypress/react18';
 // eslint-disable-next-line import/no-unresolved
@@ -83,7 +84,7 @@ describe(
     });
 
     it('displays apply button as disabled and unclickable until user has made a change', () => {
-      const onApply = (value: string[]) => cy.stub();
+      const onApply = () => cy.stub();
       const onApplySpy = cy.spy(onApply).as('onApplySpy');
       mount(
         <Filter
@@ -127,7 +128,7 @@ describe(
     });
 
     it('applies the chosen options by calling onApply with the chosen values', () => {
-      const onApply = (value: string[]) => cy.stub();
+      const onApply = () => cy.stub();
       const onApplySpy = cy.spy(onApply).as('onApplySpy');
       mount(
         <Filter
@@ -147,7 +148,7 @@ describe(
     });
 
     it('can be opened, navigated, applied with changes by using keybord', () => {
-      const onApply = (value: string[]) => cy.stub();
+      const onApply = () => cy.stub();
       const onApplySpy = cy.spy(onApply).as('onApplySpy');
       mount(
         <Filter
@@ -179,7 +180,7 @@ describe(
     });
 
     it('resets the chosen values when user clicks reset', () => {
-      const onApply = (value: string[]) => cy.stub();
+      const onApply = () => cy.stub();
       const onApplySpy = cy.spy(onApply).as('onApplySpy');
       mount(
         <Filter
@@ -227,7 +228,7 @@ describe(
     });
 
     it('calls onApply if closed without clicking apply', () => {
-      const onApply = (value: string[]) => cy.stub();
+      const onApply = () => cy.stub();
       const onApplySpy = cy.spy(onApply).as('onApplySpy');
       mount(
         <Filter
@@ -253,7 +254,7 @@ describe(
         />,
       );
       cy.get('button').contains('Filter').click();
-      cy.get('input').should('be.visible');
+      cy.get('[type=search]').should('be.visible');
     });
 
     it('does not display search field when search is disabled', () => {
@@ -264,7 +265,7 @@ describe(
         />,
       );
       cy.get('button').contains('Filter').click();
-      cy.get('input').should('not.be.visible');
+      cy.get('[type=search]').should('not.exist');
     });
 
     it('adjusts options when they are changed externally', () => {
