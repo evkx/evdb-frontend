@@ -201,7 +201,10 @@ const initialState: SliceState = {
 
 export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchparam: EvSearch) => {
   const currentUri = window.location.href;
-  let uri = 'https://api.evkx.net/api/Ev';
+  let uri = 'https://evkx.net/api/Ev';
+  if (currentUri.startsWith('https://evkx.azurewebsites.net')) {
+    uri = 'https://evkx.azurewebsites.net/api/Ev';
+  }
   if (currentUri.startsWith('http://localhost')) {
     uri = 'https://localhost:7112/api/Ev';
   }
@@ -219,7 +222,10 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
 
 export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions', async () => {
   const currentUri = window.location.href;
-  let uri = 'https://api.evkx.net/api/searchoptions';
+  let uri = 'https://evkx.net/api/searchoptions';
+  if (currentUri.startsWith('https://evkx.azurewebsites.net')) {
+    uri = 'https://evkx.azurewebsites.net/api/searchoptions';
+  }
   if (currentUri.startsWith('http://localhost')) {
     uri = 'https://localhost:7112/api/searchoptions';
   }

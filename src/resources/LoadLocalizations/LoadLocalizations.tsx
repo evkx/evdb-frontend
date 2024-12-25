@@ -31,7 +31,7 @@ const LoadLocalizations = ({ children }: Props) => {
   }
 
   const baseUrl = import.meta.env.BASE_URL;
-  const localizationsFilePath = `${baseUrl}public/localizations/${lang}.json`;
+  const localizationsFilePath = `${baseUrl}assets/evsearch/localizations/${lang}.json`;
   const localizationsFileUrl = new URL(localizationsFilePath, import.meta.url).href;
 
   useQuery(
