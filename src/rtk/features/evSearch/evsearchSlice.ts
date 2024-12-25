@@ -203,7 +203,7 @@ export const fetchEvs = createAsyncThunk('evsearch/fetchEvs', async (evsearchpar
   const currentUri = window.location.href;
   let uri = 'https://api.evkx.net/api/Ev';
   if (currentUri.startsWith('http://localhost')) {
-    uri = 'https://localhost:7033/api/Ev';
+    uri = 'https://localhost:7112/api/Ev';
   }
   return await axios
     .post(uri, evsearchparam, {
@@ -221,7 +221,7 @@ export const fetchSearchOptions = createAsyncThunk('evsearch/fetchSearchOptions'
   const currentUri = window.location.href;
   let uri = 'https://api.evkx.net/api/searchoptions';
   if (currentUri.startsWith('http://localhost')) {
-    uri = 'https://localhost:7033/api/searchoptions';
+    uri = 'https://localhost:7112/api/searchoptions';
   }
   return await axios
     .get(uri)
