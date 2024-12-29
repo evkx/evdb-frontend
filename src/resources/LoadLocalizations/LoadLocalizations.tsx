@@ -12,7 +12,7 @@ const LoadLocalizations = ({ children }: Props) => {
   const currentUri = window.location.href;
   let lang = 'en';
   if (currentUri.includes('nb/')) {
-    lang = 'no_nb';
+    lang = 'nb';
   }
   else if (currentUri.includes('sv/')) {
     lang = 'sv';
@@ -30,6 +30,7 @@ const LoadLocalizations = ({ children }: Props) => {
     lang = 'de';
   }
 
+  i18n.changeLanguage(lang);
   const baseUrl = import.meta.env.BASE_URL;
   const localizationsFilePath = `${baseUrl}assets/evsearch/localizations/${lang}.json`;
   const localizationsFileUrl = new URL(localizationsFilePath, import.meta.url).href;

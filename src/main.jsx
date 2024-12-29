@@ -41,7 +41,7 @@ const initLanguage = (lang) => {
 use(initReactI18next).init(
   {
     // TODO: replace no_nb below with result from backend call that checks which language is set
-    lng: initLanguage('no_nb'),
+    lng: initLanguage('en'),
     fallbackLng: getConfig('defaultLocale'),
     ns: ['common'],
     defaultNS: 'common',

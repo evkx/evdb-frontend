@@ -20,7 +20,6 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { FilterIcon, CarIcon, PaletteIcon, PersonGroupIcon, RobotSmileIcon, LightningIcon, FingerButtonIcon  } from '@navikt/aksel-icons';
-
 import { Filter, type FilterOption } from '@/components/Filter';
 import {
   fetchEvs,
@@ -84,7 +83,7 @@ import { Page, PageContent } from '../Page';
 import classes from './EvSearchPage.module.css';
 
 export const EvSearchPage = () => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const loading = useAppSelector((state) => state.evsearchResult.loading);
 
   const dispatch = useAppDispatch();
@@ -115,11 +114,8 @@ export const EvSearchPage = () => {
 
     const openUrl = () => {
       const currentUri = window.location.href;
-      let baseUrl = 'https://db.evkx.net/evcompare';
-      if (currentUri.startsWith('http://localhost')) {
-        baseUrl = 'https://localhost:7033/evcompare';
-      }
-
+      const currentLanguage =i18n.language;
+      let baseUrl = `/${currentLanguage}/evcompare/`;
       const queryParamName = "evs";
       const valuesCombined = compareList.join(','); // Join the values with ','
       const completeUrl = `${baseUrl}?${queryParamName}=${encodeURIComponent(valuesCombined)}`;
